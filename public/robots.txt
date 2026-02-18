@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arinjain.xyz/sitemap.xml

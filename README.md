@@ -1,7 +1,7 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.2.3-green.svg)
+![Version](https://img.shields.io/badge/version-0.2.5-green.svg)
 
 A modern, interactive developer portfolio built with performance and aesthetics in mind. Featuring a unique paper tear design, reactive parallax effects, and a responsive layout.
 
@@ -13,6 +13,7 @@ A modern, interactive developer portfolio built with performance and aesthetics 
 -   **Dynamic Content**: JSON-driven portfolio data for easy updates.
 -   **Interactive Terminal**: Fully functional retro-style command-line interface with theme support.
 -   **Interactive Map**: Leaflet integration for journey visualization with custom markers.
+-   **SEO Optimized**: Advanced meta tags, JSON-LD structured data, and automated sitemap generation.
 
 ## Technical Stack
 

@@ -1,5 +1,19 @@
 [
     {
+        "version": "0.2.5",
+        "date": "2026-02-18",
+        "changes": {
+            "Added": [
+                "Technical SEO Suite: Comprehensive metadata for Twitter, Open Graph, and search engines.",
+                "Structured Data: Implemented JSON-LD Person schema for identity mapping.",
+                "Crawler Assets: Added robots.txt and sitemap.xml to the public directory."
+            ],
+            "Changed": [
+                "Domain Configuration: Unified all SEO assets and canonical links to https://arinjain.xyz."
+            ]
+        }
+    },
+    {
         "version": "0.2.4",
         "date": "2026-02-18",
         "changes": {

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.5] - 2026-02-18
+
+### Added
+-   **Technical SEO Suite**: Comprehensive metadata suite including Keywords, Open Graph, and Twitter Card support in `index.html`.
+-   **Structured Data (JSON-LD)**: Implemented `Person` schema to improve entity recognition by search engines.
+-   **Crawler Guidance**: Added `robots.txt` and `sitemap.xml` to the `public` directory.
+
+### Changed
+-   **Domain Configuration**: Unified all canonical links and asset URLs to use the production domain `https://arinjain.xyz`.
+
 ## [0.2.4] - 2026-02-18
 
 ### Fixed
