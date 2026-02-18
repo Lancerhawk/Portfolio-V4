@@ -171,8 +171,8 @@ export default function JourneySection() {
                             zoomControl={true}
                         >
                             <TileLayer
-                                url="https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg"
-                                attribution='&copy; <a href="https://stamen.com">Stamen Design</a>'
+                                url="https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg"
+                                attribution='&copy; <a href="https://stamen.com">Stamen Design</a>, &copy; <a href="https://www.cooperhewitt.org">Cooper Hewitt</a>'
                             />
                             <MapController flyTo={flyTo} />
                             <MapMarkers onLocationClick={setFlyTo} />
