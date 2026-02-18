@@ -1,5 +1,20 @@
 [
     {
+        "version": "0.2.3",
+        "date": "2026-02-18",
+        "changes": {
+            "Added": [
+                "Map Label Positioning: Support for bottom-positioned labels to prevent marker clashing.",
+                "Timeline UI: Restored the vertical connector line for the last item to maintain visual consistency."
+            ],
+            "Fixed": [
+                "Map Centering: Offsets camera to focus on the info box (popup) instead of the pin.",
+                "Map Popup UI: Scrollable content for multiple entries and a themed close button.",
+                "Map Legibility: Removed popup transparency for better reading."
+            ]
+        }
+    },
+    {
         "version": "0.2.2",
         "date": "2026-02-18",
         "changes": {

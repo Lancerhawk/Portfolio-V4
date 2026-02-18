@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2026-02-18
+
+### Added
+-   **Map Label Positioning**: Support for `labelPosition: bottom` to prevent marker overlaps.
+-   **Timeline UI**: Restored the vertical connector line for the last item to maintain visual consistency.
+
+### Fixed
+-   **Map Centering**: Adjusted auto-centering logic to focus on the info box (popup) instead of just the pin for better visibility.
+-   **Map Popup UI**: Added scrollable content container and redesigned neo-brutalist close button.
+-   **Map Opacity**: Removed default transparency from popups for better legibility.
+
 ## [0.2.2] - 2026-02-18
 
 ### Added

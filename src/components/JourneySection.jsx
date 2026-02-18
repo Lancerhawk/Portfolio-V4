@@ -13,8 +13,9 @@ function createNeoMarker(location) {
     const el = document.createElement('div');
     el.className = 'neo-marker';
     el.style.cssText = 'position:relative;width:28px;height:28px;';
+    const labelClass = `neo-marker-label${location.isCurrent ? ' neo-marker-label-current' : ''}${location.labelPosition === 'bottom' ? ' neo-marker-label-bottom' : ''}`;
     el.innerHTML = `
-    <div class="neo-marker-label${location.isCurrent ? ' neo-marker-label-current' : ''}">${location.country}</div>
+    <div class="${labelClass}">${location.country}</div>
     <div class="neo-marker-pin${location.isCurrent ? ' neo-marker-pin-current' : ''}"></div>
   `;
     return L.divIcon({ html: el.outerHTML, className: 'neo-marker', iconSize: [28, 28], iconAnchor: [14, 14] });
@@ -23,7 +24,14 @@ function createNeoMarker(location) {
 function MapController({ flyTo }) {
     const map = useMap();
     useEffect(() => {
-        if (flyTo) map.flyTo(flyTo.coords, 6, { animate: true, duration: 1.5 });
+        if (flyTo) {
+            const zoom = 6;
+            // Project the marker coordinates to pixels, offset upward, and unproject back
+            const point = map.project(flyTo.coords, zoom);
+            point.y -= 150; // Offset by 150 pixels up to center the popup box
+            const targetLatLng = map.unproject(point, zoom);
+            map.flyTo(targetLatLng, zoom, { animate: true, duration: 1.5 });
+        }
     }, [flyTo, map]);
     return null;
 }
@@ -118,9 +126,7 @@ export default function JourneySection() {
                                             borderRadius: '50%', marginTop: '0.25rem', position: 'relative', zIndex: 2,
                                             transition: 'all 0.2s ease'
                                         }} />
-                                        {i < data.experience.length - 1 && (
-                                            <div style={{ width: '2px', flex: 1, background: 'var(--border)', opacity: 0.3, marginTop: '4px' }} />
-                                        )}
+                                        <div style={{ width: '2px', flex: 1, background: 'var(--border)', opacity: 0.3, marginTop: '4px' }} />
                                     </div>
                                     <div style={{ flex: 1 }}>
                                         <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.25rem', lineHeight: 1.4 }}>
