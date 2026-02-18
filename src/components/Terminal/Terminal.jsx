@@ -63,7 +63,6 @@ const Terminal = () => {
     const menuRef = useRef(null);
     const navigate = useNavigate();
 
-    const [isTyping, setIsTyping] = useState(false);
 
     // Click outside handler for theme menu
     useEffect(() => {
@@ -114,14 +113,12 @@ const Terminal = () => {
             ];
 
             let currentLine = 0;
-            setIsTyping(true);
             const interval = setInterval(() => {
                 if (currentLine <= welcomeLines.length) {
                     setHistory(welcomeLines.slice(0, currentLine));
                     currentLine++;
                 } else {
                     clearInterval(interval);
-                    setIsTyping(false);
                 }
             }, 100);
 
@@ -204,12 +201,13 @@ const Terminal = () => {
                 });
                 break;
 
-            case 'education':
+            case 'education': {
                 const edu = portfolioData.education;
                 response.push({ type: 'text', content: `\nDEGREE: ${edu.degree}`, className: 'terminal-highlight' });
                 response.push({ type: 'text', content: `SCHOOL: ${edu.school}` });
                 response.push({ type: 'text', content: `PERIOD: ${edu.period} | CGPA: ${edu.cgpa}` });
                 break;
+            }
 
             case 'contact':
                 response.push({ type: 'text', content: '\nCONNECT WITH ME:', className: 'terminal-highlight' });
