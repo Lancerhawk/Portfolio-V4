@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useTheme } from './hooks/useTheme';
+import { useClickSound } from './hooks/useClickSound';
 import LoaderOverlay from './components/LoaderOverlay';
 import ProgressBar from './components/ProgressBar';
 import Navbar from './components/Navbar';
@@ -14,6 +16,7 @@ import EducationLanguagesSection from './components/EducationLanguagesSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import VersionHistory from './components/VersionHistory';
+import CustomCursor from './components/CustomCursor';
 
 import Terminal from './components/Terminal/Terminal';
 
@@ -42,11 +45,20 @@ const MainLayout = ({ theme, toggleTheme }) => (
 
 export default function App() {
   const { theme, toggle } = useTheme();
+  const { playClick } = useClickSound();
+
+  useEffect(() => {
+    window.addEventListener('mousedown', playClick);
+    return () => window.removeEventListener('mousedown', playClick);
+  }, [playClick]);
 
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout theme={theme} toggleTheme={toggle} />} />
-      <Route path="/terminal" element={<Terminal />} />
-    </Routes>
+    <>
+      <CustomCursor />
+      <Routes>
+        <Route path="/" element={<MainLayout theme={theme} toggleTheme={toggle} />} />
+        <Route path="/terminal" element={<Terminal />} />
+      </Routes>
+    </>
   );
 }

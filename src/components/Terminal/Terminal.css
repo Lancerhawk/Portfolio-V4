@@ -11,6 +11,11 @@
     --term-error: #ff6b6b;
 }
 
+.terminal-route-container ::selection {
+    background-color: var(--term-color);
+    color: var(--term-bg);
+}
+
 .terminal-route-container {
     background-color: #000;
     width: 100vw;

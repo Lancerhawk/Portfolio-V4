@@ -24,6 +24,12 @@ html {
   scroll-behavior: smooth;
 }
 
+::selection {
+  background-color: var(--yellow);
+  color: #000;
+}
+
+
 :root {
   --bg: #ffffff;
   --text: #000000;
@@ -1324,5 +1330,108 @@ body::-webkit-scrollbar-thumb:hover {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+/* Custom Cursor Styles */
+* {
+  cursor: none !important;
+}
+
+.cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: normal;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--cyan);
+  border: 2.5px solid var(--border);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cursor-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  background: transparent;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 3px 3px 0 var(--border);
+}
+
+/* Hover States */
+.cursor-container.hovering .cursor-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--pink);
+}
+
+.cursor-container.hovering .cursor-ring {
+  width: 45px;
+  height: 45px;
+  border-color: var(--pink);
+  background: rgba(255, 107, 157, 0.1);
+}
+
+/* Click State */
+.cursor-container.clicked .cursor-dot {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.cursor-container.clicked .cursor-ring {
+  transform: translate(-50%, -50%) scale(0.8);
+  box-shadow: 1px 1px 0 var(--border);
+}
+
+/* Terminal Mode Cursor */
+.cursor-container.terminal-mode .cursor-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--term-color, #00ff41);
+  border-radius: 0;
+  border: none;
+}
+
+.cursor-container.terminal-mode .cursor-ring {
+  width: 22px;
+  height: 22px;
+  border-radius: 0;
+  border: 2px solid var(--term-color, #00ff41);
+  box-shadow: 2px 2px 0 var(--term-color, #00ff41);
+  background: rgba(0, 255, 65, 0.05);
+}
+
+.cursor-container.terminal-mode.hovering .cursor-ring {
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 255, 65, 0.2);
+}
+
+@media (max-width: 768px) {
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor-container {
+    display: none;
   }
 }

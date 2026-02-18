@@ -1,5 +1,20 @@
 [
     {
+        "version": "0.2.6",
+        "date": "2026-02-18",
+        "changes": {
+            "Added": [
+                "Custom Cursor: Neo-brutalist adaptive cursor with hover states and ring-dot design.",
+                "Terminal Route Cursor: Specialized block cursor style for the retro terminal environment.",
+                "Reactive Click Sound: Synthesized tech-snap sound on click using Web Audio API.",
+                "Custom Selection Styling: Theme-matching text selection colors for Home and Terminal."
+            ],
+            "Changed": [
+                "Global Styles: Hidden default browser cursor to prioritize the custom interactive experience."
+            ]
+        }
+    },
+    {
         "version": "0.2.5",
         "date": "2026-02-18",
         "changes": {
