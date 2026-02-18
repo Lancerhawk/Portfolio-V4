@@ -110,7 +110,7 @@ export default function JourneySection() {
                             🗺️ Career Timeline
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                            {data.experience.map((exp, i) => (
+                            {data.experience.map((exp) => (
                                 <div key={exp.id} onClick={() => handleTimelineClick(exp)}
                                     style={{
                                         display: 'flex', gap: '1rem', cursor: 'pointer',
