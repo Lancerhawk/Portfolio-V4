@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<MainLayout theme={theme} toggle={toggle} />} />
+      <Route path="/" element={<MainLayout theme={theme} toggleTheme={toggle} />} />
       <Route path="/terminal" element={<Terminal />} />
     </Routes>
   );

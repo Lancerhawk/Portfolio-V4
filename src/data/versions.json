@@ -1,5 +1,14 @@
 [
     {
+        "version": "0.2.4",
+        "date": "2026-02-18",
+        "changes": {
+            "Fixed": [
+                "Navbar Theme Switcher: Fixed a prop name mismatch that prevented the theme toggle from working."
+            ]
+        }
+    },
+    {
         "version": "0.2.3",
         "date": "2026-02-18",
         "changes": {
