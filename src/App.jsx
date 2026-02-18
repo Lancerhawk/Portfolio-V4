@@ -17,6 +17,8 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import VersionHistory from './components/VersionHistory';
 import CustomCursor from './components/CustomCursor';
+import SidebarControls from './components/SidebarControls';
+import VibeNotification from './components/VibeNotification';
 
 import Terminal from './components/Terminal/Terminal';
 
@@ -55,6 +57,8 @@ export default function App() {
   return (
     <>
       <CustomCursor />
+      <SidebarControls />
+      <VibeNotification />
       <Routes>
         <Route path="/" element={<MainLayout theme={theme} toggleTheme={toggle} />} />
         <Route path="/terminal" element={<Terminal />} />

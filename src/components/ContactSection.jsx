@@ -2,9 +2,9 @@ import { useFadeIn } from '../hooks/useFadeIn';
 import data from '../data/portfolio.json';
 
 const cardStyles = [
-    { bg: '#66d9ef', rotate: '-2deg' },
-    { bg: '#ffd93d', rotate: '1deg' },
-    { bg: '#ff6b9d', rotate: '-1deg' },
+    { bg: 'var(--cyan)', color: 'var(--cyan-content)', rotate: '-2deg' },
+    { bg: 'var(--yellow)', color: 'var(--yellow-content)', rotate: '1deg' },
+    { bg: 'var(--pink)', color: 'var(--pink-content)', rotate: '-1deg' },
 ];
 
 export default function ContactSection() {
@@ -43,7 +43,7 @@ export default function ContactSection() {
                                         minHeight: '180px', background: style.bg,
                                         border: 'var(--border-width) solid var(--border)',
                                         boxShadow: '6px 6px 0 var(--border)',
-                                        textDecoration: 'none', color: 'var(--text)',
+                                        textDecoration: 'none', color: style.color,
                                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                         textAlign: 'center', position: 'relative',
                                         transform: `rotate(${style.rotate})`, transformOrigin: 'center center'
@@ -60,7 +60,7 @@ export default function ContactSection() {
                                         zIndex: 10, pointerEvents: 'none', transform: 'rotate(15deg)',
                                         transition: 'transform 0.3s ease'
                                     }} />
-                                    <i className={c.icon} style={{ fontSize: '2.5rem', color: 'var(--text)', marginTop: '1rem' }} />
+                                    <i className={c.icon} style={{ fontSize: '2.5rem', color: style.color, marginTop: '1rem' }} />
                                     <span style={{
                                         fontSize: '1.1rem', fontWeight: 700,
                                         fontFamily: 'Caveat, cursive', letterSpacing: '0.5px'

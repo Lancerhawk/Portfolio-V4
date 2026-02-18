@@ -78,7 +78,7 @@ export default function Navbar({ theme, toggleTheme }) {
                             padding: '0.45rem 1rem', background: 'var(--cyan)',
                             border: '2px solid var(--border)', boxShadow: '3px 3px 0 var(--border)',
                             cursor: 'pointer', fontFamily: 'inherit', fontWeight: 700, fontSize: '0.85rem',
-                            color: 'var(--text)', transition: 'all 0.2s', whiteSpace: 'nowrap'
+                            color: 'var(--cyan-content)', transition: 'all 0.2s', whiteSpace: 'nowrap'
                         }}
                         onMouseEnter={e => { e.currentTarget.style.transform = 'translate(2px,2px)'; e.currentTarget.style.boxShadow = '1px 1px 0 var(--border)'; }}
                         onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '3px 3px 0 var(--border)'; }}
@@ -149,7 +149,7 @@ export default function Navbar({ theme, toggleTheme }) {
                             padding: '0.65rem 1rem', background: 'var(--cyan)',
                             border: '2px solid var(--border)', boxShadow: '3px 3px 0 var(--border)',
                             cursor: 'pointer', fontFamily: 'inherit', fontWeight: 700, fontSize: '1rem',
-                            color: 'var(--text)', marginTop: '0.25rem'
+                            color: 'var(--cyan-content)', marginTop: '0.25rem'
                         }}
                     >Get in Touch!</button>
                 </div>

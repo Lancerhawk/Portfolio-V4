@@ -52,7 +52,7 @@ export default function HeroSection() {
                                 display: 'flex', alignItems: 'center', gap: '0.5rem',
                                 padding: '0.55rem 1rem', background: 'var(--yellow)',
                                 border: '3px solid var(--border)', boxShadow: '4px 4px 0 var(--border)',
-                                textDecoration: 'none', color: 'var(--text)', fontWeight: 700,
+                                textDecoration: 'none', color: 'var(--yellow-content)', fontWeight: 700,
                                 fontSize: '0.85rem', transition: 'all 0.2s'
                             }}
                             onMouseEnter={e => { e.currentTarget.style.transform = 'translate(4px,4px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; }}
@@ -67,7 +67,7 @@ export default function HeroSection() {
                                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                                 padding: '0.75rem 1.75rem', background: 'var(--cyan)',
                                 border: '3px solid var(--border)', boxShadow: '5px 5px 0 var(--border)',
-                                textDecoration: 'none', color: 'var(--text)', fontWeight: 700,
+                                textDecoration: 'none', color: 'var(--cyan-content)', fontWeight: 700,
                                 fontSize: '1rem', transition: 'all 0.2s'
                             }}
                             onMouseEnter={e => { e.currentTarget.style.transform = 'translate(5px,5px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; }}

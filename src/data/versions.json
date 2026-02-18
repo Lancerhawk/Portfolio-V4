@@ -1,5 +1,21 @@
 [
     {
+        "version": "0.3.0",
+        "date": "2026-02-19",
+        "changes": {
+            "Added": [
+                "Vibe Check System: Cycle through Neon, Retro, Minimal, and Default themes.",
+                "Global Contrast Sweep: Theme-aware content colors for perfect accessibility.",
+                "Vibe Switch Notifications: Centered on-screen alerts when themes change.",
+                "Floating Sound Controls: Global mute toggle for reactive sound effects."
+            ],
+            "Fixed": [
+                "Version History Contrast: Improved visibility for history and mute buttons across all themes.",
+                "Core Navigation: Refined button contrast in Navbar, Skills, and Projects sections."
+            ]
+        }
+    },
+    {
         "version": "0.2.6",
         "date": "2026-02-18",
         "changes": {

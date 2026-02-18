@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [0.3.0] - 2026-02-19
+
+### Added
+-   **Vibe Check System**: Implementation of a global theme-switching system with 4 distinct color palettes (Neon, Retro, Minimal, Default).
+-   **Contrast Accessibility Sweep**: Comprehensive update to all components using CSS contrast variables to ensure legibility across all themes.
+-   **Vibe Notifications**: Added centered on-screen notifications that display the active theme name for 3 seconds during transitions.
+-   **Global Sound Controls**: Integrated a persistent Mute toggle for the tech-click sound system.
+
+### Fixed
+-   **Button Visibility**: Resolved contrast issues for the floating Mute and History buttons in the Retro and Neon themes.
+-   **Responsive Layout Refinements**: Minor adjustments to spacing and contrast in the Projects and Skills sections for better mobile readability.
 
 ## [0.2.6] - 2026-02-18
 

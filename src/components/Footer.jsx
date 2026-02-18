@@ -54,8 +54,18 @@ export default function Footer() {
                                     color: 'var(--text)', fontSize: '1.1rem', textDecoration: 'none',
                                     boxShadow: '2px 2px 0 0 var(--border)', transition: 'all 0.2s ease'
                                 }}
-                                onMouseEnter={e => { e.currentTarget.style.transform = 'translate(2px,2px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; e.currentTarget.style.background = 'var(--primary)'; }}
-                                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '2px 2px 0 0 var(--border)'; e.currentTarget.style.background = 'var(--white)'; }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.transform = 'translate(2px,2px)';
+                                    e.currentTarget.style.boxShadow = '0 0 0 var(--border)';
+                                    e.currentTarget.style.background = 'var(--primary)';
+                                    e.currentTarget.style.color = 'var(--primary-content)';
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.transform = '';
+                                    e.currentTarget.style.boxShadow = '2px 2px 0 0 var(--border)';
+                                    e.currentTarget.style.background = 'var(--white)';
+                                    e.currentTarget.style.color = 'var(--text)';
+                                }}
                             ><i className={s.icon} /></a>
                         ))}
                     </div>
@@ -73,7 +83,7 @@ export default function Footer() {
                         style={{
                             display: 'flex', alignItems: 'center', gap: '0.5rem',
                             padding: '0.5rem 1rem', background: 'var(--cyan)',
-                            color: 'var(--text)', textDecoration: 'none',
+                            color: 'var(--cyan-content)', textDecoration: 'none',
                             border: 'var(--border-width) solid var(--border)', borderRadius: '6px',
                             boxShadow: '3px 3px 0 0 var(--border)', fontWeight: 600, fontSize: '0.85rem',
                             transition: 'all 0.2s ease'

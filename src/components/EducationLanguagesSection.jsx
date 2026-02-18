@@ -36,7 +36,8 @@ export default function EducationLanguagesSection() {
                                             padding: '0.4rem 0.85rem', background: 'var(--primary)',
                                             border: 'var(--border-width) solid var(--border)',
                                             fontFamily: 'Space Mono, monospace', fontSize: '0.8rem', fontWeight: 600,
-                                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem', whiteSpace: 'nowrap'
+                                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem', whiteSpace: 'nowrap',
+                                            color: 'var(--primary-content)'
                                         }}>
                                             <i className="fas fa-calendar" /> {edu.period}
                                         </div>
@@ -45,7 +46,8 @@ export default function EducationLanguagesSection() {
                                                 padding: '0.4rem 0.85rem', background: 'var(--secondary)',
                                                 border: 'var(--border-width) solid var(--border)',
                                                 fontFamily: 'Space Mono, monospace', fontSize: '0.8rem', fontWeight: 600,
-                                                display: 'inline-flex', alignItems: 'center', gap: '0.4rem', whiteSpace: 'nowrap'
+                                                display: 'inline-flex', alignItems: 'center', gap: '0.4rem', whiteSpace: 'nowrap',
+                                                color: 'var(--secondary-content)'
                                             }}>
                                                 <i className="fas fa-star" /> CGPA: {edu.cgpa}
                                             </div>
@@ -81,8 +83,8 @@ export default function EducationLanguagesSection() {
                                     border: 'var(--border-width) solid var(--border)', borderRadius: '6px',
                                     boxShadow: '2px 2px 0 0 var(--border)', transition: 'all 0.2s ease'
                                 }}
-                                    onMouseEnter={e => { e.currentTarget.style.transform = 'translate(2px,2px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; e.currentTarget.style.background = 'var(--primary)'; }}
-                                    onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '2px 2px 0 0 var(--border)'; e.currentTarget.style.background = 'var(--white)'; }}
+                                    onMouseEnter={e => { e.currentTarget.style.transform = 'translate(2px,2px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; e.currentTarget.style.background = 'var(--primary)'; e.currentTarget.style.color = 'var(--primary-content)'; }}
+                                    onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '2px 2px 0 0 var(--border)'; e.currentTarget.style.background = 'var(--white)'; e.currentTarget.style.color = 'initial'; }}
                                 >
                                     <span style={{ fontWeight: 600, fontSize: '1rem' }}>{lang.name}</span>
                                     <div style={{ display: 'flex', gap: '0.5rem' }}>

@@ -15,8 +15,18 @@ function SkillBox({ skill, index }) {
         return () => observer.disconnect();
     }, [index]);
 
-    const colorMap = ['var(--cyan)', 'var(--yellow)', 'var(--pink)', 'var(--accent)', 'var(--cyan)', 'var(--pink)', 'var(--yellow)', 'var(--accent)'];
-    const color = colorMap[index] || 'var(--primary)';
+    const colorMap = [
+        { bg: 'var(--cyan)', content: 'var(--cyan-content)' },
+        { bg: 'var(--yellow)', content: 'var(--yellow-content)' },
+        { bg: 'var(--pink)', content: 'var(--pink-content)' },
+        { bg: 'var(--accent)', content: 'var(--accent-content)' },
+        { bg: 'var(--cyan)', content: 'var(--cyan-content)' },
+        { bg: 'var(--pink)', content: 'var(--pink-content)' },
+        { bg: 'var(--yellow)', content: 'var(--yellow-content)' },
+        { bg: 'var(--accent)', content: 'var(--accent-content)' }
+    ];
+    const colorObj = colorMap[index] || { bg: 'var(--primary)', content: 'var(--primary-content)' };
+    const color = colorObj.bg;
 
     return (
         <div ref={ref} className={`skill-box-anim skill-box-${index + 1} skill-box-responsive`}
@@ -43,8 +53,18 @@ function SkillBox({ skill, index }) {
                             border: '3px solid var(--border)', background: 'var(--white)',
                             boxShadow: '3px 3px 0 var(--border)', transition: 'all 0.2s ease', cursor: 'pointer'
                         }}
-                        onMouseEnter={e => { e.currentTarget.style.transform = 'translate(3px,3px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; e.currentTarget.style.background = colorMap[index] || 'var(--yellow)'; }}
-                        onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '3px 3px 0 var(--border)'; e.currentTarget.style.background = 'var(--white)'; }}
+                        onMouseEnter={e => {
+                            e.currentTarget.style.transform = 'translate(3px,3px)';
+                            e.currentTarget.style.boxShadow = '0 0 0 var(--border)';
+                            e.currentTarget.style.background = color;
+                            e.currentTarget.style.color = colorObj.content;
+                        }}
+                        onMouseLeave={e => {
+                            e.currentTarget.style.transform = '';
+                            e.currentTarget.style.boxShadow = '3px 3px 0 var(--border)';
+                            e.currentTarget.style.background = 'var(--white)';
+                            e.currentTarget.style.color = 'var(--text)';
+                        }}
                     >
                         <i className={tag.icon} style={{ fontSize: '1rem' }} />
                         {tag.label}

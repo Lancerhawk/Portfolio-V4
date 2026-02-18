@@ -1,9 +1,12 @@
 import { useCallback, useRef } from 'react';
+import { useControls } from '../context/ControlContext';
 
 export function useClickSound() {
+    const { isMuted } = useControls();
     const audioCtx = useRef(null);
 
     const playClick = useCallback(() => {
+        if (isMuted) return;
         try {
             if (!audioCtx.current) {
                 audioCtx.current = new (window.AudioContext || window.webkitAudioContext)();
@@ -32,7 +35,7 @@ export function useClickSound() {
         } catch (e) {
             console.error('Audio click failed', e);
         }
-    }, []);
+    }, [isMuted]);
 
     return { playClick };
 }

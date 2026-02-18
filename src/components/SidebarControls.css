@@ -1,0 +1,218 @@
+.desk-sidebar-container {
+    position: fixed;
+    left: 0;
+    /* No gap */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Right-side positioning for Terminal */
+.desk-sidebar-container.is-right {
+    left: auto;
+    right: 0;
+    /* No gap */
+}
+
+.desk-only {
+    display: none;
+}
+
+@media (min-width: 769px) {
+    .desk-only {
+        display: flex;
+    }
+}
+
+.sidebar-btn {
+    background: var(--white);
+    border: 3px solid var(--border);
+    border-left: none;
+    /* Sit flush on left side */
+    padding: 20px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 4px 0 0 var(--border);
+}
+
+.sidebar-btn:first-child {
+    border-top-right-radius: 8px;
+}
+
+.sidebar-btn:last-child {
+    border-bottom-right-radius: 8px;
+    border-bottom: 3px solid var(--border);
+}
+
+.sidebar-btn .btn-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.8rem;
+    /* Slightly smaller for more items */
+    letter-spacing: 0.5px;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.sidebar-btn .btn-indicator {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 20px;
+    background: var(--border);
+    opacity: 0.3;
+}
+
+/* Hover & Active States */
+.sidebar-btn:hover {
+    padding-left: 15px;
+    background: var(--yellow);
+}
+
+.sidebar-btn.active {
+    background: var(--cyan);
+    padding-left: 20px;
+    box-shadow: 6px 0 0 var(--border);
+}
+
+.sidebar-btn.active .btn-indicator {
+    background: var(--white);
+    opacity: 1;
+}
+
+/* Mobile FAB */
+.mobile-sidebar-trigger {
+    position: fixed;
+    left: 20px;
+    bottom: 2.5rem;
+    z-index: 1000;
+}
+
+.mobile-fab {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: var(--white);
+    border: 3px solid var(--border);
+    box-shadow: 6px 6px 0 var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text);
+    transition: all 0.2s;
+}
+
+.mobile-fab.open {
+    background: var(--pink);
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--border);
+}
+
+/* Mobile Drawer */
+.mobile-controls-drawer {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--white);
+    border-right: 6px solid var(--border);
+    z-index: 1001;
+    padding: 30px;
+    transition: left 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-controls-drawer.open {
+    left: 0;
+}
+
+.mobile-controls-drawer h3 {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    margin-bottom: 30px;
+    border-bottom: 4px solid var(--border);
+    padding-bottom: 10px;
+}
+
+.drawer-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.drawer-btn {
+    padding: 15px;
+    background: var(--white);
+    border: 4px solid var(--border);
+    box-shadow: 6px 6px 0 var(--border);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.drawer-btn.active {
+    background: var(--cyan);
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0 var(--border);
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.desk-sidebar-container.is-right .sidebar-btn {
+    border-left: 3px solid var(--border);
+    border-right: none;
+    box-shadow: -4px 0 0 var(--border);
+}
+
+.desk-sidebar-container.is-right .sidebar-btn:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+}
+
+.desk-sidebar-container.is-right .sidebar-btn:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 0;
+}
+
+.desk-sidebar-container.is-right .sidebar-btn:hover {
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+.desk-sidebar-container.is-right .sidebar-btn.active {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: -6px 0 0 var(--border);
+}
+
+.desk-sidebar-container.is-right .sidebar-btn .btn-indicator {
+    left: 4px;
+    right: auto;
+}

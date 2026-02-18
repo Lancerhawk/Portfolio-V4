@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import versions from '../data/versions.json';
+import { useControls } from '../context/ControlContext';
 
 export default function VersionHistory() {
     const [isOpen, setIsOpen] = useState(false);
+    const { isMuted, toggleMute } = useControls();
 
     // Close modal on ESC key
     useEffect(() => {
@@ -15,6 +17,42 @@ export default function VersionHistory() {
 
     return (
         <>
+            {/* Mute Button */}
+            <button
+                onClick={toggleMute}
+                className="mute-toggle-btn"
+                title={isMuted ? "Unmute Sounds" : "Mute Sounds"}
+                style={{
+                    position: 'fixed',
+                    bottom: '2.5rem',
+                    right: '6.5rem',
+                    zIndex: 1000,
+                    width: '50px',
+                    height: '50px',
+                    borderRadius: '50%',
+                    background: isMuted ? 'var(--pink)' : 'var(--cyan)',
+                    border: '3px solid var(--border)',
+                    boxShadow: '4px 4px 0 var(--border)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.2rem',
+                    transition: 'all 0.2s ease',
+                    color: isMuted ? 'var(--pink-content)' : 'var(--cyan-content)'
+                }}
+                onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translate(2px, 2px)';
+                    e.currentTarget.style.boxShadow = '0 0 0 var(--border)';
+                }}
+                onMouseLeave={e => {
+                    e.currentTarget.style.transform = '';
+                    e.currentTarget.style.boxShadow = '4px 4px 0 var(--border)';
+                }}
+            >
+                <i className={`fas ${isMuted ? 'fa-volume-mute' : 'fa-volume-up'}`} />
+            </button>
+
             {/* Floating Button */}
             <button
                 onClick={() => setIsOpen(true)}
@@ -22,8 +60,8 @@ export default function VersionHistory() {
                 title="Version History"
                 style={{
                     position: 'fixed',
-                    bottom: '2rem',
-                    right: '2rem',
+                    bottom: '2.5rem',
+                    right: '2.5rem',
                     zIndex: 1000,
                     width: '50px',
                     height: '50px',
@@ -37,7 +75,7 @@ export default function VersionHistory() {
                     justifyContent: 'center',
                     fontSize: '1.2rem',
                     transition: 'all 0.2s ease',
-                    color: 'var(--border)'
+                    color: 'var(--yellow-content)'
                 }}
                 onMouseEnter={e => {
                     e.currentTarget.style.transform = 'translate(2px, 2px)';
@@ -96,7 +134,7 @@ export default function VersionHistory() {
                             justifyContent: 'space-between',
                             alignItems: 'center'
                         }}>
-                            <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>Version History</h2>
+                            <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800, color: 'var(--cyan-content)' }}>Version History</h2>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 style={{
@@ -120,7 +158,7 @@ export default function VersionHistory() {
                                     e.currentTarget.style.boxShadow = '3px 3px 0 var(--border)';
                                 }}
                             >
-                                <i className="fas fa-times" />
+                                <i className="fas fa-times" style={{ color: 'var(--pink-content)' }} />
                             </button>
                         </div>
 
@@ -165,6 +203,7 @@ export default function VersionHistory() {
                                                 display: 'inline-block',
                                                 padding: '0.2rem 0.5rem',
                                                 background: type === 'Added' ? 'var(--accent)' : type === 'Fixed' ? 'var(--pink)' : 'var(--cyan)',
+                                                color: type === 'Added' ? 'var(--accent-content)' : type === 'Fixed' ? 'var(--pink-content)' : 'var(--cyan-content)',
                                                 border: '2px solid var(--border)',
                                                 fontWeight: 700
                                             }}>{type}</h4>

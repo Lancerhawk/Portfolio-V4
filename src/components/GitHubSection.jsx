@@ -51,9 +51,9 @@ const GQL_QUERY = (username) => `{
 
 function cellColor(count) {
     if (count === 0) return 'var(--bg-cell)';
-    if (count <= 2) return '#a8e6cf';
-    if (count <= 5) return '#66d9ef';
-    return '#ffd93d';
+    if (count <= 2) return 'var(--accent)';
+    if (count <= 5) return 'var(--cyan)';
+    return 'var(--yellow)';
 }
 
 // Compute current streak + longest streak from contribution weeks
@@ -318,6 +318,7 @@ export default function GitHubSection() {
                                                 padding: '0.2rem 0.6rem',
                                                 background: 'var(--secondary)', border: 'var(--border-width) solid var(--border)',
                                                 boxShadow: '3px 3px 0 var(--border)',
+                                                color: 'var(--secondary-content)',
                                                 fontFamily: 'Space Mono, monospace', fontSize: '0.75rem', fontWeight: 700,
                                             }}>
                                                 {icon} {show}-day {label}
