@@ -188,12 +188,6 @@ export default function JourneySection() {
                             <rect width="100%" height="100%" fill="url(#grid)" />
                         </svg>
 
-                        {/* Pirate overlay */}
-                        <img src="/image/arrow.png" alt="" style={{
-                            position: 'absolute', bottom: '-60px', left: '-13px',
-                            width: '200px', height: 'auto', zIndex: 1000, pointerEvents: 'none',
-                            opacity: 0.5
-                        }} />
                     </div>
                 </div>
             </div>

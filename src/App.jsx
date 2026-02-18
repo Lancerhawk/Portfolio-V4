@@ -13,15 +13,16 @@ import GitHubSection from './components/GitHubSection';
 import EducationLanguagesSection from './components/EducationLanguagesSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import VersionHistory from './components/VersionHistory';
 
 import Terminal from './components/Terminal/Terminal';
 
-const MainLayout = ({ theme, toggle }) => (
+const MainLayout = ({ theme, toggleTheme }) => (
   <>
     <LoaderOverlay />
     <ProgressBar />
     <div className="page-wrapper">
-      <Navbar theme={theme} toggleTheme={toggle} />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
         <HeroSection />
         <PaperTear />
@@ -34,6 +35,7 @@ const MainLayout = ({ theme, toggle }) => (
         <ContactSection />
       </main>
       <Footer />
+      <VersionHistory />
     </div>
   </>
 );

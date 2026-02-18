@@ -1,0 +1,70 @@
+[
+    {
+        "version": "0.2.2",
+        "date": "2026-02-18",
+        "changes": {
+            "Added": [
+                "Version History Modal: Floating button (FAB) to browse project evolution.",
+                "Neo-brutalist modal design with theme support."
+            ],
+            "Fixed": [
+                "Map Overlay: Removed unwanted arrow image from the journey map."
+            ]
+        }
+    },
+    {
+        "version": "0.2.1",
+        "date": "2026-02-18",
+        "changes": {
+            "Added": [
+                "Physical Book Flip: Redesigned the 'My Journey' flip with backface-visibility: hidden.",
+                "Vercel Deployment: Added vercel.json for client-side routing and reloads."
+            ],
+            "Changed": [
+                "Mobile Paper Tear: Removed gray parallax gap/color on mobile for cleaner transitions.",
+                "Responsive Footer: Centered layout and improved vertical stacking on small screens."
+            ],
+            "Fixed": [
+                "Fixed 'white screen' crash caused by missing useState import.",
+                "Eliminated sub-pixel color bleeding in paper tear SVGs.",
+                "Refined sidebar shadow behavior to hide when the book is open."
+            ]
+        }
+    },
+    {
+        "version": "0.2.0",
+        "date": "2026-02-18",
+        "changes": {
+            "Added": [
+                "Interactive Terminal: Retro-style route (/terminal) with dynamic theme switching.",
+                "Dynamic ASCII Art: Figlet integration for real-time terminal art.",
+                "CGPA Display: Added to education section.",
+                "Language Stars Counter: Fixed proficiency star visualization.",
+                "Paper Tear Effect: Implemented jagged separator with deterministic paths.",
+                "Tape Sticker: Interactive component with corrected positioning."
+            ],
+            "Changed": [
+                "Journey Book Flip: 레드esigned 3D animation to be smoother.",
+                "Map Integration: Refined markers and positioning.",
+                "Brutalism Aesthetic: Unified design system with borders and shadows.",
+                "Responsive Navigation: Improved navbar tracking."
+            ],
+            "Fixed": [
+                "Fixed marker icons loading in Leaflet.",
+                "Resolved overlapping in Journey grid.",
+                "Fixed z-index conflicts in 3D components."
+            ]
+        }
+    },
+    {
+        "version": "0.0.1",
+        "date": "2026-02-14",
+        "changes": {
+            "Added": [
+                "Initial project setup with Vite + React.",
+                "Basic component structure.",
+                "Integration of Leaflet maps."
+            ]
+        }
+    }
+]
