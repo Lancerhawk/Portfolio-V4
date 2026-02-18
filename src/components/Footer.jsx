@@ -9,26 +9,26 @@ export default function Footer() {
     };
 
     return (
-        <footer style={{
+        <footer className="footer" style={{
             marginTop: '3rem', padding: '2rem 2rem 1.5rem',
             background: 'var(--white)', borderTop: 'var(--border-width) solid var(--border)',
             transition: 'all 0.3s ease'
         }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <div className="footer-container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 {/* Main row */}
-                <div style={{
+                <div className="footer-main-row" style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     gap: '2rem', flexWrap: 'wrap', paddingBottom: '1.5rem',
                     borderBottom: 'var(--border-width) solid var(--border)'
                 }}>
                     {/* Brand */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    <div className="footer-brand" style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                         <strong style={{ fontSize: '1.1rem', fontWeight: 700 }}>{data.meta.name}</strong>
                         <span style={{ fontSize: '0.875rem', opacity: 0.7 }}>{f.role}</span>
                     </div>
 
                     {/* Nav links */}
-                    <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+                    <div className="footer-nav" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
                         {f.navLinks.map(link => (
                             <button key={link.label} onClick={() => scrollTo(link.href)}
                                 style={{
@@ -43,7 +43,7 @@ export default function Footer() {
                     </div>
 
                     {/* Social icons */}
-                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                    <div className="footer-socials" style={{ display: 'flex', gap: '0.75rem' }}>
                         {f.socials.map(s => (
                             <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer"
                                 title={s.label}
@@ -62,14 +62,14 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom row */}
-                <div style={{
+                <div className="footer-bottom-row" style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     paddingTop: '1.5rem', flexWrap: 'wrap', gap: '1rem'
                 }}>
-                    <span style={{ fontFamily: 'Space Mono, monospace', fontSize: '0.85rem', opacity: 0.7 }}>
+                    <span className="footer-copyright" style={{ fontFamily: 'Space Mono, monospace', fontSize: '0.85rem', opacity: 0.7 }}>
                         {f.copyright}
                     </span>
-                    <a href={f.terminalLink}
+                    <a href={f.terminalLink} className="footer-terminal-btn"
                         style={{
                             display: 'flex', alignItems: 'center', gap: '0.5rem',
                             padding: '0.5rem 1rem', background: 'var(--cyan)',

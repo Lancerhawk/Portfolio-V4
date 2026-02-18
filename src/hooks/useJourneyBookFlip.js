@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function useJourneyBookFlip() {
     const timelineRef = useRef(null);
     const backRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         const timeline = timelineRef.current;
@@ -17,6 +18,7 @@ export function useJourneyBookFlip() {
             back.style.transform = 'rotateY(0deg)';
             timeline.style.zIndex = '100';
             back.style.zIndex = '1';
+            setIsOpen(true);
             setTimeout(() => { timeline.style.overflowY = 'auto'; }, 600);
         };
 
@@ -28,6 +30,7 @@ export function useJourneyBookFlip() {
             timeline.style.zIndex = '1';
             back.style.zIndex = '100';
             timeline.style.overflowY = 'hidden';
+            setIsOpen(false);
         };
 
         // Start closed
@@ -51,5 +54,5 @@ export function useJourneyBookFlip() {
         return () => observer.disconnect();
     }, []);
 
-    return { timelineRef, backRef };
+    return { timelineRef, backRef, isOpen };
 }

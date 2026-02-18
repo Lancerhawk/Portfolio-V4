@@ -1,7 +1,7 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.2.0-green.svg)
+![Version](https://img.shields.io/badge/version-0.2.1-green.svg)
 
 A modern, interactive developer portfolio built with performance and aesthetics in mind. Featuring a unique paper tear design, reactive parallax effects, and a responsive layout.
 
@@ -21,7 +21,6 @@ A modern, interactive developer portfolio built with performance and aesthetics 
 -   **Styling**: TailwindCSS v4 & CSS Modules
 -   **Maps**: Leaflet & React-Leaflet
 -   **Deployment**: Vercel / Netlify (Ready)
-
 
 ## ⚙️ Configuration
 

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-02-18
+
+### Added
+-   **Physical Book Flip**: Redesigned the "My Journey" flip to use a realistic 3D page-turning effect with `backface-visibility: hidden`. Content is now physically on the back of the cover.
+-   **Vercel Deployment**: Added `vercel.json` with rewrite rules to support client-side routing and page reloads.
+
+### Changed
+-   **Mobile Paper Tear**: Completely removed the gray parallax gap/color on mobile devices for a cleaner, non-popping jagged transition.
+-   **Responsive Footer**: Centered layout and improved vertical stacking on small screens for better accessibility.
+
+### Fixed
+-   Fixed "white screen" crash caused by missing `useState` import.
+-   Eliminated sub-pixel color bleeding in paper tear SVGs.
+-   Refined sidebar shadow behavior to correctly hide when the book is open.
+
 ## [0.2.0] - 2026-02-18
 
 ### Added

@@ -58,7 +58,7 @@ function MapMarkers({ onLocationClick }) {
 }
 
 export default function JourneySection() {
-    const { timelineRef, backRef } = useJourneyBookFlip();
+    const { timelineRef, backRef, isOpen } = useJourneyBookFlip();
     const fadeRef = useFadeIn();
     const [flyTo, setFlyTo] = useState(null);
 
@@ -89,7 +89,7 @@ export default function JourneySection() {
                     <div ref={timelineRef} className="journey-timeline" style={{
                         background: 'var(--white)', padding: '1.5rem',
                         border: 'var(--border-width) solid var(--border)',
-                        boxShadow: '8px 8px 0 var(--border)', height: '600px',
+                        boxShadow: isOpen ? '0 8px 0 var(--border)' : '8px 8px 0 var(--border)', height: '600px',
                         position: 'relative', overflowY: 'hidden'
                     }}>
                         <div style={{
@@ -145,7 +145,7 @@ export default function JourneySection() {
                     {/* Back of book (treasure map SVG) */}
                     <div ref={backRef} className="journey-timeline-back" style={{
                         background: '#f4ecd8', border: 'var(--border-width) solid var(--border)',
-                        boxShadow: '8px 8px 0 var(--border)',
+                        boxShadow: isOpen ? '0 8px 0 var(--border)' : '8px 8px 0 var(--border)',
                         alignItems: 'center', justifyContent: 'center'
                     }}>
                         <svg viewBox="0 0 400 600" style={{ width: '100%', height: '100%', opacity: 0.8 }}>

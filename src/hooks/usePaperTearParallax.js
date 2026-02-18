@@ -8,8 +8,9 @@ export function usePaperTearParallax() {
     const grayPathBottomRef = useRef(null);
 
     useEffect(() => {
+        const isMobile = window.innerWidth <= 768;
         const minGapHeight = -30;
-        const initialGapHeight = 300;
+        const initialGapHeight = isMobile ? 100 : 300;
         const scrollStart = 100;
         const scrollRange = 200;
         const stickerDelay = 30;
