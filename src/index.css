@@ -347,6 +347,7 @@ body::-webkit-scrollbar-thumb:hover {
   margin: 0.25rem 0.1rem;
   position: relative;
   background: transparent;
+  color: #000;
   z-index: 1;
 }
 
@@ -537,6 +538,11 @@ body::-webkit-scrollbar-thumb:hover {
     grid-column: 2;
     z-index: 1;
   }
+
+  /* Map Pirate Aesthetic Filter */
+  .leaflet-tile-container {
+    filter: sepia(0.6) contrast(1.1) brightness(0.9) hue-rotate(-10deg) saturate(0.8);
+  }
 }
 
 /* Leaflet custom styles */
@@ -711,7 +717,7 @@ body::-webkit-scrollbar-thumb:hover {
   position: absolute;
   top: -42px;
   left: 50%;
-  transform: translateX(-70%);
+  transform: translateX(-50%);
   background: var(--yellow);
   border: 3px solid var(--border);
   box-shadow: 3px 3px 0 var(--border);

@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { useTheme } from './hooks/useTheme';
 import LoaderOverlay from './components/LoaderOverlay';
 import ProgressBar from './components/ProgressBar';
@@ -13,28 +14,37 @@ import EducationLanguagesSection from './components/EducationLanguagesSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
+import Terminal from './components/Terminal/Terminal';
+
+const MainLayout = ({ theme, toggle }) => (
+  <>
+    <LoaderOverlay />
+    <ProgressBar />
+    <div className="page-wrapper">
+      <Navbar theme={theme} toggleTheme={toggle} />
+      <main>
+        <HeroSection />
+        <PaperTear />
+        <AboutSection />
+        <JourneySection />
+        <SkillsSection />
+        <GitHubSection />
+        <ProjectsSection />
+        <EducationLanguagesSection />
+        <ContactSection />
+      </main>
+      <Footer />
+    </div>
+  </>
+);
+
 export default function App() {
   const { theme, toggle } = useTheme();
 
   return (
-    <>
-      <LoaderOverlay />
-      <ProgressBar />
-      <div className="page-wrapper">
-        <Navbar theme={theme} toggleTheme={toggle} />
-        <main>
-          <HeroSection />
-          <PaperTear />
-          <AboutSection />
-          <JourneySection />
-          <SkillsSection />
-          <GitHubSection />
-          <ProjectsSection />
-          <EducationLanguagesSection />
-          <ContactSection />
-        </main>
-        <Footer />
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<MainLayout theme={theme} toggle={toggle} />} />
+      <Route path="/terminal" element={<Terminal />} />
+    </Routes>
   );
 }

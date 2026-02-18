@@ -144,16 +144,17 @@ export default function JourneySection() {
 
                     {/* Back of book (treasure map SVG) */}
                     <div ref={backRef} className="journey-timeline-back" style={{
-                        background: 'var(--white)', border: 'var(--border-width) solid var(--border)',
-                        boxShadow: '8px 8px 0 var(--border)', height: '600px',
-                        alignItems: 'center', justifyContent: 'center', display: 'none'
+                        background: '#f4ecd8', border: 'var(--border-width) solid var(--border)',
+                        boxShadow: '8px 8px 0 var(--border)',
+                        alignItems: 'center', justifyContent: 'center'
                     }}>
-                        <svg viewBox="0 0 400 600" style={{ width: '100%', height: '100%', opacity: 0.15 }}>
-                            <rect width="400" height="600" fill="var(--yellow)" />
+                        <svg viewBox="0 0 400 600" style={{ width: '100%', height: '100%', opacity: 0.8 }}>
+                            <rect width="400" height="600" fill="#f4ecd8" />
                             <path d="M50,100 Q200,50 350,100 Q300,200 350,300 Q200,350 50,300 Q100,200 50,100Z" fill="none" stroke="var(--border)" strokeWidth="3" strokeDasharray="10,5" />
                             <circle cx="200" cy="200" r="30" fill="none" stroke="var(--border)" strokeWidth="3" />
                             <text x="200" y="205" textAnchor="middle" fontFamily="Space Mono" fontSize="20" fill="var(--border)">✕</text>
                             <path d="M50,50 L350,550 M350,50 L50,550" stroke="var(--border)" strokeWidth="1" opacity="0.3" />
+                            <text x="200" y="400" textAnchor="middle" fontFamily="Space Grotesk" fontSize="24" fontWeight="700" fill="var(--border)" style={{ textTransform: 'uppercase' }}>Treasure Awaits</text>
                         </svg>
                     </div>
 

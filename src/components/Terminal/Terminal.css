@@ -1,0 +1,350 @@
+:root {
+    --term-color: #ff8c00;
+    --term-bg: #141414;
+    --term-glow: rgba(255, 140, 0, 0.4);
+    --term-header-bg: #0d0d0d;
+    --term-border: rgba(255, 140, 0, 0.2);
+    --term-highlight: #ffb347;
+    --term-divider: #4d3d2b;
+    --term-dim: #666666;
+    --term-success: #98fb98;
+    --term-error: #ff6b6b;
+}
+
+.terminal-route-container {
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: "Fira Code", "Courier New", Courier, monospace;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.terminal-window {
+    width: 100%;
+    height: 100%;
+    background-color: var(--term-bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+}
+
+.terminal-window::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.15) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 2;
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--term-header-bg);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--term-border);
+    position: relative;
+    z-index: 3;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.close {
+    background-color: #ff5f56;
+}
+
+.minimize {
+    background-color: #ffbd2e;
+}
+
+.maximize {
+    background-color: #27c93f;
+}
+
+.terminal-title {
+    color: var(--term-color);
+    opacity: 0.6;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.terminal-content {
+    padding: 2rem;
+    flex: 1;
+    color: var(--term-color);
+    overflow-y: auto;
+    position: relative;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    scrollbar-width: thin;
+    scrollbar-color: var(--term-border) transparent;
+}
+
+@media (max-width: 768px) {
+    .terminal-content {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .terminal-header {
+        padding: 8px 12px;
+    }
+
+    .terminal-title {
+        display: none;
+        /* Hide path on mobile to save space */
+    }
+
+    .theme-btn {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+
+    .footer-link {
+        font-size: 0.75rem;
+        gap: 3px;
+    }
+
+    .terminal-footer {
+        gap: 10px;
+        padding: 8px 10px;
+    }
+
+    .ascii-art {
+        font-size: 0.7rem;
+        /* Scale down ASCII art */
+    }
+
+    .terminal-input {
+        font-size: 1rem;
+    }
+}
+
+/* Custom Scrollbar for Terminal Content */
+.terminal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+    background: var(--term-border);
+    border-radius: 4px;
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--term-glow);
+}
+
+/* .output-line {
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+} */
+
+.output-line {
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+    display: block;
+    /* width: 100%; */
+}
+
+.output-line pre {
+    margin: 0;
+}
+
+.command-text {
+    color: var(--term-color);
+    opacity: 0.8;
+}
+
+.error-text {
+    color: #ff6b6b;
+}
+
+.success-text {
+    color: #98fb98;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prompt {
+    color: var(--term-color);
+    font-weight: bold;
+}
+
+.terminal-input {
+    background: none;
+    border: none;
+    color: var(--term-color);
+    font-size: 1.1rem;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+}
+
+/* .ascii-art {
+    color: #d4843e;
+    margin-bottom: 1rem;
+} */
+
+.ascii-art {
+    color: var(--term-color);
+    margin: 0;
+    padding: 0;
+    font-family: "Fira Code", "Courier New", monospace;
+    font-size: 0.9rem;
+    /* Slightly smaller = cleaner figlet output */
+    line-height: 1;
+    /* CRITICAL FIX */
+    letter-spacing: 0;
+    white-space: pre;
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Hide scrollbar for ascii art */
+    font-variant-ligatures: none;
+    text-rendering: optimizeSpeed;
+}
+
+.ascii-art::-webkit-scrollbar {
+    display: none;
+}
+
+
+.divider {
+    color: var(--term-divider);
+    margin: 0.5rem 0;
+}
+
+.terminal-highlight {
+    color: var(--term-highlight);
+}
+
+.dim {
+    color: var(--term-dim);
+}
+
+.dimitalic {
+    color: var(--term-dim);
+    font-style: italic;
+}
+
+.terminal-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.theme-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.theme-btn {
+    background: none;
+    border: 1px solid var(--term-border);
+    color: var(--term-color);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+
+.theme-btn:hover {
+    opacity: 1;
+    background-color: var(--term-border);
+}
+
+.theme-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--term-header-bg);
+    border: 1px solid var(--term-border);
+    margin-top: 5px;
+    border-radius: 4px;
+    z-index: 10;
+    min-width: 120px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.theme-option {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: var(--term-color);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.theme-option:hover {
+    background-color: var(--term-border);
+    opacity: 1;
+}
+
+.terminal-footer {
+    padding: 10px 15px;
+    border-top: 1px solid var(--term-border);
+    background-color: var(--term-header-bg);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    z-index: 3;
+}
+
+.footer-link {
+    color: var(--term-color);
+    opacity: 0.7;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.footer-link:hover {
+    opacity: 1;
+}

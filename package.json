@@ -1,7 +1,7 @@
 {
   "name": "portfolio-arin-jain",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,10 +12,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@tailwindcss/vite": "^4.1.18",
+    "@types/figlet": "^1.7.0",
+    "figlet": "^1.10.0",
     "leaflet": "^1.9.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-leaflet": "^5.0.0",
+    "react-router-dom": "^7.13.0",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {

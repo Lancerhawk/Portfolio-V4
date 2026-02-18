@@ -5,7 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2026-02-18
+## [0.2.0] - 2026-02-18
+
+### Added
+-   **Interactive Terminal**: A fully functional retro-style terminal route (/terminal) with dynamic theme switching (Amber, Matrix, Modern, Retro), command history, and tab completion.
+-   **Dynamic ASCII Art**: Integrated Figlet for real-time ASCII art generation in the terminal.
+-   **CGPA Display**: Added CGPA to the education section in `portfolio.json`.
+-   **Language Stars Counter**: Fixed and improved the language proficiency star visualization.
+
+### Changed
+-   **Journey Book Flip**: Completely redesigned the 3D book flip animation to be smoother and more robust, syncing logic with reference implementations.
+-   **Map Integration**: Refined Leaflet map markers, fixed positioning offsets, and improved responsive behavior.
+-   **Brutalism Aesthetic**: Unified the design system with consistent borders, shadows, and neo-brutalist color tokens.
+-   **Responsive Navigation**: Improved navbar behavior and section tracking.
+
+### Fixed
+-   Fixed marker icons not loading correctly in Leaflet.
+-   Resolved overlapping issues in the Journey section grid.
+-   Fixed various z-index conflicts between overlapping 3D components.
+
 
 ### Added
 -   **Paper Tear Effect**: Implemented a realistic, jagged paper tear separator with deterministic path generation.

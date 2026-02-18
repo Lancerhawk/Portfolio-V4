@@ -44,11 +44,6 @@
         "photo": "/image/avatar-gpt.png",
         "photoAlt": "Arin Jain",
         "decoLabel": "Full-Stack Ninja",
-        "RootlyRuntime": {
-            "url": "https://project-rootly.vercel.app/",
-            "logo": "/image/rootly-icon.svg",
-            "text": "Creator of Rootly"
-        },
         "techBadges": [
             {
                 "icon": "fab fa-node-js",

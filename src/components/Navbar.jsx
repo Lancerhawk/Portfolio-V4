@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import data from '../data/portfolio.json';
 
 export default function Navbar({ theme, toggleTheme }) {
     const [hidden, setHidden] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     // Scroll hide/show
     useEffect(() => {
@@ -43,19 +45,19 @@ export default function Navbar({ theme, toggleTheme }) {
                     <span style={{ fontWeight: 700, fontSize: '1.25rem', letterSpacing: '-0.5px' }}>
                         {data.meta.brand}
                     </span>
-                    <a href={data.hero.RootlyRuntime?.url} target="_blank" rel="noopener noreferrer"
+                    <button onClick={() => navigate('/terminal')}
                         style={{
                             display: 'flex', alignItems: 'center', gap: '0.4rem',
                             padding: '0.3rem 0.65rem', background: 'var(--yellow)',
                             border: '2px solid var(--border)', boxShadow: '2px 2px 0 var(--border)',
-                            textDecoration: 'none', color: 'var(--text)', fontWeight: 600, fontSize: '0.75rem',
+                            cursor: 'pointer', fontFamily: 'inherit', color: 'var(--text)', fontWeight: 600, fontSize: '0.75rem',
                             transition: 'all 0.2s', whiteSpace: 'nowrap'
                         }}
                         onMouseEnter={e => { e.currentTarget.style.transform = 'translate(2px,2px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; }}
                         onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '2px 2px 0 var(--border)'; }}
                     >
-                        <i className="fas fa-fire" /> Rootly-Runtime
-                    </a>
+                        &gt;_ Terminal
+                    </button>
                 </div>
 
                 {/* Desktop nav links */}
@@ -133,6 +135,15 @@ export default function Navbar({ theme, toggleTheme }) {
                             }}
                         >{link.label}</button>
                     ))}
+                    <button onClick={() => { navigate('/terminal'); setMenuOpen(false); }}
+                        style={{
+                            background: 'none', border: 'none', cursor: 'pointer',
+                            fontFamily: 'inherit', fontWeight: 600, fontSize: '1rem',
+                            color: 'var(--text)', textAlign: 'left', padding: '0.5rem 0',
+                            borderBottom: '1px solid var(--border)', opacity: 0.85,
+                            display: 'flex', alignItems: 'center', gap: '8px'
+                        }}
+                    >&gt;_ Terminal</button>
                     <button onClick={() => scrollTo('#contact')}
                         style={{
                             padding: '0.65rem 1rem', background: 'var(--cyan)',
