@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dark background circle -->
+  <circle cx="50" cy="50" r="48" fill="#0f172a" stroke="#22c55e" stroke-width="2"/>
+  
+  <!-- Terminal window design -->
+  <rect x="20" y="25" width="60" height="50" rx="3" fill="#1e293b" stroke="#22c55e" stroke-width="1.5"/>
+  
+  <!-- Terminal header dots -->
+  <circle cx="26" cy="31" r="2" fill="#ef4444"/>
+  <circle cx="33" cy="31" r="2" fill="#eab308"/>
+  <circle cx="40" cy="31" r="2" fill="#22c55e"/>
+  
+  <!-- Terminal prompt symbol -->
+  <text x="25" y="52" font-family="monospace" font-size="18" font-weight="bold" fill="#22c55e">&gt;_</text>
+  
+  <!-- Code brackets -->
+  <text x="45" y="52" font-family="monospace" font-size="16" font-weight="bold" fill="#22c55e">{}</text>
+  
+  <!-- Blinking cursor effect -->
+  <rect x="62" y="40" width="2" height="14" fill="#22c55e">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Bottom accent line -->
+  <line x1="25" y1="68" x2="75" y2="68" stroke="#22c55e" stroke-width="1.5" opacity="0.5"/>
+</svg>

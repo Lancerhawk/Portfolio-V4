@@ -1,0 +1,617 @@
+{
+    "github": {
+        "username": "Lancerhawk",
+        "_note": "Add your GitHub PAT to .env as VITE_GITHUB_TOKEN=ghp_... (read:user scope only)"
+    },
+    "meta": {
+        "name": "Arin Jain",
+        "initials": "AJ",
+        "brand": "Arin Jain",
+        "title": "Software Engineer | Full-Stack & Cloud Expert",
+        "description": "Backend-heavy Full Stack Software Engineer focused on system design, production-grade APIs, and developer tooling infrastructure with strong emphasis on scalability, data integrity, and performance optimization.",
+        "keywords": "Arin Jain, Software Engineer, Backend Engineer, Full Stack Developer, System Design, Distributed Systems, API Architecture, REST APIs, Node.js, TypeScript, JavaScript, Python, PostgreSQL, MongoDB, Express.js, Next.js, React.js, Tailwind CSS, JWT Authentication, OAuth Integration, Rate Limiting, Runtime SDK Development, Developer Tooling, VS Code Extension Development, Stack Trace Parsing, Relational Database Design, Data Integrity, Batch Processing Optimization, Asynchronous Workflows, AWS S3, AWS Lambda, WebSockets, Docker, Scalable Architecture, Production Systems Engineering.",
+        "author": "Arin Jain",
+        "siteUrl": "https://arinjain.xyz",
+        "ogImage": ""
+    },
+    "hero": {
+        "greeting": "Hi there!👋",
+        "name": "I'm Arin Jain.",
+        "description": "Backend-heavy Full Stack Software Engineer focused on system design, production-grade APIs, and developer tooling infrastructure with strong emphasis on scalability, data integrity, and performance optimization.",
+        "socials": [
+            {
+                "icon": "fab fa-github",
+                "url": "https://github.com/Lancerhawk",
+                "label": "GitHub"
+            },
+            {
+                "icon": "fab fa-linkedin",
+                "url": "https://www.linkedin.com/in/arin-eren-jain/",
+                "label": "LinkedIn"
+            },
+            {
+                "icon": "fa-solid fa-download",
+                "url": "/downloadable/ArinJain_One_Page.pdf",
+                "label": "Resume"
+            }
+        ],
+        "coffeeText": "Buy me a coffee",
+        "coffeeUrl": "https://buymeacoffee.com/lancerhawk",
+        "coffeeIcon": "/image/caffe-icon.gif",
+        "arrowImage": "/image/arrow.png",
+        "ctaText": "Get in Touch!",
+        "ctaLink": "#contact",
+        "photo": "/image/avatar-gpt.png",
+        "photoAlt": "Arin Jain",
+        "decoLabel": "Full-Stack Ninja",
+        "RootlyRuntime": {
+            "url": "https://project-rootly.vercel.app/",
+            "logo": "/image/rootly-icon.svg",
+            "text": "Creator of Rootly"
+        },
+        "techBadges": [
+            {
+                "icon": "fab fa-node-js",
+                "label": "Node.js"
+            },
+            {
+                "icon": "fas fa-server",
+                "label": "Express.js"
+            },
+            {
+                "icon": "fas fa-code",
+                "label": "TypeScript"
+            },
+            {
+                "icon": "fab fa-js",
+                "label": "JavaScript"
+            },
+            {
+                "icon": "fas fa-database",
+                "label": "PostgreSQL"
+            },
+            {
+                "icon": "fas fa-table",
+                "label": "Relational Schema Design"
+            },
+            {
+                "icon": "fas fa-shield-alt",
+                "label": "JWT & OAuth"
+            },
+            {
+                "icon": "fas fa-tachometer-alt",
+                "label": "Rate Limiting"
+            },
+            {
+                "icon": "fas fa-bug",
+                "label": "Runtime SDK Development"
+            },
+            {
+                "icon": "fas fa-code-branch",
+                "label": "Developer Tooling"
+            },
+            {
+                "icon": "fab fa-react",
+                "label": "React.js"
+            },
+            {
+                "icon": "fas fa-layer-group",
+                "label": "Next.js"
+            },
+            {
+                "icon": "fab fa-aws",
+                "label": "AWS (S3, Lambda)"
+            },
+            {
+                "icon": "fab fa-docker",
+                "label": "Docker"
+            },
+            {
+                "icon": "fas fa-network-wired",
+                "label": "Distributed Systems"
+            }
+        ]
+    },
+    "about": {
+        "paragraphs": [
+            {
+                "parts": [
+                    {
+                        "text": "Motivated software engineering student with hands-on experience building "
+                    },
+                    {
+                        "text": "full-stack web applications",
+                        "highlight": "yellow"
+                    },
+                    {
+                        "text": " using modern technologies. I enjoy working on "
+                    },
+                    {
+                        "text": "backend logic, database design, and API development",
+                        "highlight": "pink"
+                    },
+                    {
+                        "text": ", while also building clean and responsive user interfaces."
+                    }
+                ]
+            },
+            {
+                "parts": [
+                    {
+                        "text": "Through personal and internship projects, I have developed practical experience in "
+                    },
+                    {
+                        "text": "Node.js, PostgreSQL, and authentication systems",
+                        "highlight": "cyan"
+                    },
+                    {
+                        "text": ", focusing on writing reliable and maintainable code."
+                    }
+                ]
+            },
+            {
+                "parts": [
+                    {
+                        "text": "I am continuously improving my skills in "
+                    },
+                    {
+                        "text": "data structures, system design, and scalable application development",
+                        "highlight": "green"
+                    },
+                    {
+                        "text": ", with the goal of becoming a strong and well-rounded software engineer."
+                    }
+                ]
+            }
+        ]
+    },
+    "experience": [
+        {
+            "id": "exp-1",
+            "title": "Web Developer Intern @ SleekSky",
+            "period": "Jan 2026 - Present",
+            "description": "Leading backend development for NudgePlay, building RESTful APIs using Node.js and Express to handle game templates and customization logic, and integrating Next.js frontend with AWS services (S3, Lambda) for scalable asset handling and backend operations.",
+            "location": "Remote (Bangalore Urban, Karnataka, India)",
+            "country": "India",
+            "locationId": "loc-bangalore"
+        },
+        {
+            "id": "exp-2",
+            "title": "Website Development Intern @ SleekSky",
+            "period": "Nov 2025 - Dec 2025",
+            "description": "Developed customizable website templates using EJS and Tailwind CSS, implementing reusable layouts and dynamic routing with clear separation of layout, content, and structured user input.",
+            "location": "Remote",
+            "country": "India",
+            "locationId": "loc-jabalpur"
+        },
+        {
+            "id": "exp-3",
+            "title": "Web Development Intern @ EliteTech",
+            "period": "Mar 2025 - Apr 2025",
+            "description": "Built and optimized frontend applications using React and TypeScript, improved performance using Chrome Lighthouse audits, and maintained clean version control workflows with Git and GitHub.",
+            "location": "Remote (Jabalpur, MP, India)",
+            "country": "India",
+            "locationId": "loc-jabalpur"
+        },
+        {
+            "id": "exp-4",
+            "title": "President @ Coding Era!",
+            "period": "Feb 2025 - Jan 2026",
+            "description": "Led a 50+ member tech community, organizing weekly coding sessions, AI workshops, and hackathons, launching three new technical clubs, and mentoring members leading to 5+ internship placements.",
+            "location": "Jabalpur, MP, India (Hybrid)",
+            "country": "India",
+            "locationId": "loc-jabalpur"
+        },
+        {
+            "id": "exp-5",
+            "title": "IEEE Branch Vice Chair @ BGIEM",
+            "period": "Aug 2023 - Dec 2025",
+            "description": "Led financial planning and sponsorship efforts for 10+ technical events, optimizing budgets, increasing funding by 30%, and driving a 40% rise in member participation through successful cross-functional collaboration.",
+            "location": "Jabalpur, MP, India",
+            "country": "India",
+            "locationId": "loc-jabalpur"
+        },
+        {
+            "id": "exp-6",
+            "title": "PHP Developer @ Atoms Group",
+            "period": "Mar 2023 - May 2023",
+            "description": "Developed and maintained PHP-based static websites and integrated SQL databases for dynamic content management.",
+            "location": "Bhopal, MP, India",
+            "country": "India",
+            "locationId": "loc-bhopal"
+        }
+    ],
+    "mapLocations": [
+        {
+            "id": "loc-bangalore",
+            "coords": [
+                12.9716,
+                77.5946
+            ],
+            "country": "India",
+            "isCurrent": true,
+            "companies": [
+                {
+                    "city": "Bangalore",
+                    "company": "SleekSky",
+                    "period": "2026 - Present",
+                    "role": "Web Developer Intern"
+                }
+            ]
+        },
+        {
+            "id": "loc-jabalpur",
+            "coords": [
+                23.1815,
+                79.9864
+            ],
+            "country": "India",
+            "isCurrent": false,
+            "companies": [
+                {
+                    "city": "Jabalpur",
+                    "company": "SleekSky",
+                    "period": "2025",
+                    "role": "Website Development Intern"
+                },
+                {
+                    "city": "Jabalpur",
+                    "company": "EliteTech",
+                    "period": "2025",
+                    "role": "Web Development Intern"
+                },
+                {
+                    "city": "Jabalpur",
+                    "company": "Coding Era!",
+                    "period": "2025 - 2026",
+                    "role": "President"
+                },
+                {
+                    "city": "Jabalpur",
+                    "company": "IEEE Branch BGIEM",
+                    "period": "2023 - 2025",
+                    "role": "Vice Chair"
+                }
+            ]
+        },
+        {
+            "id": "loc-bhopal",
+            "coords": [
+                23.2599,
+                77.4126
+            ],
+            "country": "India",
+            "isCurrent": false,
+            "companies": [
+                {
+                    "city": "Bhopal",
+                    "company": "Atoms Group",
+                    "period": "2023",
+                    "role": "PHP Developer"
+                }
+            ]
+        }
+    ],
+    "skills": [
+        {
+            "title": "Frontend",
+            "icon": "fab fa-react",
+            "isHighlight": false,
+            "tags": [
+                {
+                    "icon": "fab fa-react",
+                    "label": "React.js"
+                },
+                {
+                    "icon": "fas fa-layer-group",
+                    "label": "Next.js"
+                },
+                {
+                    "icon": "fab fa-js",
+                    "label": "JavaScript"
+                },
+                {
+                    "icon": "fas fa-code",
+                    "label": "TypeScript"
+                },
+                {
+                    "icon": "fab fa-html5",
+                    "label": "HTML"
+                },
+                {
+                    "icon": "fab fa-css3",
+                    "label": "CSS"
+                },
+                {
+                    "icon": "fas fa-wind",
+                    "label": "Tailwind CSS"
+                },
+                {
+                    "icon": "fas fa-file-code",
+                    "label": "EJS"
+                }
+            ]
+        },
+        {
+            "title": "Languages",
+            "icon": "fas fa-code",
+            "isHighlight": false,
+            "tags": [
+                {
+                    "icon": "fab fa-js",
+                    "label": "JavaScript"
+                },
+                {
+                    "icon": "fas fa-code",
+                    "label": "TypeScript"
+                },
+                {
+                    "icon": "fab fa-python",
+                    "label": "Python"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "SQL"
+                },
+                {
+                    "icon": "fab fa-php",
+                    "label": "PHP"
+                }
+            ]
+        },
+        {
+            "title": "Backend",
+            "icon": "fas fa-server",
+            "isHighlight": true,
+            "tags": [
+                {
+                    "icon": "fab fa-node-js",
+                    "label": "Node.js"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Express.js"
+                },
+                {
+                    "icon": "fas fa-key",
+                    "label": "JWT Authentication"
+                },
+                {
+                    "icon": "fas fa-user-shield",
+                    "label": "OAuth Integration"
+                },
+                {
+                    "icon": "fas fa-shield-alt",
+                    "label": "API Security"
+                },
+                {
+                    "icon": "fas fa-tachometer-alt",
+                    "label": "Rate Limiting"
+                },
+                {
+                    "icon": "fas fa-bug",
+                    "label": "Error Handling & Logging"
+                }
+            ]
+        },
+        {
+            "title": "Cloud & DevOps",
+            "icon": "fas fa-cloud",
+            "isHighlight": false,
+            "tags": [
+                {
+                    "icon": "fab fa-aws",
+                    "label": "AWS S3"
+                },
+                {
+                    "icon": "fab fa-aws",
+                    "label": "AWS Lambda"
+                },
+                {
+                    "icon": "fab fa-docker",
+                    "label": "Docker"
+                },
+                {
+                    "icon": "fab fa-git-alt",
+                    "label": "Git"
+                },
+                {
+                    "icon": "fab fa-github",
+                    "label": "GitHub Actions"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Vercel"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Render"
+                }
+            ]
+        },
+        {
+            "title": "Databases",
+            "icon": "fas fa-database",
+            "isHighlight": false,
+            "tags": [
+                {
+                    "icon": "fas fa-elephant",
+                    "label": "PostgreSQL"
+                },
+                {
+                    "icon": "fas fa-leaf",
+                    "label": "MongoDB"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "Relational Schema Design"
+                },
+                {
+                    "icon": "fas fa-project-diagram",
+                    "label": "Database Normalization"
+                }
+            ]
+        },
+        {
+            "title": "Systems & Concepts",
+            "icon": "fas fa-sitemap",
+            "isHighlight": true,
+            "tags": [
+                {
+                    "icon": "fas fa-network-wired",
+                    "label": "REST API Design"
+                },
+                {
+                    "icon": "fas fa-exchange-alt",
+                    "label": "Batch Processing"
+                },
+                {
+                    "icon": "fas fa-code-branch",
+                    "label": "Version Control Workflows"
+                },
+                {
+                    "icon": "fas fa-cogs",
+                    "label": "System Design Fundamentals"
+                },
+                {
+                    "icon": "fas fa-chart-line",
+                    "label": "Performance Optimization"
+                }
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "label": "Creator of",
+            "name": "Rootly-Runtime",
+            "tagline": "Surface Production Errors Directly in Your IDE.",
+            "description": "Rootly is a developer platform designed to bridge the gap between production failures and your development environment. Get real-time notifications about production errors right where you code, with full context and stack traces.",
+            "url": "https://project-rootly.vercel.app/",
+            "githubUrl": "https://github.com/Lancerhawk/Rootly-Runtime",
+            "logo": "/image/rootly-icon.svg",
+            "logoBg": false
+        },
+        {
+            "label": "Creator of",
+            "name": "Learning's Hub",
+            "tagline": "Master DSA, and Development Skills with Proper Tracking.",
+            "description": "Learning’s Hub is a fullstack web app that helps developers track their progress in Data Structures, Algorithms, and programming languages. It supports custom list creation, public sharing, progress tracking, and community-based learning.",
+            "url": "https://learningshub.in",
+            "githubUrl": "https://github.com/lancerhawk/learning-hub",
+            "logo": "/image/learninghub-logo.svg",
+            "logoBg": false
+        }
+    ],
+    "education": {
+        "degree": "Bachelor's Degree in Computer Science",
+        "school": "Baderia Global Institute of Engineering and Management, BGIEM",
+        "period": "2022 - 2026",
+        "location": "Jabalpur, MP, India",
+        "cgpa": "7.88"
+    },
+    "languages": [
+        {
+            "name": "Hindi",
+            "stars": 2
+        },
+        {
+            "name": "English",
+            "stars": 3
+        },
+        {
+            "name": "Japanease",
+            "stars": 1
+        }
+    ],
+    "contact": [
+        {
+            "platform": "LinkedIn",
+            "icon": "fab fa-linkedin",
+            "url": "https://www.linkedin.com/in/arin-eren-jain/"
+        },
+        {
+            "platform": "GitHub",
+            "icon": "fab fa-github",
+            "url": "https://github.com/Lancerhawk"
+        },
+        {
+            "platform": "WhatsApp",
+            "icon": "fab fa-whatsapp",
+            "url": "https://wa.me/919301459291"
+        }
+    ],
+    "footer": {
+        "copyright": "© 2025 Arin Jain",
+        "role": "Senior Software Engineer",
+        "email": "70001933arin@gmail.com",
+        "terminalLink": "/terminal",
+        "navLinks": [
+            {
+                "label": "Home",
+                "href": "#hero"
+            },
+            {
+                "label": "About",
+                "href": "#about"
+            },
+            {
+                "label": "Journey",
+                "href": "#experience"
+            },
+            {
+                "label": "Skills",
+                "href": "#skills"
+            },
+            {
+                "label": "GitHub",
+                "href": "#github"
+            },
+            {
+                "label": "Projects",
+                "href": "#projects"
+            }
+        ],
+        "socials": [
+            {
+                "icon": "fab fa-github",
+                "url": "https://github.com/Lancerhawk",
+                "label": "GitHub"
+            },
+            {
+                "icon": "fab fa-linkedin",
+                "url": "https://www.linkedin.com/in/arin-eren-jain/",
+                "label": "LinkedIn"
+            },
+            {
+                "icon": "fas fa-envelope",
+                "url": "mailto:70001933arin@gmail.com",
+                "label": "Email"
+            }
+        ]
+    },
+    "progressSections": [
+        "hero",
+        "about",
+        "experience",
+        "skills",
+        "github",
+        "projects",
+        "contact"
+    ],
+    "progressLabels": [
+        "Home",
+        "About",
+        "Journey",
+        "Skills",
+        "GitHub",
+        "Projects",
+        "Contact"
+    ],
+    "mapConfig": {
+        "center": [
+            21,
+            78
+        ],
+        "zoom": 5
+    }
+}
