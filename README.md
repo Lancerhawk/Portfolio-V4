@@ -21,17 +21,41 @@ A modern, interactive developer portfolio built with performance and aesthetics 
 -   **Maps**: Leaflet & React-Leaflet
 -   **Deployment**: Vercel / Netlify (Ready)
 
-## Installation
 
-Clone the repository and install dependencies:
+## ⚙️ Configuration
 
-```bash
-git clone https://github.com/Lancerhawk/Portfolio-V4.git
-cd portfolio-arin-jain
-npm install
-```
+### Environment Variables
 
-## Development
+1.  Copy `.env.example` to `.env`:
+    ```bash
+    cp .env.example .env
+    ```
+2.  Add your GitHub Token:
+    -   Generate a Personal Access Token on GitHub (Settings -> Developer Settings -> Personal Access Tokens).
+    -   Select `repo` (or just `public_repo` if you only need public data) scope.
+    -   Paste it into `.env` as `VITE_GITHUB_TOKEN`.
+
+> **Note**: The GitHub section uses `sessionStorage` to cache API responses. If you don't see your latest contributions immediately, try clearing your browser cache or waiting for the session to expire.
+
+## 📝 How to Use This Template
+
+This portfolio is designed to be easily customizable via a single JSON file. You don't need to touch the React code to update your content!
+
+### 1. Edit `src/data/portfolio.json`
+All text, links, and project data are stored here.
+-   **Hero**: Update `greeting`, `name`, `description`, and `socials`.
+-   **Skills**: Add or remove skills in the `skills` array.
+-   **Projects**: Add your own projects to the `projects` list.
+-   **Journey**: Update your timeline in `journey`.
+
+### 2. Update Images
+-   Place your images in the `public/images` folder.
+-   Reference them in `portfolio.json` (e.g., `"logo": "/images/my-logo.png"`).
+
+### 3. Change Colors (Optional)
+-   Edit `src/index.css` to change CSS variables like `--primary`, `--cyan`, `--yellow`, etc., to match your brand.
+
+## 💻 Development
 
 Start the development server:
 
