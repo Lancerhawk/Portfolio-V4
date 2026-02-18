@@ -1,23 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import data from '../data/portfolio.json';
 
 export default function Navbar({ theme, toggleTheme }) {
     const [hidden, setHidden] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const lastScrollY = typeof window !== 'undefined' ? { current: 0 } : { current: 0 };
 
     // Scroll hide/show
-    if (typeof window !== 'undefined') {
-        window.onscroll = (() => {
-            let last = 0;
-            return () => {
-                const current = window.scrollY;
-                setHidden(current > last && current > 100);
-                last = current;
-                if (menuOpen) setMenuOpen(false);
-            };
-        })();
-    }
+    useEffect(() => {
+        let last = 0;
+        const onScroll = () => {
+            const current = window.scrollY;
+            setHidden(current > last && current > 100);
+            last = current;
+            if (menuOpen) setMenuOpen(false);
+        };
+        window.addEventListener('scroll', onScroll);
+        return () => window.removeEventListener('scroll', onScroll);
+    }, [menuOpen]);
 
     const scrollTo = (href) => {
         const id = href.replace('#', '');

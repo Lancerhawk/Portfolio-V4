@@ -18,8 +18,7 @@ export function usePaperTearParallax() {
 
         let rafId = null;
         let lastScrollY = -1;
-        // Cache sticker top offset once — avoids getBoundingClientRect() every frame
-        let stickerTopOffset = 0;
+
 
         const gap = gapRef.current;
         const tearBottom = tearBottomRef.current;
@@ -41,14 +40,7 @@ export function usePaperTearParallax() {
         // Limit layout/paint scope for the sticker to its own subtree.
         if (sticker) sticker.style.contain = 'layout style paint';
 
-        // Measure sticker offset once (and again on resize) instead of every frame.
-        // This removes the getBoundingClientRect() read-then-write pattern that
-        // forces a synchronous layout flush on each scroll event.
-        const measureStickerOffset = () => {
-            if (!sticker || !tearBottom) return;
-            // Read phase — only reading here, no writes
-            stickerTopOffset = tearBottom.getBoundingClientRect().top + window.scrollY;
-        };
+
 
         // Batch all style writes into a single function so the browser can
         // compute layout once and repaint once per frame.
@@ -137,7 +129,6 @@ export function usePaperTearParallax() {
         const onResize = () => {
             if (window.innerWidth <= 768) return;
             // Re-measure cached offset on resize since layout has changed
-            measureStickerOffset();
             compute(window.scrollY);
         };
 
@@ -145,7 +136,7 @@ export function usePaperTearParallax() {
         window.addEventListener('resize', onResize, { passive: true });
 
         // Initial measure + render
-        measureStickerOffset();
+        // Initial measure + render
         requestAnimationFrame(() => compute(window.scrollY));
 
         return () => {

@@ -176,9 +176,15 @@ export default function GitHubSection() {
         if (cached) {
             try {
                 const c = JSON.parse(cached);
-                setProfile(c.profile); setPinnedRepos(c.pinnedRepos);
-                setWeeks(c.weeks); setTotalContribs(c.totalContribs);
-                setLoading(false); return;
+                // Avoid synchronous state update in effect
+                Promise.resolve().then(() => {
+                    setProfile(c.profile);
+                    setPinnedRepos(c.pinnedRepos);
+                    setWeeks(c.weeks);
+                    setTotalContribs(c.totalContribs);
+                    setLoading(false);
+                });
+                return;
             } catch { /* ignore */ }
         }
 

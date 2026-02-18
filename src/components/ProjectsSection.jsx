@@ -4,7 +4,6 @@ import data from '../data/portfolio.json';
 
 export default function ProjectsSection() {
     const fadeRef = useFadeIn();
-    const p = data.project;
     const [isMobile, setIsMobile] = useState(() => window.innerWidth < 1080);
     useEffect(() => {
         const onResize = () => setIsMobile(window.innerWidth < 1080);

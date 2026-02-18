@@ -1,16 +1,60 @@
-# React + Vite
+# Portfolio V4 - Arin Jain
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-0.1.0-green.svg)
 
-Currently, two official plugins are available:
+A modern, interactive developer portfolio built with performance and aesthetics in mind. Featuring a unique paper tear design, reactive parallax effects, and a responsive layout.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+-   **Interactive UI**: Custom paper tear effects with deterministic jagged edges.
+-   **Parallax Animations**: Smooth scrolling and mouse movement depth effects.
+-   **Responsive Design**: Optimized for Desktop, Tablet, and Mobile devices.
+-   **Dynamic Content**: JSON-driven portfolio data for easy updates.
+-   **Interactive Map**: Leaflet integration for journey visualization.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technical Stack
 
-## Expanding the ESLint configuration
+-   **Frontend**: React 19
+-   **Build Tool**: Vite
+-   **Styling**: TailwindCSS v4 & CSS Modules
+-   **Maps**: Leaflet & React-Leaflet
+-   **Deployment**: Vercel / Netlify (Ready)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/Lancerhawk/Portfolio-V4.git
+cd portfolio-arin-jain
+npm install
+```
+
+## Development
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173 in your browser.
+
+## Building for Production
+
+Create a production-ready build:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
