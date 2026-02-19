@@ -1,5 +1,16 @@
 [
     {
+        "version": "0.4.1",
+        "date": "2026-02-20",
+        "changes": {
+            "Fixed": [
+                "Tablet Media Query: Changed breakpoint from max-width: 1024px to min-width: 641px and max-width: 1024px so tablet styles no longer conflict with the mobile breakpoint.",
+                "Tablet Layout Width: Added width: 100% and overflow-x: hidden to .page-wrapper at tablet viewports, fixing content being crammed into a narrow column with a dead gray area on the right.",
+                "Tablet Navbar: Explicitly kept the desktop navbar visible and hamburger menu hidden at tablet widths."
+            ]
+        }
+    },
+    {
         "version": "0.4.0",
         "date": "2026-02-19",
         "changes": {

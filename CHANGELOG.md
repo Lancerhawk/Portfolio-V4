@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-02-20
+
+### Fixed
+- **Tablet Media Query**: Corrected the `@media (max-width: 1024px)` breakpoint to `(min-width: 641px) and (max-width: 1024px)` so tablet styles no longer bleed into the mobile breakpoint.
+- **Tablet Layout Width**: Added `width: 100%` and `overflow-x: hidden` to `.page-wrapper` at tablet viewport sizes, preventing content from being crammed into a narrow column with dead space on the right.
+- **Tablet Navbar**: Explicitly locked the desktop navbar visible (`nav-desktop`) and hamburger hidden (`nav-mobile`) at tablet widths to prevent unintended nav swap.
+
 ## [0.4.0] - 2026-02-19
+
 
 ### Added
 - **AI Assistant Modal**: Full neobrutalist chat interface powered by Groq (`llama-3.1-8b-instant`) — dynamically prompted from live `portfolio.json` data.

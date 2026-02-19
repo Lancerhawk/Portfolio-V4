@@ -1179,22 +1179,25 @@ body::-webkit-scrollbar-thumb:hover {
 /* =============================================
    TABLET  (641px – 1024px)
    ============================================= */
-@media (max-width: 1024px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   body {
     padding: 12px;
+    overflow-x: hidden;
   }
 
   .page-wrapper {
+    width: 100%;
     border-width: 4px;
     box-shadow: 8px 8px 0 var(--border);
-    margin-bottom: 12px;
+    margin: 0 auto 12px;
     min-height: calc(100vh - 24px);
+    overflow-x: hidden;
   }
 
   /* Hero: stack on tablet */
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .hero-photo-col {
@@ -1232,6 +1235,15 @@ body::-webkit-scrollbar-thumb:hover {
   .edu-lang-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  /* Navbar: keep desktop nav on tablet */
+  .nav-desktop {
+    display: flex !important;
+  }
+
+  .nav-mobile {
+    display: none !important;
   }
 }
 
