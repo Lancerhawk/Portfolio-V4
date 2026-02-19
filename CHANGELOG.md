@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.3.1] - 2026-02-19
+
+### Added
+- **Realistic 3D Book Flip**: Completely redesigned the Journey section flip using a unified `preserve-3d` leaf structure. Both the cover and content now exist on the same physical 'leaf'.
+- **Snap-to-State Interaction**: Implemented debounced scroll-stop detection to ensure the book always completes its flip (fully open or fully closed) instead of getting stuck mid-transition.
+- **Viewport-Aware Animations**: Integrated Intersection Observer into the Paper Tear effect to disable all JS logic and style writes when the component is off-screen.
+- **Terminal Message Tracking**: Added visual divider lines after each command response to clearly delineate terminal history.
+
+### Fixed
+- **Page Tear Optimization**: Eliminated parallax stutter by resolving conflicts between CSS transitions and high-frequency JS updates.
+- **State-Locking Performance**: Added visual state-locking to prevent redundant DOM writes once animation boundaries are reached.
+- **Journey Content Glitch**: Resolved the issue where timeline content would render or 'print' before the flip animation started.
+- **Terminal UI Refinement**: Hashed out distracting sidebars, global controls, and notifications from the `/terminal` route for a cleaner immersion.
 ## [0.3.0] - 2026-02-19
 
 ### Added

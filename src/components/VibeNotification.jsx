@@ -1,10 +1,11 @@
-import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useControls } from '../context/ControlContext';
 
 export default function VibeNotification() {
     const { vibe, showNotification } = useControls();
+    const location = useLocation();
 
-    if (!showNotification) return null;
+    if (!showNotification || location.pathname === '/terminal') return null;
 
     const vibeNames = {
         default: 'Default Vibe',

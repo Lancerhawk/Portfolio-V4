@@ -8,8 +8,10 @@ export default function SidebarControls() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const location = useLocation();
 
-    // Side section on the right side for the terminal route
     const isTerminal = location.pathname === '/terminal';
+
+    // Hide sidebar entirely on terminal route
+    if (isTerminal) return null;
 
     return (
         <>

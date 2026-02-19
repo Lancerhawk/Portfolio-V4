@@ -9,17 +9,15 @@ export function usePaperTearParallax() {
 
     useEffect(() => {
         const isMobile = window.innerWidth <= 768;
+        if (isMobile) return;
+
         const minGapHeight = -30;
-        const initialGapHeight = isMobile ? 100 : 300;
+        const initialGapHeight = 300;
         const scrollStart = 100;
         const scrollRange = 200;
         const stickerDelay = 30;
         const stickerStart = scrollStart + scrollRange + stickerDelay;
         const stickerRange = 60;
-
-        let rafId = null;
-        let lastScrollY = -1;
-
 
         const gap = gapRef.current;
         const tearBottom = tearBottomRef.current;
@@ -29,39 +27,35 @@ export function usePaperTearParallax() {
 
         if (!gap || !tearBottom) return;
 
-        // Promote animated elements to their own compositor layers up front.
-        // This tells the GPU to keep these as separate textures so transforms
-        // and opacity changes never trigger layout or paint — only compositing.
+        let rafId = null;
+        let lastScrollY = -1;
+        let isVisible = false;
+        let lockState = null; // 'start' | 'end' | null
+
+        // Promote to compositor layers
         gap.style.willChange = 'height';
-        tearBottom.style.willChange = 'transform, margin-top';
+        tearBottom.style.willChange = 'margin-top';
         if (grayPath) grayPath.style.willChange = 'opacity';
         if (grayPathBottom) grayPathBottom.style.willChange = 'opacity';
         if (sticker) sticker.style.willChange = 'transform, opacity';
-
-        // Limit layout/paint scope for the sticker to its own subtree.
         if (sticker) sticker.style.contain = 'layout style paint';
 
-
-
-        // Batch all style writes into a single function so the browser can
-        // compute layout once and repaint once per frame.
         const applyStyles = (
-            gapHeight,       // number | null (null = skip)
-            tearMargin,      // number | null
-            grayOpacity,     // number | null
-            stickerTransform, // string | null
-            stickerOpacity   // number | null
+            gapHeight, tearMargin, grayOpacity, stickerTransform, stickerOpacity, stateKey
         ) => {
-            // All writes happen together — no interleaved reads that stall layout
+            // Prevent redundant writes if we are already locked in this visual state
+            if (stateKey && lockState === stateKey) return;
+            lockState = stateKey;
+
             if (gapHeight !== null) gap.style.height = gapHeight + 'px';
             if (tearMargin !== null) tearBottom.style.marginTop = tearMargin + 'px';
+
             if (grayOpacity !== null) {
-                if (grayPath) grayPath.style.opacity = String(grayOpacity);
-                if (grayPathBottom) grayPathBottom.style.opacity = String(grayOpacity);
+                const opStr = String(grayOpacity);
+                if (grayPath) grayPath.style.opacity = opStr;
+                if (grayPathBottom) grayPathBottom.style.opacity = opStr;
             }
             if (sticker) {
-                // Update fixed-position top using cached offset instead of live rect
-                /* sticker.style.top handled by CSS absolute positioning now */
                 if (stickerTransform !== null) sticker.style.transform = stickerTransform;
                 if (stickerOpacity !== null) sticker.style.opacity = String(stickerOpacity);
             }
@@ -71,55 +65,71 @@ export function usePaperTearParallax() {
             if (scrollY <= scrollStart) {
                 applyStyles(
                     initialGapHeight, 0, 1,
-                    'rotate(-8deg) translateY(-40px) translateZ(30px) rotateX(35deg)', 0
-                );
-            } else if (scrollY <= scrollStart + scrollRange) {
-                const progress = (scrollY - scrollStart) / scrollRange;
-                const currentHeight = initialGapHeight - (initialGapHeight - minGapHeight) * progress;
-
-                if (currentHeight >= 0) {
-                    applyStyles(
-                        currentHeight, 0, 1,
-                        'rotate(-8deg) translateY(-100px) translateZ(50px) rotateX(45deg)', 0
-                    );
-                } else {
-                    const negProgress = Math.abs(currentHeight) / Math.abs(minGapHeight);
-                    applyStyles(
-                        0, currentHeight, 1 - negProgress,
-                        'rotate(-8deg) translateY(-100px) translateZ(50px) rotateX(45deg)', 0
-                    );
-                }
-            } else if (scrollY > stickerStart && scrollY < stickerStart + stickerRange) {
-                const sp = (scrollY - stickerStart) / stickerRange;
-                const ty = -40 + 40 * sp;
-                const tz = 30 - 30 * sp;
-                const rx = 35 - 35 * sp;
-                // clamp manually — faster than Math.min/max calls in hot path
-                const op = sp < 0.35 ? 0 : sp > 1 ? 1 : (sp - 0.35) * 1.54;
-                applyStyles(
-                    0, minGapHeight, 0,
-                    `rotate(-8deg) translateY(${ty}px) translateZ(${tz}px) rotateX(${rx}deg)`,
-                    op
+                    'rotate(-8deg) translateY(-40px) translateZ(30px) rotateX(35deg)', 0,
+                    'start'
                 );
             } else if (scrollY >= stickerStart + stickerRange) {
                 applyStyles(
                     0, minGapHeight, 0,
-                    'rotate(-8deg) translateY(0px) translateZ(0px) rotateX(0deg)', 1
+                    'rotate(-8deg) translateY(0px) translateZ(0px) rotateX(0deg)', 1,
+                    'end'
                 );
-            } else {
-                // Between scrollStart+scrollRange and stickerStart
-                applyStyles(
-                    0, minGapHeight, 0,
-                    'rotate(-8deg) translateY(-40px) translateZ(30px) rotateX(35deg)', 0
-                );
+            } else if (scrollY > scrollStart && scrollY < stickerStart + stickerRange) {
+                lockState = null; // Unlock when in transition range
+
+                if (scrollY <= scrollStart + scrollRange) {
+                    const progress = (scrollY - scrollStart) / scrollRange;
+                    const currentHeight = initialGapHeight - (initialGapHeight - minGapHeight) * progress;
+
+                    if (currentHeight >= 0) {
+                        applyStyles(
+                            currentHeight, 0, 1,
+                            'rotate(-8deg) translateY(-100px) translateZ(50px) rotateX(45deg)', 0,
+                            null
+                        );
+                    } else {
+                        const negProgress = Math.abs(currentHeight) / Math.abs(minGapHeight);
+                        applyStyles(
+                            0, currentHeight, 1 - negProgress,
+                            'rotate(-8deg) translateY(-100px) translateZ(50px) rotateX(45deg)', 0,
+                            null
+                        );
+                    }
+                } else if (scrollY > stickerStart) {
+                    const sp = (scrollY - stickerStart) / stickerRange;
+                    const ty = -40 + 40 * sp;
+                    const tz = 30 - 30 * sp;
+                    const rx = 35 - 35 * sp;
+                    const op = sp < 0.35 ? 0 : sp > 1 ? 1 : (sp - 0.35) * 1.54;
+                    applyStyles(
+                        0, minGapHeight, 0,
+                        `rotate(-8deg) translateY(${ty}px) translateZ(${tz}px) rotateX(${rx}deg)`,
+                        op,
+                        null
+                    );
+                } else {
+                    // Plateau between range and sticker
+                    applyStyles(
+                        0, minGapHeight, 0,
+                        'rotate(-8deg) translateY(-40px) translateZ(30px) rotateX(35deg)', 0,
+                        'plateau'
+                    );
+                }
             }
         };
 
         const onScroll = () => {
-            if (window.innerWidth <= 768) return;
+            // OPTIMIZATION 1: If the component isn't in viewport, don't even read scrollY
+            if (!isVisible) return;
+
             const scrollY = window.scrollY;
             if (scrollY === lastScrollY) return;
             lastScrollY = scrollY;
+
+            // OPTIMIZATION 2: Don't compute if we are deep past the entire animation zone
+            // and we already hit the 'end' lock state.
+            if (scrollY > stickerStart + stickerRange + 500 && lockState === 'end') return;
+
             if (rafId) return;
             rafId = requestAnimationFrame(() => {
                 rafId = null;
@@ -127,24 +137,28 @@ export function usePaperTearParallax() {
             });
         };
 
-        const onResize = () => {
-            if (window.innerWidth <= 768) return;
-            // Re-measure cached offset on resize since layout has changed
-            compute(window.scrollY);
-        };
+        // OPTIMIZATION 3: Intersection Observer to enable/disable scroll tracking
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible) {
+                // Kick off initial render when entering viewport
+                requestAnimationFrame(() => compute(window.scrollY));
+            }
+        }, { threshold: 0, rootMargin: '200px' }); // Margin helps it start slightly before entry
+
+        observer.observe(gap);
 
         window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onResize, { passive: true });
+        window.addEventListener('resize', () => compute(window.scrollY), { passive: true });
 
-        // Initial measure + render
-        // Initial measure + render
-        requestAnimationFrame(() => compute(window.scrollY));
+        // Initial setup
+        compute(window.scrollY);
 
         return () => {
+            observer.disconnect();
             window.removeEventListener('scroll', onScroll);
-            window.removeEventListener('resize', onResize);
             if (rafId) cancelAnimationFrame(rafId);
-            // Clean up will-change to free compositor memory when component unmounts
+            // Cleanup styles to avoid memory leaks or visual glitches on re-renders
             gap.style.willChange = '';
             tearBottom.style.willChange = '';
             if (grayPath) grayPath.style.willChange = '';

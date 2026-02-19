@@ -242,6 +242,12 @@ const Terminal = () => {
                 response.push({ type: 'text', content: `Command not found: ${mainCmd}. Type 'help' for available commands.`, className: 'error-text' });
         }
 
+        response.push({
+            type: 'text',
+            content: window.innerWidth < 600 ? '────────────────────────────────' : '─────────────────────────────────────────────────',
+            className: 'divider'
+        });
+
         setHistory(prev => [...prev, ...response]);
     };
 

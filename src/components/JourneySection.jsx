@@ -66,7 +66,7 @@ function MapMarkers({ onLocationClick }) {
 }
 
 export default function JourneySection() {
-    const { timelineRef, backRef, isOpen } = useJourneyBookFlip();
+    const { leafRef, isOpen } = useJourneyBookFlip();
     const fadeRef = useFadeIn();
     const [flyTo, setFlyTo] = useState(null);
 
@@ -93,75 +93,78 @@ export default function JourneySection() {
                 }}>My Journey</h2>
 
                 <div className="journey-container">
-                    {/* Timeline (front of book) */}
-                    <div ref={timelineRef} className="journey-timeline" style={{
-                        background: 'var(--white)', padding: '1.5rem',
-                        border: 'var(--border-width) solid var(--border)',
-                        boxShadow: isOpen ? '0 8px 0 var(--border)' : '8px 8px 0 var(--border)', height: '600px',
-                        position: 'relative', overflowY: 'hidden'
-                    }}>
-                        <div style={{
-                            fontSize: '1.25rem', fontWeight: 700,
-                            margin: '-1.5rem -1.5rem 1.5rem -1.5rem',
-                            padding: '1.5rem 1.5rem 1rem 1.5rem',
-                            borderBottom: 'var(--border-width) solid var(--border)',
-                            position: 'sticky', top: '-25px', background: 'var(--white)', zIndex: 10
+                    {/* The Book Leaf (Front and Back together) */}
+                    <div ref={leafRef} className="journey-book-leaf">
+                        {/* Inside: Timeline */}
+                        <div className="journey-timeline" style={{
+                            background: 'var(--white)', padding: '1.5rem',
+                            border: 'var(--border-width) solid var(--border)',
+                            boxShadow: isOpen ? '0 8px 0 var(--border)' : '8px 8px 0 var(--border)',
+                            overflowY: 'hidden'
                         }}>
-                            🗺️ Career Timeline
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                            {data.experience.map((exp) => (
-                                <div key={exp.id} onClick={() => handleTimelineClick(exp)}
-                                    style={{
-                                        display: 'flex', gap: '1rem', cursor: 'pointer',
-                                        transition: 'transform 0.2s ease'
-                                    }}
-                                    onMouseEnter={e => e.currentTarget.style.transform = 'translateX(5px)'}
-                                    onMouseLeave={e => e.currentTarget.style.transform = ''}
-                                >
-                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <div style={{
-                                            minWidth: '12px', width: '12px', height: '12px',
-                                            background: 'var(--border)', border: '2px solid var(--border)',
-                                            borderRadius: '50%', marginTop: '0.25rem', position: 'relative', zIndex: 2,
-                                            transition: 'all 0.2s ease'
-                                        }} />
-                                        <div style={{ width: '2px', flex: 1, background: 'var(--border)', opacity: 0.3, marginTop: '4px' }} />
+                            <div style={{
+                                fontSize: '1.25rem', fontWeight: 700,
+                                margin: '-1.5rem -1.5rem 1.5rem -1.5rem',
+                                padding: '1.5rem 1.5rem 1rem 1.5rem',
+                                borderBottom: 'var(--border-width) solid var(--border)',
+                                position: 'sticky', top: '-25px', background: 'var(--white)', zIndex: 10
+                            }}>
+                                🗺️ Career Timeline
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                {data.experience.map((exp) => (
+                                    <div key={exp.id} onClick={() => handleTimelineClick(exp)}
+                                        style={{
+                                            display: 'flex', gap: '1rem', cursor: 'pointer',
+                                            transition: 'transform 0.2s ease'
+                                        }}
+                                        onMouseEnter={e => e.currentTarget.style.transform = 'translateX(5px)'}
+                                        onMouseLeave={e => e.currentTarget.style.transform = ''}
+                                    >
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <div style={{
+                                                minWidth: '12px', width: '12px', height: '12px',
+                                                background: 'var(--border)', border: '2px solid var(--border)',
+                                                borderRadius: '50%', marginTop: '0.25rem', position: 'relative', zIndex: 2,
+                                                transition: 'all 0.2s ease'
+                                            }} />
+                                            <div style={{ width: '2px', flex: 1, background: 'var(--border)', opacity: 0.3, marginTop: '4px' }} />
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.25rem', lineHeight: 1.4 }}>
+                                                {exp.title}
+                                            </div>
+                                            <div style={{ fontSize: '0.85rem', color: 'var(--text)', opacity: 0.7, marginBottom: '0.5rem', fontFamily: 'Space Mono, monospace' }}>
+                                                {exp.period}
+                                            </div>
+                                            <div style={{ fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '0.5rem' }}>
+                                                {exp.description}
+                                            </div>
+                                            <div style={{ fontSize: '0.85rem', color: 'var(--text)', opacity: 0.8, display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'Space Mono, monospace' }}>
+                                                <i className="fas fa-map-marker-alt" style={{ color: 'var(--primary)' }} />
+                                                {exp.location}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style={{ flex: 1 }}>
-                                        <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.25rem', lineHeight: 1.4 }}>
-                                            {exp.title}
-                                        </div>
-                                        <div style={{ fontSize: '0.85rem', color: 'var(--text)', opacity: 0.7, marginBottom: '0.5rem', fontFamily: 'Space Mono, monospace' }}>
-                                            {exp.period}
-                                        </div>
-                                        <div style={{ fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '0.5rem' }}>
-                                            {exp.description}
-                                        </div>
-                                        <div style={{ fontSize: '0.85rem', color: 'var(--text)', opacity: 0.8, display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'Space Mono, monospace' }}>
-                                            <i className="fas fa-map-marker-alt" style={{ color: 'var(--primary)' }} />
-                                            {exp.location}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Back of book (treasure map SVG) */}
-                    <div ref={backRef} className="journey-timeline-back" style={{
-                        background: '#f4ecd8', border: 'var(--border-width) solid var(--border)',
-                        boxShadow: isOpen ? '0 8px 0 var(--border)' : '8px 8px 0 var(--border)',
-                        alignItems: 'center', justifyContent: 'center'
-                    }}>
-                        <svg viewBox="0 0 400 600" style={{ width: '100%', height: '100%', opacity: 0.8 }}>
-                            <rect width="400" height="600" fill="#f4ecd8" />
-                            <path d="M50,100 Q200,50 350,100 Q300,200 350,300 Q200,350 50,300 Q100,200 50,100Z" fill="none" stroke="var(--border)" strokeWidth="3" strokeDasharray="10,5" />
-                            <circle cx="200" cy="200" r="30" fill="none" stroke="var(--border)" strokeWidth="3" />
-                            <text x="200" y="205" textAnchor="middle" fontFamily="Space Mono" fontSize="20" fill="var(--border)">✕</text>
-                            <path d="M50,50 L350,550 M350,50 L50,550" stroke="var(--border)" strokeWidth="1" opacity="0.3" />
-                            <text x="200" y="400" textAnchor="middle" fontFamily="Space Grotesk" fontSize="24" fontWeight="700" fill="var(--border)" style={{ textTransform: 'uppercase' }}>Treasure Awaits</text>
-                        </svg>
+                        {/* Back: Cover (Treasure Map) */}
+                        <div className="journey-timeline-back" style={{
+                            background: '#f4ecd8', border: 'var(--border-width) solid var(--border)',
+                            boxShadow: '0 8px 0 var(--border)',
+                            alignItems: 'center', justifyContent: 'center'
+                        }}>
+                            <svg viewBox="0 0 400 600" style={{ width: '100%', height: '100%', opacity: 0.8 }}>
+                                <rect width="400" height="600" fill="#f4ecd8" />
+                                <path d="M50,100 Q200,50 350,100 Q300,200 350,300 Q200,350 50,300 Q100,200 50,100Z" fill="none" stroke="var(--border)" strokeWidth="3" strokeDasharray="10,5" />
+                                <circle cx="200" cy="200" r="30" fill="none" stroke="var(--border)" strokeWidth="3" />
+                                <text x="200" y="205" textAnchor="middle" fontFamily="Space Mono" fontSize="20" fill="var(--border)">✕</text>
+                                <path d="M50,50 L350,550 M350,50 L50,550" stroke="var(--border)" strokeWidth="1" opacity="0.3" />
+                                <text x="200" y="400" textAnchor="middle" fontFamily="Space Grotesk" fontSize="24" fontWeight="700" fill="var(--border)" style={{ textTransform: 'uppercase' }}>Treasure Awaits</text>
+                            </svg>
+                        </div>
                     </div>
 
                     {/* Map */}

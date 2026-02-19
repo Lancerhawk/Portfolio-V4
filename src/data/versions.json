@@ -1,5 +1,22 @@
 [
     {
+        "version": "0.3.1",
+        "date": "2026-02-19",
+        "changes": {
+            "Added": [
+                "Realistic 3D Book Flip: Unified leaf structure with backface-visibility for a true physical page turn.",
+                "Snap-to-State Logic: Debounced interaction ensures the book always finishes flipping to open or closed.",
+                "Animation Viewport Intelligence: Intersection Observer support added to Paper Tear for zero CPU overhead off-screen.",
+                "Terminal Session Logic: Added visual divider lines after command responses for better message tracking."
+            ],
+            "Fixed": [
+                "Page Tear Optimization: Eliminated scroll lag by resolving CSS transition conflicts and adding state-locking.",
+                "Journey Rendering: Fixed 'ghost printing' where timeline content appeared before the flip animation.",
+                "Terminal UI: Removed distracting global sidebar, mute/history buttons, and vibe notifications from the terminal route."
+            ]
+        }
+    },
+    {
         "version": "0.3.0",
         "date": "2026-02-19",
         "changes": {
