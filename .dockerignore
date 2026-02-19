@@ -1,0 +1,9 @@
+node_modules
+.env
+dist
+.git
+.gitignore
+README.md
+CHANGELOG.md
+src/
+!src/data/portfolio.json

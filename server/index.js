@@ -8,7 +8,7 @@ const path = require('path');
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const app = express();
-const PORT = process.env.AI_SERVER_PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 // Init Groq client
 const groq = new Groq({ apiKey: process.env.groq_api_key });
