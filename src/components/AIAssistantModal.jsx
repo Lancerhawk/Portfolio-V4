@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const API_URL = import.meta.env.VITE_AI_SERVER_URL || 'http://localhost:3001';
+const API_URL = import.meta.env.VITE_AI_SERVER_URL || '';
 const STORAGE_KEY = 'ai_chat_history';
 
 const INITIAL_MESSAGE = {
@@ -363,7 +363,7 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                         flexShrink: 0,
                     }}>
                         <i className="fas fa-triangle-exclamation" />
-                        <span>Server offline — run <code style={{ background: 'rgba(0,0,0,0.12)', padding: '1px 6px', borderRadius: 0, fontFamily: 'var(--font-mono)', fontSize: 'inherit' }}>npm run server</code> to start.</span>
+                        <span>AI Assistant unavailable — please try again in a moment.</span>
                     </div>
                 )}
 
