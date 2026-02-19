@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useControls } from '../context/ControlContext';
+import AIAssistantModal from './AIAssistantModal';
 import './SidebarControls.css';
 
 export default function SidebarControls() {
     const { cycleVibe } = useControls();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [aiOpen, setAiOpen] = useState(false);
     const location = useLocation();
 
     const isTerminal = location.pathname === '/terminal';
@@ -15,12 +17,15 @@ export default function SidebarControls() {
 
     return (
         <>
+            {/* AI Assistant Modal */}
+            <AIAssistantModal isOpen={aiOpen} onClose={() => setAiOpen(false)} />
+
             {/* Desktop Vertical Sidebar */}
-            <div className={`desk-sidebar-container desk-only ${isTerminal ? 'is-right' : ''}`}>
-                {/* Future Feature Placeholders */}
-                <button className="sidebar-btn" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+            <div className={`desk-sidebar-container desk-only`}>
+                {/* AI Assistant Button */}
+                <button className="sidebar-btn" onClick={() => setAiOpen(true)}>
                     <span className="btn-label">AI ASSISTANT</span>
-                    <div className="btn-indicator" style={{ background: '#666' }} />
+                    <div className="btn-indicator" style={{ background: 'var(--accent)' }} />
                 </button>
 
                 <button
@@ -46,12 +51,11 @@ export default function SidebarControls() {
             <div className={`mobile-controls-drawer md:hidden ${mobileOpen ? 'open' : ''}`}>
                 <h3>CONTROLS</h3>
                 <div className="drawer-actions">
-                    {/* Placeholder Mobile Buttons */}
+                    <button className="drawer-btn" onClick={() => { setAiOpen(true); setMobileOpen(false); }}>
+                        AI ASSISTANT
+                    </button>
                     <button className="drawer-btn" onClick={cycleVibe}>
                         VIBE CHECK
-                    </button>
-                    <button className="drawer-btn" disabled style={{ opacity: 0.5 }}>
-                        AI ASSISTANT (COMING SOON)
                     </button>
                 </div>
             </div>

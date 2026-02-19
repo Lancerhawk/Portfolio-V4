@@ -1,7 +1,7 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.3.1-green.svg)
+![Version](https://img.shields.io/badge/version-0.4.0-green.svg)
 
 A modern, interactive developer portfolio built with performance and aesthetics in mind. Featuring a unique paper tear design, reactive parallax effects, and a responsive layout.
 
@@ -17,6 +17,7 @@ A modern, interactive developer portfolio built with performance and aesthetics 
 -   **Physics Mode**: Integrated Matter-js for a gravity-based interactive playground.
 -   **SEO Optimized**: Advanced meta tags, JSON-LD structured data, and automated sitemap generation.
 -   **Custom Cursor, Audio & Selection**: Neo-brutalist adaptive cursor, reactive tech-click sounds, and theme-matching text selection.
+-   **AI Assistant**: Groq-powered chat interface with full portfolio context, quick-question chips, animated bubbles, and a live status indicator.
 
 ## Technical Stack
 

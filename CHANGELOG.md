@@ -5,7 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-02-19
+
+### Added
+- **AI Assistant Modal**: Full neobrutalist chat interface powered by Groq (`llama-3.1-8b-instant`) — dynamically prompted from live `portfolio.json` data.
+- **Express Backend Server**: Dedicated Node.js/Express server (`server/`) with `/api/health` and `/api/chat` endpoints, CORS allowlist, and ENV-driven config.
+- **Quick-Question Chips**: One-click prompt buttons (Skills, Projects, Education, Experience) shown on a fresh conversation to guide the visitor.
+- **Animated Message Bubbles**: Per-message `msgIn` slide-up animation with distinct user (pink) and assistant (cyan) avatars.
+- **Dot-Grid Chat Area**: Subtle `radial-gradient` dot grid background in the message pane for a premium neobrutalist feel.
+- **Scanline Header Stripe**: Decorative repeating border stripe at the very top of the modal header.
+- **Live Status Indicator**: Pulsing dot (green/yellow/red) with connecting animation and live message count in the header subtitle.
+- **Character Counter**: Appears inline while typing so the user can see input length at a glance.
+- **Keyboard Shortcuts Footer**: Styled `<kbd>` hints for `Enter`, `Shift+Enter`, and `Esc` at the bottom of the modal.
+- **ESLint Node.js Config**: Added a dedicated server-side ESLint block with `globals.node` and `sourceType: 'commonjs'` to `eslint.config.js`.
+
+### Fixed
+- **ESLint Server Errors**: Resolved 11 `no-undef` errors for `require`, `process`, and `__dirname` in `server/index.js`.
+
 ## [0.3.1] - 2026-02-19
+
 
 ### Added
 - **Realistic 3D Book Flip**: Completely redesigned the Journey section flip using a unified `preserve-3d` leaf structure. Both the cover and content now exist on the same physical 'leaf'.

@@ -1,5 +1,26 @@
 [
     {
+        "version": "0.4.0",
+        "date": "2026-02-19",
+        "changes": {
+            "Added": [
+                "AI Assistant Modal: Full chat interface powered by Groq (llama-3.1-8b-instant) with real portfolio context.",
+                "Express Backend Server: Dedicated Node.js/Express server in server/ with health-check, CORS, and Groq API integration.",
+                "Quick-Question Chips: One-click prompt buttons for Skills, Projects, Education, and Experience on first load.",
+                "Animated Message Bubbles: Per-message slide-in animation with distinct user and assistant avatars.",
+                "Dot-Grid Chat Background: Subtle grid pattern in the message area for a premium neobrutalist feel.",
+                "Scanline Header Stripe: Decorative repeating stripe above the modal header.",
+                "Live Status Indicator: Pulsing dot with online/offline/connecting state and message count in the modal header.",
+                "Character Counter: Live character count shown while typing in the input field.",
+                "Keyboard Shortcuts Bar: Styled kbd hints for Enter, Shift+Enter, and Esc in the modal footer.",
+                "ESLint Node Config: Added server-specific ESLint block with globals.node and commonjs sourceType."
+            ],
+            "Fixed": [
+                "ESLint Server Errors: Resolved 11 no-undef errors for require, process, and __dirname in server/index.js."
+            ]
+        }
+    },
+    {
         "version": "0.3.1",
         "date": "2026-02-19",
         "changes": {
