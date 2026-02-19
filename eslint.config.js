@@ -26,7 +26,7 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
-  // Server — CommonJS Node.js environment
+  // Server — CommonJS Node.js environment (local dev)
   {
     files: ['server/**/*.js'],
     extends: [js.configs.recommended],
@@ -36,6 +36,22 @@ export default defineConfig([
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'commonjs',
+      },
+    },
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
+  },
+  // API — ESM Node.js environment (Vercel serverless functions)
+  {
+    files: ['api/**/*.js'],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      ecmaVersion: 2022,
+      globals: globals.node,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
     rules: {
