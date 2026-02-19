@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-02-20
+
+### Added
+- **Serverless API Migration**: Converted the AI assistant backend from a standalone Express server to Vercel Serverless Functions (`api/chat.js` and `api/health.js`).
+- **Same-Origin Connectivity**: Updated the frontend to use relative `/api` paths, allowing seamless communication within the Vercel ecosystem.
+- **Local Dev Proxy**: Implemented a Vite development proxy to maintain compatibility with the existing local Express server.
+
 ## [0.4.1] - 2026-02-20
+
 
 ### Fixed
 - **Tablet Media Query**: Corrected the `@media (max-width: 1024px)` breakpoint to `(min-width: 641px) and (max-width: 1024px)` so tablet styles no longer bleed into the mobile breakpoint.

@@ -1,5 +1,16 @@
 [
     {
+        "version": "0.5.0",
+        "date": "2026-02-20",
+        "changes": {
+            "Added": [
+                "Serverless API Migration: Full conversion of the AI backend to Vercel Serverless Functions for unified deployment.",
+                "Relative API Routing: Updated frontend to use relative /api paths for production same-origin requests.",
+                "Vite Dev Proxy: Added dev server proxying so local development remains unchanged while benefiting from serverless production."
+            ]
+        }
+    },
+    {
         "version": "0.4.1",
         "date": "2026-02-20",
         "changes": {
