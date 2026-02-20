@@ -27,12 +27,16 @@ export const ControlProvider = ({ children }) => {
         if (prevVibe.current === vibe) return;
         prevVibe.current = vibe;
 
-        // Increment key to force the toast to fully remount (restarts all CSS animations)
-        setNotificationKey(k => k + 1);
-        setShowNotification(true);
-
+        // Defer both setState calls to avoid synchronous state updates inside an effect
+        const notifyTimer = setTimeout(() => {
+            setNotificationKey(k => k + 1);
+            setShowNotification(true);
+        }, 0);
         const timer = setTimeout(() => setShowNotification(false), 3100);
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(notifyTimer);
+            clearTimeout(timer);
+        };
     }, [vibe]);
 
     // Actions
