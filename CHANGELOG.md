@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-02-20
+
+### Added
+- **Vibe Toast Notification**: Fully rebuilt the vibe change notification from a plain centered overlay into a polished bottom-right toast. Slides in from the right with a spring entrance, neobrutalist thick border and hard box-shadow — consistent with the site's design language.
+- **Per-Vibe Personality**: Each vibe now has its own icon, accent color bar, and a short descriptor tag (e.g. Neon Pulse → "Lights on", Retro Future → "Old school").
+- **Letter-by-Letter Animation**: The vibe name animates in character-by-character with a staggered pop-up using `animation-delay` per letter.
+- **Progress Bar Countdown**: A thin depleting bar at the bottom of the toast shows the remaining display time at a glance.
+
+### Fixed
+- **Notification on Page Reload**: The notification no longer fires when the page is loaded or refreshed. A `prevVibe` ref initialized to the persisted vibe value ensures the effect only triggers on genuine user-initiated changes — also correctly handles React StrictMode's double-invocation in development.
+- **Rapid Vibe Cycling**: Adding a `notificationKey` counter that increments on every real vibe change forces the toast to fully remount each time, restarting all CSS animations correctly regardless of how fast vibes are cycled.
+- **Notification Not Reappearing**: Related to the above — the key-based remount ensures the toast always shows fresh after being dismissed, even on back-to-back changes.
+
 ## [0.5.0] - 2026-02-20
 
 ### Added

@@ -1,9 +1,9 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.5.0-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.1-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.0) features a fully serverless backend migration, enabling seamless deployment on Vercel with integrated AI capabilities.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.1) features a fully rebuilt vibe notification system with smooth toast animations, per-vibe personality, and a fix for the spurious on-load notification.
 
 ## Documentation
 

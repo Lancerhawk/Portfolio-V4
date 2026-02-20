@@ -1,5 +1,22 @@
 [
     {
+        "version": "0.5.1",
+        "date": "2026-02-20",
+        "changes": {
+            "Added": [
+                "Vibe Toast Notification: Rebuilt from a plain centered overlay into a polished bottom-right toast with a spring slide-in, neobrutalist border and hard box-shadow.",
+                "Per-Vibe Personality: Each vibe has its own icon, accent color bar, and a short descriptor tag (Neon Pulse → 'Lights on', Retro Future → 'Old school', etc.).",
+                "Letter-by-Letter Animation: The vibe name pops in character-by-character with a staggered entrance animation.",
+                "Progress Bar Countdown: A depleting bar at the bottom of the toast shows time remaining before auto-dismiss."
+            ],
+            "Fixed": [
+                "Notification on Page Reload: Notification no longer fires on page load or refresh — a prevVibe ref ensures it only triggers on genuine user-initiated vibe changes.",
+                "Rapid Vibe Cycling: A notificationKey counter forces the toast to fully remount on every change, restarting animations correctly even when cycling vibes quickly.",
+                "Notification Not Reappearing: The key-based remount ensures the toast always shows fresh after being dismissed, even on back-to-back changes."
+            ]
+        }
+    },
+    {
         "version": "0.5.0",
         "date": "2026-02-20",
         "changes": {

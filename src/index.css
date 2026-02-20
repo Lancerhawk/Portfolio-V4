@@ -1561,3 +1561,157 @@ body::-webkit-scrollbar-thumb:hover {
     display: none;
   }
 }
+
+/* ─── Vibe Toast Notification ──────────────────────────────────────── */
+
+@keyframes vibe-slide-in {
+  0% {
+    transform: translateX(115%);
+    opacity: 0;
+  }
+  65% {
+    transform: translateX(-6px);
+    opacity: 1;
+  }
+  82% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes vibe-slide-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(115%);
+    opacity: 0;
+  }
+}
+
+@keyframes vibe-letter-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.7);
+  }
+  60% {
+    transform: translateY(-3px) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes vibe-progress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+.vibe-toast-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 99999;
+  pointer-events: none;
+  animation:
+    vibe-slide-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    vibe-slide-out 0.4s ease-in 2.7s forwards;
+}
+
+.vibe-toast {
+  display: flex;
+  align-items: stretch;
+  background: var(--white);
+  border: 3px solid var(--border);
+  box-shadow: 6px 6px 0 var(--border);
+  min-width: 220px;
+  max-width: 280px;
+  overflow: hidden;
+}
+
+.vibe-toast-bar {
+  width: 6px;
+  flex-shrink: 0;
+}
+
+.vibe-toast-body {
+  padding: 0.85rem 1.1rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.vibe-toast-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vibe-toast-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  color: var(--text);
+}
+
+.vibe-toast-icon {
+  font-size: 1rem;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.vibe-toast-name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 1.45rem;
+  line-height: 1.15;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-top: 0.05rem;
+}
+
+.vibe-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: vibe-letter-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.vibe-toast-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+  color: var(--text);
+  margin-top: 0.15rem;
+}
+
+.vibe-toast-progress-track {
+  height: 3px;
+  background: var(--border);
+  opacity: 0.15;
+  margin-top: 0.65rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.vibe-toast-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.8;
+  animation: vibe-progress 2.7s linear forwards;
+}

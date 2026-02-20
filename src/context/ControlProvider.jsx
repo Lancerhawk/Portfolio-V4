@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ControlContext } from './ControlContext';
 
 export const ControlProvider = ({ children }) => {
@@ -6,6 +6,9 @@ export const ControlProvider = ({ children }) => {
     const [isMuted, setIsMuted] = useState(() => localStorage.getItem('isMuted') === 'true');
     const [vibe, setVibe] = useState(() => localStorage.getItem('vibe') || 'default');
     const [showNotification, setShowNotification] = useState(false);
+    const [notificationKey, setNotificationKey] = useState(0);
+    // Initialize to current vibe so first effect run (page load) is always skipped
+    const prevVibe = useRef(localStorage.getItem('vibe') || 'default');
 
     const vibes = ['default', 'neon', 'retro', 'minimal'];
 
@@ -18,14 +21,18 @@ export const ControlProvider = ({ children }) => {
         localStorage.setItem('vibe', vibe);
         document.documentElement.setAttribute('data-vibe', vibe);
 
-        // Trigger notification asynchronously to avoid sync setState in effect lint error
-        const notifyTimer = setTimeout(() => setShowNotification(true), 0);
-        const timer = setTimeout(() => setShowNotification(false), 3000);
+        // If the vibe hasn't changed from what was persisted/last set, skip.
+        // This handles both the page-load case (prevVibe starts at the stored value)
+        // and React StrictMode's double-invocation in dev.
+        if (prevVibe.current === vibe) return;
+        prevVibe.current = vibe;
 
-        return () => {
-            clearTimeout(notifyTimer);
-            clearTimeout(timer);
-        };
+        // Increment key to force the toast to fully remount (restarts all CSS animations)
+        setNotificationKey(k => k + 1);
+        setShowNotification(true);
+
+        const timer = setTimeout(() => setShowNotification(false), 3100);
+        return () => clearTimeout(timer);
     }, [vibe]);
 
     // Actions
@@ -45,7 +52,8 @@ export const ControlProvider = ({ children }) => {
             toggleMute,
             vibe,
             cycleVibe,
-            showNotification
+            showNotification,
+            notificationKey,
         }}>
             {children}
         </ControlContext.Provider>
