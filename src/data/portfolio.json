@@ -12,10 +12,10 @@
         "keywords": "Arin Jain, Software Engineer, Backend Engineer, Full Stack Developer, System Design, Distributed Systems, API Architecture, REST APIs, Node.js, TypeScript, JavaScript, Python, PostgreSQL, MongoDB, Express.js, Next.js, React.js, Tailwind CSS, JWT Authentication, OAuth Integration, Rate Limiting, Runtime SDK Development, Developer Tooling, VS Code Extension Development, Stack Trace Parsing, Relational Database Design, Data Integrity, Batch Processing Optimization, Asynchronous Workflows, AWS S3, AWS Lambda, WebSockets, Docker, Scalable Architecture, Production Systems Engineering.",
         "author": "Arin Jain",
         "siteUrl": "https://arinjain.xyz",
-        "ogImage": ""
+        "ogImage": "/public/image/avatar-gpt.png"
     },
     "hero": {
-        "greeting": "Hi there!👋",
+        "greeting": "Hi there! 🧑‍💻",
         "name": "I'm Arin Jain.",
         "description": "Full Stack Software Engineer focused on system design, production-grade APIs, and developer tooling infrastructure with strong emphasis on scalability, data integrity, and performance optimization.",
         "socials": [
