@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.2] - 2026-02-24
+
+### Added
+- **Vyzora SDK Integration**: Integrated the official Vyzora SDK for production-grade, lightweight analytics.
+- **Enhanced Tracking**: Implemented automatic pageview and event tracking initialized at the application root for maximum reliability.
+- **Diagnostic Modes**: Added debug configuration support to the SDK initialization for streamlined troubleshooting in development environments.
+
 ## [0.5.1] - 2026-02-20
 
 ### Added

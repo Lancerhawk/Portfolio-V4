@@ -22,6 +22,8 @@ import VibeNotification from './components/VibeNotification';
 
 import Terminal from './components/Terminal/Terminal';
 
+
+
 const MainLayout = ({ theme, toggleTheme }) => (
   <>
     <LoaderOverlay />

@@ -1,9 +1,9 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.5.1-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.2-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.1) features a fully rebuilt vibe notification system with smooth toast animations, per-vibe personality, and a fix for the spurious on-load notification.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.2) features official integration with the Vyzora SDK for lightweight, production-grade analytics and event tracking.
 
 ## Documentation
 
@@ -79,6 +79,7 @@ graph TD
 - **Frontend**: [React 19](https://react.dev/), [Vite](https://vitejs.dev/)
 - **Styling**: [TailwindCSS v4](https://tailwindcss.com/), CSS Variable Theming
 - **AI**: [Groq SDK](https://groq.com/) (Llama 3.1 8B Instant)
+- **Analytics**: [Vyzora SDK](https://vyzora.io/) (Lightweight event tracking)
 - **Maps**: [React-Leaflet](https://react-leaflet.js.org/)
 - **Physics**: [Matter-js](https://brm.io/matter-js/)
 - **Deployment**: [Vercel](https://vercel.com/) (Serverless)

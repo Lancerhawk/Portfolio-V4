@@ -1,5 +1,16 @@
 [
     {
+        "version": "0.5.2",
+        "date": "2026-02-24",
+        "changes": {
+            "Added": [
+                "Vyzora SDK Integration: Official integration for production-grade analytics.",
+                "Application Root Init: Moved SDK initialization to main.jsx for improved reliability and earlier session start.",
+                "Debug Mode Support: Added configurable debug logging for easier local troubleshooting."
+            ]
+        }
+    },
+    {
         "version": "0.5.1",
         "date": "2026-02-20",
         "changes": {
