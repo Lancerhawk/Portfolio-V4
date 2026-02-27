@@ -490,6 +490,16 @@
         },
         {
             "label": "Creator of",
+            "name": "Vyzora",
+            "tagline": "Analytics that respect user privacy.",
+            "description": "Vyzora is a privacy-first, horizontally scalable analytics platform that lets developers track events, reconstruct sessions, and visualize aggregated metrics in real time without relying on third-party trackers or invasive data collection.",
+            "url": "https://vyzora-frontend.vercel.app/",
+            "githubUrl": "https://github.com/Lancerhawk/Vyzora",
+            "logo": "/image/vyzora.svg",
+            "logoBg": false
+        },
+        {
+            "label": "Creator of",
             "name": "Learning's Hub",
             "tagline": "Master DSA, and Development Skills with Proper Tracking.",
             "description": "Learning’s Hub is a fullstack web app that helps developers track their progress in Data Structures, Algorithms, and programming languages. It supports custom list creation, public sharing, progress tracking, and community-based learning.",
