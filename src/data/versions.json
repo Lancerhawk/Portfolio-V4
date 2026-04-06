@@ -1,5 +1,24 @@
 [
     {
+        "version": "0.5.3",
+        "date": "2026-04-06",
+        "changes": {
+            "Added": [
+                "GitHub Contribution Modal: Full-page portal modal showing all fetched commits with full multi-line messages when clicking any active graph day.",
+                "IST Timezone Fix: Expanded UTC search window for all dates to correctly capture commits made in IST time (UTC+5:30).",
+                "Accurate Count Header: Modal header shows the real graph contribution count sourced directly from heatmap data.",
+                "Private/Linked Card: Dashed lock card explains the gap between fetched API results and the actual GitHub graph count.",
+                "lint:fix Script: Added npm run lint:fix for ESLint auto-fix support."
+            ],
+            "Fixed": [
+                "Over-counting Bug: Removed PR cards as separate items — they were inflating the displayed count above the graph number.",
+                "Merge Commit Label: Merge commits are now distinctly labelled with a MERGE COMMIT badge and separate icon.",
+                "Lint setState in Effect: Moved synchronous setState calls inside the async function, resolving react-hooks/set-state-in-effect error.",
+                "Lint Unused Import: Removed unused useRef from GitHubSection.jsx imports."
+            ]
+        }
+    },
+    {
         "version": "0.5.2",
         "date": "2026-02-24",
         "changes": {
