@@ -1,9 +1,9 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.5.2-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.3-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.2) features official integration with the Vyzora SDK for lightweight, production-grade analytics and event tracking.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.3) features a deep-integrated GitHub Contribution Modal with IST timezone awareness and accurate activity tracking.
 
 ## Documentation
 

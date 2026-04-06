@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.3] - 2026-04-06
+
+### Added
+- **GitHub Contribution Modal**: Full-page modal (React Portal) that opens on clicking any active day in the contribution heatmap, showing all fetched commits with full multi-line messages.
+- **IST Timezone Fix**: Expanded UTC date range search to cover the full local (IST/UTC+5:30) day for all dates — commits made after midnight IST no longer appear on the wrong day.
+- **Accurate Contribution Count Header**: Modal header now displays the real graph count (e.g. "26 CONTRIBUTIONS ON Friday, April 3") sourced directly from the heatmap cell data.
+- **Private/Linked Contributions Card**: A dashed lock card at the bottom shows exactly how many contributions are inaccessible via the public API (private repos, PRs counted separately, linked-account commits), with an explanation.
+- **`lint:fix` Script**: Added `npm run lint:fix` to run ESLint with auto-fix enabled.
+
+### Fixed
+- **Over-counting Bug**: Removed PR cards as separate items from the modal — they were inflating the displayed count above the graph number. PRs are now accounted for in the unavailable lock card.
+- **Merge Commit Label**: Commits starting with `Merge pull request` or `Merge branch` are now distinctly labelled as `MERGE COMMIT` with a different icon.
+- **Lint: setState in Effect**: Moved all synchronous `setState` calls inside the async fetch function body, resolving the `react-hooks/set-state-in-effect` error.
+- **Lint: Unused Import**: Removed unused `useRef` from `GitHubSection.jsx` imports.
+
 ## [0.5.2] - 2026-02-24
 
 ### Added

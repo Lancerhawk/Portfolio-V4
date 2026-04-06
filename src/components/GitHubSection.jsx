@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useFadeIn } from '../hooks/useFadeIn';
 import data from '../data/portfolio.json';
+import GitHubCommitModal from './GitHubCommitModal';
 
 const LANG_COLORS = {
     JavaScript: '#f7df1e', TypeScript: '#3178c6', Python: '#3572A5',
@@ -73,30 +75,76 @@ function computeStreaks(weeks) {
     return { current, longest };
 }
 
-// Simple cell — uses native title for tooltip (no overflow/positioning issues)
-function Cell({ day, size }) {
+// Simple cell — uses custom instant tooltip
+function Cell({ day, size, onClick, onHover, onHoverEnd }) {
     return (
         <div
-            title={`${day.date}: ${day.contributionCount} contribution${day.contributionCount !== 1 ? 's' : ''}`}
+            onClick={() => onClick(day)}
+            onMouseEnter={e => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                onHover(day, rect);
+                e.currentTarget.style.transform = 'scale(1.1)';
+            }}
+            onMouseLeave={e => {
+                onHoverEnd();
+                e.currentTarget.style.transform = '';
+            }}
             style={{
                 width: size || '100%',
                 height: size || undefined,
                 aspectRatio: size ? undefined : '1',
                 background: cellColor(day.contributionCount),
                 border: '1.5px solid var(--border)',
-                cursor: 'default',
-                transition: 'transform 0.15s',
+                cursor: day.contributionCount > 0 ? 'pointer' : 'default',
+                transition: 'transform 0.15s, background 0.15s',
                 boxSizing: 'border-box',
                 flexShrink: 0,
+                position: 'relative',
             }}
-            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.3)'}
-            onMouseLeave={e => e.currentTarget.style.transform = ''}
         />
     );
 }
 
+// Custom Instant Tooltip
+function ContributionTooltip({ data }) {
+    if (!data) return null;
+    const { date, count, x, y } = data;
+    return (
+        <div style={{
+            position: 'fixed',
+            left: x,
+            top: y - 10,
+            transform: 'translate(-50%, -100%)',
+            background: 'var(--text)',
+            color: 'var(--white)',
+            padding: '0.4rem 0.8rem',
+            border: '2px solid var(--border)',
+            boxShadow: '4px 4px 0 var(--border)',
+            fontFamily: 'Space Mono, monospace',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            pointerEvents: 'none',
+            zIndex: 10001,
+            whiteSpace: 'nowrap',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2px',
+            animation: 'ghTooltipIn 0.1s ease-out forwards',
+        }}>
+            <style>{`
+                @keyframes ghTooltipIn {
+                    from { transform: translate(-50%, -90%); opacity: 0; }
+                    to   { transform: translate(-50%, -100%); opacity: 1; }
+                }
+            `}</style>
+            <div style={{ opacity: 0.8, fontSize: '0.65rem' }}>{date}</div>
+            <div>{count} contribution{count !== 1 ? 's' : ''}</div>
+        </div>
+    );
+}
+
 // Fluid on desktop, fixed-size + horizontal scroll on mobile
-function HeatmapGrid({ weeks }) {
+function HeatmapGrid({ weeks, onCellClick, onCellHover, onCellHoverEnd }) {
     const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
     useEffect(() => {
         const onResize = () => setIsMobile(window.innerWidth < 768);
@@ -128,7 +176,14 @@ function HeatmapGrid({ weeks }) {
                     {weeks.map((week, wi) => (
                         <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: GAP }}>
                             {week.contributionDays.map(day => (
-                                <Cell key={day.date} day={day} size={CELL} />
+                                <Cell 
+                                    key={day.date} 
+                                    day={day} 
+                                    size={CELL} 
+                                    onClick={onCellClick}
+                                    onHover={onCellHover}
+                                    onHoverEnd={onCellHoverEnd}
+                                />
                             ))}
                         </div>
                     ))}
@@ -149,7 +204,13 @@ function HeatmapGrid({ weeks }) {
                 {weeks.map((week, wi) => (
                     <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: GAP }}>
                         {week.contributionDays.map(day => (
-                            <Cell key={day.date} day={day} />
+                            <Cell 
+                                key={day.date} 
+                                day={day} 
+                                onClick={onCellClick}
+                                onHover={onCellHover}
+                                onHoverEnd={onCellHoverEnd}
+                            />
                         ))}
                     </div>
                 ))}
@@ -168,6 +229,10 @@ export default function GitHubSection() {
     const [totalContribs, setTotalContribs] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedCount, setSelectedCount] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [tooltip, setTooltip] = useState(null);
 
     useEffect(() => {
         if (!username) return;
@@ -331,8 +396,40 @@ export default function GitHubSection() {
                                 </div>
                             </div>
 
-                            {/* Heatmap — fluid on desktop, horizontally scrollable on mobile */}
-                            <HeatmapGrid weeks={weeks} />
+                            <HeatmapGrid 
+                                weeks={weeks} 
+                                onCellClick={(day) => {
+                                    if (day.contributionCount > 0) {
+                                        setSelectedDate(day.date);
+                                        setSelectedCount(day.contributionCount);
+                                        setIsModalOpen(true);
+                                    }
+                                }} 
+                                onCellHover={(day, rect) => {
+                                    setTooltip({
+                                        date: day.date,
+                                        count: day.contributionCount,
+                                        x: rect.left + rect.width / 2,
+                                        y: rect.top
+                                    });
+                                }}
+                                onCellHoverEnd={() => setTooltip(null)}
+                            />
+
+                            {/* Portalled Tooltip & Modal */}
+                            {createPortal(
+                                <>
+                                    <ContributionTooltip data={tooltip} />
+                                    <GitHubCommitModal 
+                                        isOpen={isModalOpen}
+                                        onClose={() => setIsModalOpen(false)}
+                                        date={selectedDate}
+                                        username={username}
+                                        graphCount={selectedCount}
+                                    />
+                                </>,
+                                document.body
+                            )}
 
                             {/* Legend */}
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.75rem', fontFamily: 'Space Mono, monospace', fontSize: '0.7rem', opacity: 0.7 }}>
