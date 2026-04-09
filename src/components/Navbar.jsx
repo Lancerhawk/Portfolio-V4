@@ -7,7 +7,6 @@ export default function Navbar({ theme, toggleTheme }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
 
-    // Scroll hide/show
     useEffect(() => {
         let last = 0;
         const onScroll = () => {
@@ -35,7 +34,6 @@ export default function Navbar({ theme, toggleTheme }) {
             transition: 'transform 0.3s ease',
             transform: hidden ? 'translateY(-120%)' : 'translateY(0)'
         }}>
-            {/* Main bar */}
             <div style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 padding: '1rem 1.5rem 1rem 1.5rem', flexWrap: 'nowrap', gap: '1rem'
@@ -60,7 +58,6 @@ export default function Navbar({ theme, toggleTheme }) {
                     </button>
                 </div>
 
-                {/* Desktop nav links */}
                 <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'nowrap' }}>
                     {data.footer.navLinks.map(link => (
                         <button key={link.label} onClick={() => scrollTo(link.href)}
@@ -98,7 +95,6 @@ export default function Navbar({ theme, toggleTheme }) {
                     </button>
                 </div>
 
-                {/* Mobile: theme + hamburger */}
                 <div className="nav-mobile" style={{ display: 'none', alignItems: 'center', gap: '0.5rem' }}>
                     <button onClick={toggleTheme}
                         style={{
@@ -119,7 +115,6 @@ export default function Navbar({ theme, toggleTheme }) {
                 </div>
             </div>
 
-            {/* Mobile dropdown menu */}
             {menuOpen && (
                 <div style={{
                     borderTop: '2px solid var(--border)', background: 'var(--white)',

@@ -1,7 +1,6 @@
 .desk-sidebar-container {
     position: fixed;
     left: 0;
-    /* No gap */
     top: 50%;
     transform: translateY(-50%);
     z-index: 99999;
@@ -10,11 +9,9 @@
     gap: 0;
 }
 
-/* Right-side positioning for Terminal */
 .desk-sidebar-container.is-right {
     left: auto;
     right: 0;
-    /* No gap */
 }
 
 .desk-only {
@@ -31,7 +28,6 @@
     background: var(--white);
     border: 3px solid var(--border);
     border-left: none;
-    /* Sit flush on left side */
     padding: 20px 8px;
     cursor: pointer;
     display: flex;
@@ -58,7 +54,6 @@
     font-family: var(--font-mono);
     font-weight: 700;
     font-size: 0.8rem;
-    /* Slightly smaller for more items */
     letter-spacing: 0.5px;
     color: var(--text);
     white-space: nowrap;
@@ -75,7 +70,6 @@
     opacity: 0.3;
 }
 
-/* Hover & Active States */
 .sidebar-btn:hover {
     padding-left: 15px;
     background: var(--yellow);
@@ -92,7 +86,6 @@
     opacity: 1;
 }
 
-/* Mobile FAB */
 .mobile-sidebar-trigger {
     position: fixed;
     left: 20px;
@@ -122,7 +115,6 @@
     box-shadow: 0 0 0 var(--border);
 }
 
-/* Mobile Drawer */
 .mobile-controls-drawer {
     position: fixed;
     left: -100%;

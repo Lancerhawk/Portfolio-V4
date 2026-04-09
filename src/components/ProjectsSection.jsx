@@ -71,7 +71,6 @@ function ProjectCard({ project: p, onOpenModal }) {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            {/* Year badge — top right */}
             {p.year && (
                 <div style={{
                     position: 'absolute', top: 12, right: 12,
@@ -82,12 +81,10 @@ function ProjectCard({ project: p, onOpenModal }) {
                     letterSpacing: '1px', zIndex: 1,
                 }}>{p.year}</div>
             )}
-            {/* Card Header */}
             <div style={{
                 padding: '1.5rem 1.5rem 0',
                 display: 'flex', alignItems: 'flex-start', gap: '1rem',
             }}>
-                {/* Logo */}
                 <div style={{
                     width: 64, height: 64, flexShrink: 0,
                     background: p.logoBg ? 'var(--yellow)' : 'var(--bg-cell, #ebedf0)',
@@ -101,7 +98,6 @@ function ProjectCard({ project: p, onOpenModal }) {
                         : (p.logo || '🔥')
                     }
                 </div>
-                {/* Title area */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', opacity: 0.55, fontFamily: 'Space Mono, monospace', marginBottom: '0.3rem' }}>
                         {p.label}
@@ -117,21 +113,18 @@ function ProjectCard({ project: p, onOpenModal }) {
                 </div>
             </div>
 
-            {/* Tagline */}
             <div style={{ padding: '0 1.5rem' }}>
                 <p style={{ fontSize: '0.95rem', fontWeight: 600, opacity: 0.75, fontFamily: 'Space Mono, monospace', lineHeight: 1.5 }}>
                     {p.tagline}
                 </p>
             </div>
 
-            {/* Description */}
             <div style={{ padding: '0 1.5rem' }}>
                 <p style={{ fontSize: '0.85rem', opacity: 0.6, fontFamily: 'Space Mono, monospace', lineHeight: 1.7 }}>
                     {p.description}
                 </p>
             </div>
 
-            {/* Tech Stack Preview (first 4) */}
             {p.techStack?.length > 0 && (
                 <div style={{ padding: '0 1.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                     {p.techStack.slice(0, 4).map((t, i) => (
@@ -155,7 +148,6 @@ function ProjectCard({ project: p, onOpenModal }) {
                 </div>
             )}
 
-            {/* GitHub Analysis badge */}
             {p.githubAnalysis && (
                 <div style={{ padding: '0 1.5rem' }}>
                     <div style={{
@@ -170,14 +162,12 @@ function ProjectCard({ project: p, onOpenModal }) {
                 </div>
             )}
 
-            {/* Action buttons */}
             <div style={{
                 padding: '1rem 1.5rem 1.5rem',
                 display: 'flex', gap: '0.75rem', flexWrap: 'wrap',
                 marginTop: 'auto', borderTop: '3px solid var(--border)',
                 background: 'var(--bg-cell, #ebedf0)',
             }}>
-                {/* View Details */}
                 <button
                     onClick={onOpenModal}
                     style={{
@@ -193,7 +183,6 @@ function ProjectCard({ project: p, onOpenModal }) {
                     <i className="fas fa-expand-alt" /> VIEW DETAILS
                 </button>
 
-                {/* Visit Site */}
                 {p.url && (
                     <a href={p.url} target="_blank" rel="noopener noreferrer"
                         style={{
@@ -210,7 +199,6 @@ function ProjectCard({ project: p, onOpenModal }) {
                     </a>
                 )}
 
-                {/* GitHub */}
                 {p.githubUrl && (
                     <a href={p.githubUrl} target="_blank" rel="noopener noreferrer"
                         style={{

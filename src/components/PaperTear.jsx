@@ -34,8 +34,6 @@ const generateJaggedPath = (width, height, seed = 123) => {
     return `M0,${(height / 2).toFixed(1)} ${points.join(' ')}`;
 }
 
-// Generate jagged path once
-// Starting at x=0 and going to x=1440
 const wavePathRaw = generateJaggedPath(1440, 30);
 
 export default function PaperTear() {
@@ -43,33 +41,23 @@ export default function PaperTear() {
 
     return (
         <>
-            {/* Top tear - white to gray */}
             <div className="paper-tear-top" style={{ display: 'block', lineHeight: 0, marginBottom: '-1px' }}>
                 <svg viewBox="0 0 1440 30" preserveAspectRatio="none" style={{ width: '100%', height: '30px', display: 'block' }}>
-                    {/* Upper part (White) */}
                     <path d={`${wavePathRaw} L1440,0 L0,0 Z`} fill="var(--white)" className="paper-tear-white" />
-                    {/* Lower part (Gray) */}
                     <path ref={grayPathRef} d={`${wavePathRaw} L1440,30 L0,30 Z`} fill="#d0d0d0" className="paper-tear-gray" />
-                    {/* Outline */}
                     <path d={wavePathRaw} fill="none" stroke="var(--border)" strokeWidth="3" vectorEffect="non-scaling-stroke" />
                 </svg>
             </div>
 
-            {/* Gap */}
             <div ref={gapRef} className="page-gap" style={{ height: '300px' }} />
 
-            {/* Bottom tear - gray to white */}
             <div ref={tearBottomRef} style={{ display: 'block', lineHeight: 0, marginTop: '0px', marginBottom: '-1px', position: 'relative' }}>
                 <svg viewBox="0 0 1440 30" preserveAspectRatio="none" style={{ width: '100%', height: '30px', display: 'block' }}>
-                    {/* Upper part (Gray) */}
                     <path ref={grayPathBottomRef} d={`${wavePathRaw} L1440,0 L0,0 Z`} fill="#d0d0d0" className="paper-tear-gray" />
-                    {/* Lower part (White) */}
                     <path d={`${wavePathRaw} L1440,30 L0,30 Z`} fill="var(--white)" className="paper-tear-white" />
-                    {/* Outline */}
                     <path d={wavePathRaw} fill="none" stroke="var(--border)" strokeWidth="3" vectorEffect="non-scaling-stroke" />
                 </svg>
 
-                {/* Tape sticker */}
                 <div ref={stickerRef} className="tear-tape-sticker" />
             </div>
         </>

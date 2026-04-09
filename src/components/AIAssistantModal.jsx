@@ -28,7 +28,6 @@ function formatMessage(text) {
         .replace(/\n/g, '<br/>');
 }
 
-// ─── Inline keyframes injected once ───────────────────────────────────────────
 const STYLES = `
 @keyframes aiModalIn {
     from { transform: translateY(28px) scale(0.96); opacity: 0; }
@@ -64,7 +63,6 @@ const STYLES = `
 .ai-btn-neo:disabled { opacity: 0.4; cursor: not-allowed !important; }
 `;
 
-// ─── MessageBubble ────────────────────────────────────────────────────────────
 function MessageBubble({ message }) {
     const isUser = message.role === 'user';
     return (
@@ -77,7 +75,6 @@ function MessageBubble({ message }) {
                 flexDirection: isUser ? 'row-reverse' : 'row',
             }}
         >
-            {/* Avatar */}
             <div style={{
                 flexShrink: 0,
                 width: 36, height: 36,
@@ -91,7 +88,6 @@ function MessageBubble({ message }) {
                 <i className={`fas ${isUser ? 'fa-user' : 'fa-robot'}`} />
             </div>
 
-            {/* Bubble */}
             <div style={{
                 maxWidth: '76%',
                 padding: '0.65rem 0.9rem',
@@ -110,7 +106,6 @@ function MessageBubble({ message }) {
     );
 }
 
-// ─── TypingIndicator ──────────────────────────────────────────────────────────
 function TypingIndicator() {
     return (
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.6rem' }}>
@@ -142,7 +137,6 @@ function TypingIndicator() {
     );
 }
 
-// ─── Main Modal ───────────────────────────────────────────────────────────────
 export default function AIAssistantModal({ isOpen, onClose }) {
     const [messages, setMessages] = useState(() => {
         try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [INITIAL_MESSAGE]; }
@@ -155,13 +149,10 @@ export default function AIAssistantModal({ isOpen, onClose }) {
     const bottomRef = useRef(null);
     const inputRef = useRef(null);
 
-    // Persist
     useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(messages)); }, [messages]);
 
-    // Scroll to bottom
     useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, isLoading]);
 
-    // On open: focus + health check
     useEffect(() => {
         if (!isOpen) return;
         setTimeout(() => inputRef.current?.focus(), 150);
@@ -171,7 +162,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
             .catch(() => setServerOnline(false));
     }, [isOpen]);
 
-    // ESC to close
     useEffect(() => {
         if (!isOpen) return;
         const handler = (e) => { if (e.key === 'Escape') onClose(); };
@@ -179,7 +169,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
         return () => window.removeEventListener('keydown', handler);
     }, [isOpen, onClose]);
 
-    // ── send ──
     const sendMessage = async (text) => {
         const msg = (text || input).trim();
         if (!msg || isLoading) return;
@@ -241,13 +230,11 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                 onClick={e => e.stopPropagation()}
             >
 
-                {/* ── HEADER ──────────────────────────────────────────────── */}
                 <div style={{
                     background: 'var(--accent)',
                     borderBottom: '4px solid var(--border)',
                     flexShrink: 0,
                 }}>
-                    {/* Scanline stripe */}
                     <div style={{
                         height: 6,
                         background: 'repeating-linear-gradient(90deg, var(--border) 0px, var(--border) 6px, transparent 6px, transparent 12px)',
@@ -257,7 +244,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                         padding: '0.85rem 1rem',
                     }}>
-                        {/* Left: icon + title */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                             <div style={{
                                 width: 44, height: 44,
@@ -282,7 +268,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                                 }}>
                                     AI Assistant
                                 </div>
-                                {/* Status row */}
                                 <div style={{
                                     display: 'flex', alignItems: 'center', gap: '0.4rem',
                                     fontFamily: 'var(--font-mono)',
@@ -306,7 +291,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                             </div>
                         </div>
 
-                        {/* Right: Reset + Close */}
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                             <button
                                 className="ai-btn-neo"
@@ -350,7 +334,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                     </div>
                 </div>
 
-                {/* ── OFFLINE BANNER ───────────────────────────────────────── */}
                 {serverOnline === false && (
                     <div style={{
                         display: 'flex', alignItems: 'center', gap: '0.6rem',
@@ -367,12 +350,10 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                     </div>
                 )}
 
-                {/* ── MESSAGES AREA ────────────────────────────────────────── */}
                 <div style={{
                     flex: 1, overflowY: 'auto',
                     display: 'flex', flexDirection: 'column', gap: '0.85rem',
                     padding: '1.1rem',
-                    /* subtle dot-grid bg */
                     backgroundImage: 'radial-gradient(circle, var(--border) 1px, transparent 1px)',
                     backgroundSize: '20px 20px',
                     backgroundAttachment: 'local',
@@ -398,7 +379,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                     <div ref={bottomRef} />
                 </div>
 
-                {/* ── QUICK QUESTIONS ──────────────────────────────────────── */}
                 {messages.length <= 2 && !isLoading && (
                     <div style={{
                         display: 'flex', gap: '0.5rem', flexWrap: 'wrap',
@@ -432,7 +412,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                     </div>
                 )}
 
-                {/* ── INPUT AREA ───────────────────────────────────────────── */}
                 <div style={{
                     borderTop: '4px solid var(--border)',
                     background: 'var(--white)',
@@ -467,7 +446,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                                     display: 'block',
                                 }}
                             />
-                            {/* char count */}
                             {input.length > 0 && (
                                 <span style={{
                                     position: 'absolute', bottom: 4, right: 6,
@@ -482,7 +460,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                             )}
                         </div>
 
-                        {/* Send button */}
                         <button
                             className="ai-btn-neo"
                             onClick={() => sendMessage()}
@@ -506,7 +483,6 @@ export default function AIAssistantModal({ isOpen, onClose }) {
                         </button>
                     </div>
 
-                    {/* Footer hint bar */}
                     <div style={{
                         borderTop: '2px solid var(--border)',
                         padding: '0.35rem 0.85rem',

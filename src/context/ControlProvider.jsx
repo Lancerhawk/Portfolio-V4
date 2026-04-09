@@ -7,12 +7,10 @@ export const ControlProvider = ({ children }) => {
     const [vibe, setVibe] = useState(() => localStorage.getItem('vibe') || 'default');
     const [showNotification, setShowNotification] = useState(false);
     const [notificationKey, setNotificationKey] = useState(0);
-    // Initialize to current vibe so first effect run (page load) is always skipped
     const prevVibe = useRef(localStorage.getItem('vibe') || 'default');
 
     const vibes = ['default', 'neon', 'retro', 'minimal'];
 
-    // Persistence
     useEffect(() => {
         localStorage.setItem('isMuted', isMuted);
     }, [isMuted]);
@@ -21,13 +19,9 @@ export const ControlProvider = ({ children }) => {
         localStorage.setItem('vibe', vibe);
         document.documentElement.setAttribute('data-vibe', vibe);
 
-        // If the vibe hasn't changed from what was persisted/last set, skip.
-        // This handles both the page-load case (prevVibe starts at the stored value)
-        // and React StrictMode's double-invocation in dev.
         if (prevVibe.current === vibe) return;
         prevVibe.current = vibe;
 
-        // Defer both setState calls to avoid synchronous state updates inside an effect
         const notifyTimer = setTimeout(() => {
             setNotificationKey(k => k + 1);
             setShowNotification(true);
@@ -39,7 +33,6 @@ export const ControlProvider = ({ children }) => {
         };
     }, [vibe]);
 
-    // Actions
     const togglePhysics = () => setIsPhysics(prev => !prev);
     const toggleMute = () => setIsMuted(prev => !prev);
     const cycleVibe = () => {

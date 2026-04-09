@@ -11,7 +11,6 @@ export default function EducationLanguagesSection() {
         <section id="education" style={{ padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)', marginBottom: '3rem' }}>
             <div ref={fadeRef} className="section-fade">
                 <div className="edu-lang-grid">
-                    {/* Education column */}
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <h2 style={{
                             fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem',
@@ -62,7 +61,6 @@ export default function EducationLanguagesSection() {
                         </div>
                     </div>
 
-                    {/* Languages column */}
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <h2 style={{
                             fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem',

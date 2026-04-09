@@ -162,22 +162,31 @@
     },
     "experience": [
         {
+            "id": "exp-0",
+            "title": "Full-Stack Developer (Contract) @ Medical Melon",
+            "period": "Mar 2026 - Present",
+            "description": "Orchestrating the complete system architecture and infrastructure for Medical Melon. Building the entire full-stack ecosystem from scratch, including scalable backend services, interactive frontend, and cloud-native infrastructure deployment.",
+            "location": "New York, NY (Remote)",
+            "country": "USA",
+            "locationId": "loc-ny"
+        },
+        {
             "id": "exp-1",
             "title": "Web Developer Intern @ SleekSky",
-            "period": "Jan 2026 - Present",
+            "period": "Jan 2026 - Apr 2026",
             "description": "Leading backend development for NudgePlay, building RESTful APIs using Node.js and Express to handle game templates and customization logic, and integrating Next.js frontend with AWS services (S3, Lambda) for scalable asset handling and backend operations.",
-            "location": "Remote (Bangalore Urban, Karnataka, India)",
-            "country": "India",
-            "locationId": "loc-bangalore"
+            "location": "San Francisco, CA (Remote)",
+            "country": "USA",
+            "locationId": "loc-sf"
         },
         {
             "id": "exp-2",
             "title": "Website Development Intern @ SleekSky",
             "period": "Nov 2025 - Dec 2025",
             "description": "Developed customizable website templates using EJS and Tailwind CSS, implementing reusable layouts and dynamic routing with clear separation of layout, content, and structured user input.",
-            "location": "Remote",
-            "country": "India",
-            "locationId": "loc-jabalpur"
+            "location": "San Francisco, CA (Remote)",
+            "country": "USA",
+            "locationId": "loc-sf"
         },
         {
             "id": "exp-3",
@@ -218,6 +227,48 @@
     ],
     "mapLocations": [
         {
+            "id": "loc-ny",
+            "coords": [
+                40.7128,
+                -74.006
+            ],
+            "country": "USA, New York",
+            "labelPosition": "top",
+            "isCurrent": true,
+            "companies": [
+                {
+                    "city": "New York",
+                    "company": "Medical Melon",
+                    "period": "Mar 2026 - Present",
+                    "role": "Full-Stack Developer (Contract)"
+                }
+            ]
+        },
+        {
+            "id": "loc-sf",
+            "coords": [
+                37.7749,
+                -122.4194
+            ],
+            "country": "USA, San Francisco",
+            "labelPosition": "bottom",
+            "isCurrent": false,
+            "companies": [
+                {
+                    "city": "San Francisco",
+                    "company": "SleekSky",
+                    "period": "2026",
+                    "role": "Web Developer Intern"
+                },
+                {
+                    "city": "San Francisco",
+                    "company": "SleekSky",
+                    "period": "2025",
+                    "role": "Website Development Intern"
+                }
+            ]
+        },
+        {
             "id": "loc-bangalore",
             "coords": [
                 12.9716,
@@ -225,21 +276,8 @@
             ],
             "country": "India, Bangalore",
             "labelPosition": "bottom",
-            "isCurrent": true,
-            "companies": [
-                {
-                    "city": "Bangalore",
-                    "company": "SleekSky",
-                    "period": "2026 - Present",
-                    "role": "Web Developer Intern"
-                },
-                {
-                    "city": "Bangalore",
-                    "company": "SleekSky",
-                    "period": "2025",
-                    "role": "Website Development Intern"
-                }
-            ]
+            "isCurrent": false,
+            "companies": []
         },
         {
             "id": "loc-jabalpur",
@@ -663,7 +701,7 @@
             "logoBg": false,
             "githubAnalysis": true,
             "status": "Active",
-            "year": "2024"
+            "year": "2026"
         }
     ],
     "education": {
@@ -705,8 +743,8 @@
         }
     ],
     "footer": {
-        "copyright": "© 2025 Arin Jain",
-        "role": "Senior Software Engineer",
+        "copyright": "© 2026 Arin Jain",
+        "role": "Software Engineer",
         "email": "70001933arin@gmail.com",
         "terminalLink": "/terminal",
         "navLinks": [

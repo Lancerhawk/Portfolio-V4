@@ -44,15 +44,12 @@ export default function VibeNotification() {
     return (
         <div key={notificationKey} className="vibe-toast-wrapper" role="status" aria-live="polite">
             <div className="vibe-toast">
-                {/* Left accent bar */}
                 <div
                     className="vibe-toast-bar"
                     style={{ background: config.accent }}
                 />
 
-                {/* Body */}
                 <div className="vibe-toast-body">
-                    {/* Top row */}
                     <div className="vibe-toast-top">
                         <span className="vibe-toast-eyebrow">VIBE SWITCHED</span>
                         <span
@@ -63,7 +60,6 @@ export default function VibeNotification() {
                         </span>
                     </div>
 
-                    {/* Animated vibe name */}
                     <div className="vibe-toast-name" aria-label={config.label}>
                         {letters.map((char, i) => (
                             <span
@@ -76,10 +72,8 @@ export default function VibeNotification() {
                         ))}
                     </div>
 
-                    {/* Tag */}
                     <div className="vibe-toast-tag">{config.tag}</div>
 
-                    {/* Progress bar */}
                     <div className="vibe-toast-progress-track">
                         <div
                             className="vibe-toast-progress-fill"

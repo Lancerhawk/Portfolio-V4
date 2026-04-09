@@ -15,19 +15,16 @@ export default function Footer() {
             transition: 'all 0.3s ease'
         }}>
             <div className="footer-container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                {/* Main row */}
                 <div className="footer-main-row" style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     gap: '2rem', flexWrap: 'wrap', paddingBottom: '1.5rem',
                     borderBottom: 'var(--border-width) solid var(--border)'
                 }}>
-                    {/* Brand */}
                     <div className="footer-brand" style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                         <strong style={{ fontSize: '1.1rem', fontWeight: 700 }}>{data.meta.name}</strong>
                         <span style={{ fontSize: '0.875rem', opacity: 0.7 }}>{f.role}</span>
                     </div>
 
-                    {/* Nav links */}
                     <div className="footer-nav" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
                         {f.navLinks.map(link => (
                             <button key={link.label} onClick={() => scrollTo(link.href)}
@@ -42,7 +39,6 @@ export default function Footer() {
                         ))}
                     </div>
 
-                    {/* Social icons */}
                     <div className="footer-socials" style={{ display: 'flex', gap: '0.75rem' }}>
                         {f.socials.map(s => (
                             <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer"
@@ -71,7 +67,6 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Bottom row */}
                 <div className="footer-bottom-row" style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     paddingTop: '1.5rem', flexWrap: 'wrap', gap: '1rem'

@@ -6,7 +6,6 @@ export default function VersionHistory() {
     const [isOpen, setIsOpen] = useState(false);
     const { isMuted, toggleMute } = useControls();
 
-    // Close modal on ESC key
     useEffect(() => {
         const handleEsc = (e) => {
             if (e.key === 'Escape') setIsOpen(false);
@@ -17,7 +16,6 @@ export default function VersionHistory() {
 
     return (
         <>
-            {/* Mute Button */}
             <button
                 onClick={toggleMute}
                 className="mute-toggle-btn"
@@ -53,7 +51,6 @@ export default function VersionHistory() {
                 <i className={`fas ${isMuted ? 'fa-volume-mute' : 'fa-volume-up'}`} />
             </button>
 
-            {/* Floating Button */}
             <button
                 onClick={() => setIsOpen(true)}
                 className="version-history-btn"
@@ -89,7 +86,6 @@ export default function VersionHistory() {
                 <i className="fas fa-history" />
             </button>
 
-            {/* Modal Overlay */}
             {isOpen && (
                 <div
                     className="version-modal-overlay"
@@ -125,7 +121,6 @@ export default function VersionHistory() {
                             animation: 'modalSlideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
                         }}
                     >
-                        {/* Header */}
                         <div style={{
                             padding: '1.5rem',
                             background: 'var(--cyan)',
@@ -162,7 +157,6 @@ export default function VersionHistory() {
                             </button>
                         </div>
 
-                        {/* Content */}
                         <div style={{
                             padding: '1.5rem',
                             overflowY: 'auto',
@@ -176,7 +170,6 @@ export default function VersionHistory() {
                                     paddingLeft: '1.5rem',
                                     position: 'relative'
                                 }}>
-                                    {/* Dot */}
                                     <div style={{
                                         position: 'absolute',
                                         left: '-11px',
@@ -226,7 +219,6 @@ export default function VersionHistory() {
                             ))}
                         </div>
 
-                        {/* Footer */}
                         <div style={{
                             padding: '1rem 1.5rem',
                             borderTop: '4px solid var(--border)',

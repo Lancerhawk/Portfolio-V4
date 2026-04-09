@@ -75,7 +75,6 @@ const MODAL_STYLES = `
 .proj-modal-scroll::-webkit-scrollbar-thumb { background: var(--border); border: 2px solid var(--bg-cell, #ebedf0); }
 `;
 
-// ── helpers ──────────────────────────────────────────────────────────────────
 
 function parseOwnerRepo(githubUrl) {
     try {
@@ -90,7 +89,6 @@ function GhFetch({ url, children }) {
     const [state, setState] = useState({ data: null, loading: true, error: null });
     const [prevUrl, setPrevUrl] = useState(url);
 
-    // Reset state in render if URL changes
     if (url !== prevUrl) {
         setPrevUrl(url);
         setState({ data: null, loading: true, error: null });
@@ -135,7 +133,6 @@ function ErrorBox({ message }) {
     );
 }
 
-// ── Image Gallery ─────────────────────────────────────────────────────────────
 
 function ImageGallery({ images }) {
     const [active, setActive] = useState(0);
@@ -168,12 +165,10 @@ function ImageGallery({ images }) {
         );
     }
 
-    // Re-map to original indices for error tracking
     const actualImages = (images || []);
 
     return (
         <div style={{ marginBottom: '1.5rem' }}>
-            {/* Main image */}
             <div
                 style={{
                     position: 'relative', height: 320, overflow: 'hidden',
@@ -216,7 +211,6 @@ function ImageGallery({ images }) {
                 )}
             </div>
 
-            {/* Thumbnails */}
             {actualImages.length > 1 && (
                 <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '4px' }}>
                     {actualImages.map((src, i) => (
@@ -245,7 +239,6 @@ function ImageGallery({ images }) {
                 </div>
             )}
 
-            {/* Lightbox - Full Image Zoom */}
             {lightbox && !imgErrors[active] && (
                 <div
                     style={{
@@ -255,7 +248,6 @@ function ImageGallery({ images }) {
                     }}
                     onClick={() => setLightbox(false)}
                 >
-                    {/* Safe Zone Container: Image is kept in the middle 70% of the screen */}
                     <div style={{
                         width: '74vw',
                         height: '84vh',
@@ -273,15 +265,12 @@ function ImageGallery({ images }) {
                                 objectFit: 'contain',
                                 display: 'block',
                                 animation: 'lightboxIn 0.2s ease',
-                                // Note: Border removed to avoid any pixel-level clipping confusion, 
-                                // using box-shadow for depth instead.
                                 boxShadow: '0 0 80px rgba(0,0,0,0.9)',
                             }}
                             onClick={e => e.stopPropagation()}
                         />
                     </div>
 
-                    {/* Controls: Positioned at the very edges of the screen, far from the Safe Zone */}
                     <div style={{ pointerEvents: 'none' }}>
                         <button
                             onClick={() => setLightbox(false)}
@@ -328,8 +317,6 @@ function ImageGallery({ images }) {
     );
 }
 
-// ── Commits Section ───────────────────────────────────────────────────────────
-
 function CommitsSection({ baseUrl, owner, repo }) {
     const [expanded, setExpanded] = useState(false);
     const [page, setPage] = useState(1);
@@ -340,7 +327,6 @@ function CommitsSection({ baseUrl, owner, repo }) {
     const [prevBaseUrl, setPrevBaseUrl] = useState(baseUrl);
     const PER_PAGE = 50;
 
-    // Reset when base repository changes
     if (baseUrl !== prevBaseUrl) {
         setPrevBaseUrl(baseUrl);
         setAllCommits([]);
@@ -394,7 +380,6 @@ function CommitsSection({ baseUrl, owner, repo }) {
 
     return (
         <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', background: 'var(--white)', overflow: 'hidden' }}>
-            {/* Header */}
             <button
                 onClick={() => setExpanded(p => !p)}
                 style={{
@@ -417,7 +402,6 @@ function CommitsSection({ baseUrl, owner, repo }) {
                 <i className={`fas fa-chevron-${expanded ? 'up' : 'down'}`} style={{ fontSize: '0.85rem', opacity: 0.6 }} />
             </button>
 
-            {/* Commit list */}
             {expanded && (
                 <div>
                     {allCommits.map((c, i) => {
@@ -437,7 +421,6 @@ function CommitsSection({ baseUrl, owner, repo }) {
                                 borderBottom: i < allCommits.length - 1 ? '3px solid var(--border)' : 'none',
                                 display: 'flex', gap: '0.85rem', alignItems: 'flex-start',
                             }}>
-                                {/* Avatar */}
                                 {avatarUrl
                                     ? <img src={avatarUrl} alt={ghLogin} style={{ width: 32, height: 32, border: '3px solid var(--border)', flexShrink: 0, marginTop: 2 }} />
                                     : <div style={{ width: 32, height: 32, background: 'var(--bg-cell,#ebedf0)', border: '3px solid var(--border)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2 }}>
@@ -445,9 +428,7 @@ function CommitsSection({ baseUrl, owner, repo }) {
                                     </div>
                                 }
 
-                                {/* Content */}
                                 <div style={{ flex: 1, minWidth: 0 }}>
-                                    {/* SHA + date row */}
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.3rem', flexWrap: 'wrap' }}>
                                         <a
                                             href={commitUrl} target="_blank" rel="noopener noreferrer"
@@ -483,7 +464,6 @@ function CommitsSection({ baseUrl, owner, repo }) {
                         );
                     })}
 
-                    {/* Load more */}
                     {allCommits.length > 0 && hasMore && (
                         <div style={{ padding: '1rem 1.25rem', borderTop: '3px solid var(--border)', display: 'flex', gap: '0.75rem', alignItems: 'center', background: 'var(--bg-cell,#ebedf0)' }}>
                             <button
@@ -518,8 +498,6 @@ function CommitsSection({ baseUrl, owner, repo }) {
     );
 }
 
-// ── GitHub Analysis Tab ────────────────────────────────────────────────────────
-
 function GitHubAnalysisTab({ githubUrl }) {
     const { owner, repo } = parseOwnerRepo(githubUrl);
     const baseUrl = `https://api.github.com/repos/${owner}/${repo}`;
@@ -536,7 +514,6 @@ function GitHubAnalysisTab({ githubUrl }) {
                     repoError ? <ErrorBox message={repoError} /> :
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
-                            {/* ── Repo description + tags at top (compact) ── */}
                             <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', padding: '1.25rem', background: 'var(--white)' }}>
                                 <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 900, fontSize: '0.75rem', letterSpacing: '2px', opacity: 0.7, marginBottom: '0.75rem' }}>REPOSITORY INFO</div>
                                 {repoData.description && (
@@ -559,7 +536,6 @@ function GitHubAnalysisTab({ githubUrl }) {
                                 </div>
                             </div>
 
-                            {/* ── Languages Breakdown ── */}
                             <GhFetch url={`${baseUrl}/languages`}>
                                 {({ data: langs, loading, error }) => (
                                     loading ? <Spinner /> : error ? <ErrorBox message={error} /> :
@@ -593,7 +569,6 @@ function GitHubAnalysisTab({ githubUrl }) {
                                 )}
                             </GhFetch>
 
-                            {/* ── Community Standards ── */}
                             <GhFetch url={`${baseUrl}/community/profile`}>
                                 {({ data: community, loading, error }) => (
                                     loading ? <Spinner /> : error ? null : community ? (
@@ -639,7 +614,6 @@ function GitHubAnalysisTab({ githubUrl }) {
                                 )}
                             </GhFetch>
 
-                            {/* ── File Tree ── */}
                             <GhFetch url={`${baseUrl}/git/trees/HEAD?recursive=0`}>
                                 {({ data: tree, loading, error }) => (
                                     loading ? <Spinner /> : error ? <ErrorBox message="Could not fetch repository tree." /> : tree?.tree ? (
@@ -693,7 +667,6 @@ function GitHubAnalysisTab({ githubUrl }) {
                                 )}
                             </GhFetch>
 
-                            {/* ── Contributors ── */}
                             <GhFetch url={`${baseUrl}/contributors?per_page=10`}>
                                 {({ data: contributors, loading, error }) => (
                                     loading ? <Spinner /> : error ? null : contributors?.length > 0 ? (
@@ -727,10 +700,8 @@ function GitHubAnalysisTab({ githubUrl }) {
                                 )}
                             </GhFetch>
 
-                            {/* ── Commits ── */}
                             <CommitsSection baseUrl={baseUrl} owner={owner} repo={repo} />
 
-                            {/* ── Repo Stats at bottom ── */}
                             <div style={{ background: 'var(--yellow)', border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', padding: '1.25rem' }}>
                                 <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 900, fontSize: '0.75rem', letterSpacing: '2px', opacity: 0.7, marginBottom: '0.75rem' }}>REPOSITORY STATS</div>
                                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
@@ -752,7 +723,6 @@ function GitHubAnalysisTab({ githubUrl }) {
                                 </div>
                             </div>
 
-                            {/* Link to repo */}
                             <a
                                 href={githubUrl} target="_blank" rel="noopener noreferrer"
                                 className="proj-action-btn"
@@ -773,15 +743,11 @@ function GitHubAnalysisTab({ githubUrl }) {
     );
 }
 
-// ── Details Tab ────────────────────────────────────────────────────────────────
-
 function DetailsTab({ project }) {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {/* Gallery */}
             <ImageGallery images={project.images} />
 
-            {/* Long description */}
             {project.longDescription && (
                 <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', padding: '1.25rem', background: 'var(--white)' }}>
                     <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 900, fontSize: '0.75rem', letterSpacing: '2px', opacity: 0.7, marginBottom: '0.75rem' }}>ABOUT THIS PROJECT</div>
@@ -791,7 +757,6 @@ function DetailsTab({ project }) {
                 </div>
             )}
 
-            {/* Highlights */}
             {project.highlights?.length > 0 && (
                 <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', padding: '1.25rem', background: 'var(--white)' }}>
                     <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 900, fontSize: '0.75rem', letterSpacing: '2px', opacity: 0.7, marginBottom: '0.75rem' }}>KEY HIGHLIGHTS</div>
@@ -816,7 +781,6 @@ function DetailsTab({ project }) {
                 </div>
             )}
 
-            {/* Tech Stack */}
             {project.techStack?.length > 0 && (
                 <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', padding: '1.25rem', background: 'var(--white)' }}>
                     <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 900, fontSize: '0.75rem', letterSpacing: '2px', opacity: 0.7, marginBottom: '0.75rem' }}>TECH STACK</div>
@@ -840,7 +804,6 @@ function DetailsTab({ project }) {
                 </div>
             )}
 
-            {/* Action Buttons */}
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', paddingBottom: '0.5rem' }}>
                 {project.url && (
                     <a href={project.url} target="_blank" rel="noopener noreferrer"
@@ -875,7 +838,6 @@ function DetailsTab({ project }) {
     );
 }
 
-// ── Main Modal ─────────────────────────────────────────────────────────────────
 
 export default function ProjectDetailModal({ project, onClose }) {
     const [activeTab, setActiveTab] = useState('details');
@@ -891,7 +853,6 @@ export default function ProjectDetailModal({ project, onClose }) {
         };
     }, [onClose]);
 
-    // Scroll to top when switching tabs
     useEffect(() => {
         if (scrollRef.current) scrollRef.current.scrollTop = 0;
     }, [activeTab]);
@@ -927,7 +888,6 @@ export default function ProjectDetailModal({ project, onClose }) {
                 }}
                 onClick={e => e.stopPropagation()}
             >
-                {/* ── Header ── */}
                 <div style={{
                     background: 'var(--secondary)',
                     borderBottom: '4px solid var(--border)',
@@ -935,7 +895,6 @@ export default function ProjectDetailModal({ project, onClose }) {
                     display: 'flex', alignItems: 'center', gap: '1rem',
                     flexShrink: 0,
                 }}>
-                    {/* Logo */}
                     <div style={{
                         width: 52, height: 52, flexShrink: 0,
                         background: project.logoBg ? 'var(--yellow)' : 'transparent',
@@ -948,7 +907,6 @@ export default function ProjectDetailModal({ project, onClose }) {
                             : (project.logo || '🔥')
                         }
                     </div>
-                    {/* Title */}
                     <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 700, fontSize: '0.7rem', letterSpacing: '2px', opacity: 0.65, textTransform: 'uppercase', marginBottom: '0.25rem' }}>
                             {project.label}
@@ -961,7 +919,6 @@ export default function ProjectDetailModal({ project, onClose }) {
                         </div>
                     </div>
 
-                    {/* Meta info on right */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.4rem', flexShrink: 0 }}>
                         {project.year && (
                             <div style={{
@@ -982,7 +939,6 @@ export default function ProjectDetailModal({ project, onClose }) {
                             }}>{project.status.toUpperCase()}</div>
                         )}
                     </div>
-                    {/* Close */}
                     <button
                         onClick={onClose}
                         style={{
@@ -1000,7 +956,6 @@ export default function ProjectDetailModal({ project, onClose }) {
                     </button>
                 </div>
 
-                {/* ── Tab Bar ── */}
                 {tabs.length > 1 && (
                     <div style={{
                         display: 'flex', borderBottom: '4px solid var(--border)',
@@ -1030,7 +985,6 @@ export default function ProjectDetailModal({ project, onClose }) {
                     </div>
                 )}
 
-                {/* ── Tab Content ── */}
                 <div
                     ref={scrollRef}
                     className="proj-modal-scroll"

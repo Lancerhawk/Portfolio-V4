@@ -14,7 +14,6 @@ const LANG_COLORS = {
 
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-// Single GraphQL query — contribution calendar + pinned repos
 const GQL_QUERY = (username) => `{
   user(login: "${username}") {
     name
@@ -58,16 +57,13 @@ function cellColor(count) {
     return 'var(--yellow)';
 }
 
-// Compute current streak + longest streak from contribution weeks
 function computeStreaks(weeks) {
     const days = weeks.flatMap(w => w.contributionDays);
     let current = 0, longest = 0, run = 0;
-    // Walk newest→oldest for current streak
     for (const d of [...days].reverse()) {
         if (d.contributionCount > 0) current++;
         else break;
     }
-    // Walk oldest→newest for longest streak
     for (const d of days) {
         if (d.contributionCount > 0) { run++; if (run > longest) longest = run; }
         else run = 0;
@@ -75,7 +71,6 @@ function computeStreaks(weeks) {
     return { current, longest };
 }
 
-// Simple cell — uses custom instant tooltip
 function Cell({ day, size, onClick, onHover, onHoverEnd }) {
     return (
         <div
@@ -105,7 +100,6 @@ function Cell({ day, size, onClick, onHover, onHoverEnd }) {
     );
 }
 
-// Custom Instant Tooltip
 function ContributionTooltip({ data }) {
     if (!data) return null;
     const { date, count, x, y } = data;
@@ -143,7 +137,6 @@ function ContributionTooltip({ data }) {
     );
 }
 
-// Fluid on desktop, fixed-size + horizontal scroll on mobile
 function HeatmapGrid({ weeks, onCellClick, onCellHover, onCellHoverEnd }) {
     const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
     useEffect(() => {
@@ -152,7 +145,7 @@ function HeatmapGrid({ weeks, onCellClick, onCellHover, onCellHoverEnd }) {
         return () => window.removeEventListener('resize', onResize);
     }, []);
 
-    const CELL = 11; // px — fixed size on mobile
+    const CELL = 11;
     const GAP = 2;
 
     if (isMobile) {
@@ -176,10 +169,10 @@ function HeatmapGrid({ weeks, onCellClick, onCellHover, onCellHoverEnd }) {
                     {weeks.map((week, wi) => (
                         <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: GAP }}>
                             {week.contributionDays.map(day => (
-                                <Cell 
-                                    key={day.date} 
-                                    day={day} 
-                                    size={CELL} 
+                                <Cell
+                                    key={day.date}
+                                    day={day}
+                                    size={CELL}
                                     onClick={onCellClick}
                                     onHover={onCellHover}
                                     onHoverEnd={onCellHoverEnd}
@@ -192,7 +185,6 @@ function HeatmapGrid({ weeks, onCellClick, onCellHover, onCellHoverEnd }) {
         );
     }
 
-    // Desktop — fluid grid, no scroll
     return (
         <div style={{ width: '100%', overflow: 'hidden', padding: '0.5rem 4px' }}>
             <div style={{
@@ -204,9 +196,9 @@ function HeatmapGrid({ weeks, onCellClick, onCellHover, onCellHoverEnd }) {
                 {weeks.map((week, wi) => (
                     <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: GAP }}>
                         {week.contributionDays.map(day => (
-                            <Cell 
-                                key={day.date} 
-                                day={day} 
+                            <Cell
+                                key={day.date}
+                                day={day}
                                 onClick={onCellClick}
                                 onHover={onCellHover}
                                 onHoverEnd={onCellHoverEnd}
@@ -241,7 +233,6 @@ export default function GitHubSection() {
         if (cached) {
             try {
                 const c = JSON.parse(cached);
-                // Avoid synchronous state update in effect
                 Promise.resolve().then(() => {
                     setProfile(c.profile);
                     setPinnedRepos(c.pinnedRepos);
@@ -327,7 +318,6 @@ export default function GitHubSection() {
                 {!loading && !error && profile && (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
-                        {/* ── Profile strip ── */}
                         <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
                             <img src={profile.avatar_url} alt={username}
                                 style={{ width: 72, height: 72, border: '3px solid var(--border)', boxShadow: '4px 4px 0 var(--border)', borderRadius: 0 }} />
@@ -365,7 +355,6 @@ export default function GitHubSection() {
                             </a>
                         </div>
 
-                        {/* ── Contribution heatmap ── */}
                         <div style={cardStyle}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -396,15 +385,15 @@ export default function GitHubSection() {
                                 </div>
                             </div>
 
-                            <HeatmapGrid 
-                                weeks={weeks} 
+                            <HeatmapGrid
+                                weeks={weeks}
                                 onCellClick={(day) => {
                                     if (day.contributionCount > 0) {
                                         setSelectedDate(day.date);
                                         setSelectedCount(day.contributionCount);
                                         setIsModalOpen(true);
                                     }
-                                }} 
+                                }}
                                 onCellHover={(day, rect) => {
                                     setTooltip({
                                         date: day.date,
@@ -416,11 +405,10 @@ export default function GitHubSection() {
                                 onCellHoverEnd={() => setTooltip(null)}
                             />
 
-                            {/* Portalled Tooltip & Modal */}
                             {createPortal(
                                 <>
                                     <ContributionTooltip data={tooltip} />
-                                    <GitHubCommitModal 
+                                    <GitHubCommitModal
                                         isOpen={isModalOpen}
                                         onClose={() => setIsModalOpen(false)}
                                         date={selectedDate}
@@ -441,7 +429,6 @@ export default function GitHubSection() {
                             </div>
                         </div>
 
-                        {/* ── Pinned repos ── */}
                         {pinnedRepos.length > 0 && (
                             <div>
                                 <div style={{ fontWeight: 700, fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1rem' }}>

@@ -5,7 +5,6 @@ import { useJourneyBookFlip } from '../hooks/useJourneyBookFlip';
 import { useFadeIn } from '../hooks/useFadeIn';
 import data from '../data/portfolio.json';
 
-// Fix leaflet default icon
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({ iconRetinaUrl: null, iconUrl: null, shadowUrl: null });
 
@@ -26,9 +25,8 @@ function MapController({ flyTo }) {
     useEffect(() => {
         if (flyTo) {
             const zoom = 6;
-            // Project the marker coordinates to pixels, offset upward, and unproject back
             const point = map.project(flyTo.coords, zoom);
-            point.y -= 150; // Offset by 150 pixels up to center the popup box
+            point.y -= 150;
             const targetLatLng = map.unproject(point, zoom);
             map.flyTo(targetLatLng, zoom, { animate: true, duration: 1.5 });
         }
@@ -38,6 +36,14 @@ function MapController({ flyTo }) {
 
 function MapMarkers({ onLocationClick }) {
     const map = useMap();
+
+    useEffect(() => {
+        if (data.mapLocations.length > 0) {
+            const bounds = L.latLngBounds(data.mapLocations.map(loc => loc.coords));
+            map.fitBounds(bounds, { padding: [50, 50], animate: true });
+        }
+    }, [map]);
+
     useEffect(() => {
         const markers = [];
         data.mapLocations.forEach(loc => {
@@ -93,9 +99,7 @@ export default function JourneySection() {
                 }}>My Journey</h2>
 
                 <div className="journey-container">
-                    {/* The Book Leaf (Front and Back together) */}
                     <div ref={leafRef} className="journey-book-leaf">
-                        {/* Inside: Timeline */}
                         <div className="journey-timeline" style={{
                             background: 'var(--white)', padding: '1.5rem',
                             border: 'var(--border-width) solid var(--border)',
@@ -150,7 +154,6 @@ export default function JourneySection() {
                             </div>
                         </div>
 
-                        {/* Back: Cover (Treasure Map) */}
                         <div className="journey-timeline-back" style={{
                             background: '#f4ecd8', border: 'var(--border-width) solid var(--border)',
                             boxShadow: '0 8px 0 var(--border)',
@@ -167,7 +170,6 @@ export default function JourneySection() {
                         </div>
                     </div>
 
-                    {/* Map */}
                     <div className="journey-map-container" style={{
                         border: 'var(--border-width) solid var(--border)',
                         boxShadow: '8px 8px 0 var(--border)', height: '600px',
@@ -187,7 +189,6 @@ export default function JourneySection() {
                             <MapMarkers onLocationClick={setFlyTo} />
                         </MapContainer>
 
-                        {/* Grid overlay */}
                         <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 999, opacity: 0.25 }}>
                             <defs>
                                 <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">

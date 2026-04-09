@@ -39,7 +39,6 @@ export default function ProgressBar() {
                 width: `${progress}%`, transition: 'width 0.1s ease',
                 borderRight: '2px solid var(--border)'
             }} />
-            {/* Checkpoints */}
             {data.progressSections.map((id, i) => {
                 const pct = (i / (data.progressSections.length - 1)) * 100;
                 return (

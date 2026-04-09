@@ -12,17 +12,13 @@ export default function SidebarControls() {
 
     const isTerminal = location.pathname === '/terminal';
 
-    // Hide sidebar entirely on terminal route
     if (isTerminal) return null;
 
     return (
         <>
-            {/* AI Assistant Modal */}
             <AIAssistantModal isOpen={aiOpen} onClose={() => setAiOpen(false)} />
 
-            {/* Desktop Vertical Sidebar */}
             <div className={`desk-sidebar-container desk-only`}>
-                {/* AI Assistant Button */}
                 <button className="sidebar-btn" onClick={() => setAiOpen(true)}>
                     <span className="btn-label">AI ASSISTANT</span>
                     <div className="btn-indicator" style={{ background: 'var(--accent)' }} />
@@ -37,7 +33,6 @@ export default function SidebarControls() {
                 </button>
             </div>
 
-            {/* Mobile Control Trigger */}
             <div className="mobile-sidebar-trigger md:hidden">
                 <button
                     className={`mobile-fab ${mobileOpen ? 'open' : ''}`}
@@ -47,7 +42,6 @@ export default function SidebarControls() {
                 </button>
             </div>
 
-            {/* Mobile Drawer */}
             <div className={`mobile-controls-drawer md:hidden ${mobileOpen ? 'open' : ''}`}>
                 <h3>CONTROLS</h3>
                 <div className="drawer-actions">
@@ -60,7 +54,6 @@ export default function SidebarControls() {
                 </div>
             </div>
 
-            {/* Overlay for mobile drawer */}
             {mobileOpen && (
                 <div className="mobile-overlay md:hidden" onClick={() => setMobileOpen(false)} />
             )}

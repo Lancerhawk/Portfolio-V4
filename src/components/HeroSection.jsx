@@ -10,9 +10,7 @@ export default function HeroSection() {
 
     return (
         <section id="hero" style={{ padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 0', position: 'relative', overflow: 'visible' }}>
-            {/* Hero content grid */}
             <div className="hero-content hero-grid" style={{ position: 'relative' }}>
-                {/* Left: text */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                     <p id="hero-greeting" style={{
                         fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 600, color: 'var(--cyan)', margin: 0,
@@ -29,7 +27,6 @@ export default function HeroSection() {
                         maxWidth: '600px', margin: 0, opacity: 0.85
                     }}>{data.hero.description}</p>
 
-                    {/* Social buttons */}
                     <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
                         {data.hero.socials.map(s => (
                             <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer"
@@ -46,7 +43,6 @@ export default function HeroSection() {
                             ><i className={s.icon} /></a>
                         ))}
 
-                        {/* Coffee CTA */}
                         <a href={data.hero.coffeeUrl} target="_blank" rel="noopener noreferrer"
                             style={{
                                 display: 'flex', alignItems: 'center', gap: '0.5rem',
@@ -60,7 +56,6 @@ export default function HeroSection() {
                         >☕ {data.hero.coffeeText}</a>
                     </div>
 
-                    {/* CTA button */}
                     <div>
                         <a href={data.hero.ctaLink}
                             style={{
@@ -78,9 +73,7 @@ export default function HeroSection() {
                     </div>
                 </div>
 
-                {/* Right: photo + deco (hidden on mobile via CSS) */}
                 <div className="hero-photo-col" style={{ position: 'relative', flexShrink: 0, display: 'flex', justifyContent: 'center' }}>
-                    {/* Deco: code SVG */}
                     <div className="deco-code" style={{ position: 'absolute', top: '-40px', right: '-30px', zIndex: 5 }}>
                         <svg width="70" height="70" viewBox="0 0 80 80">
                             <rect x="5" y="5" width="70" height="70" rx="4" fill="var(--white)" stroke="var(--border)" strokeWidth="3" />
@@ -95,7 +88,6 @@ export default function HeroSection() {
                         </svg>
                     </div>
 
-                    {/* Deco: terminal SVG */}
                     <div ref={terminalRef} className="deco-terminal" style={{
                         position: 'absolute', bottom: '-20px', left: '-50px', zIndex: 5,
                         '--fall-distance': '200px'
@@ -111,7 +103,6 @@ export default function HeroSection() {
                         </svg>
                     </div>
 
-                    {/* Deco: floppy */}
                     <div className="deco-floppy" style={{
                         position: 'absolute', top: '50%', left: '-60px', zIndex: 5, transform: 'translateY(-50%)'
                     }}>
@@ -124,7 +115,6 @@ export default function HeroSection() {
                         </svg>
                     </div>
 
-                    {/* Photo */}
                     <div style={{ position: 'relative' }}>
                         <div style={{
                             position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%) rotate(-3deg)',
@@ -156,7 +146,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* Tech badges */}
             <div style={{
                 display: 'flex', flexWrap: 'wrap', gap: '0.6rem',
                 marginTop: '2.5rem', paddingBottom: '2rem', justifyContent: 'center'

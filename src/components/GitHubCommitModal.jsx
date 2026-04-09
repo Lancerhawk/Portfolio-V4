@@ -2,7 +2,6 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-// IST = UTC+5:30. To cover a full IST day in UTC queries, expand the date window by ±1 day.
 const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
 
 function getExpandedDateRange(localDate) {
@@ -44,7 +43,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
     useEffect(() => {
         if (!isOpen || !date) return;
 
-        // All state resets live inside the async fn — satisfies react-hooks/set-state-in-effect
         const fetchActivity = async () => {
             setItems([]);
             setVisibleCount(10);
@@ -71,7 +69,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                 const allItems = [];
                 const seen = new Set();
 
-                // Commits — filtered to the user's local IST date
                 if (commitRes.status === 'fulfilled') {
                     (commitRes.value.items || []).forEach(c => {
                         const ts = c.commit.committer.date;
@@ -94,7 +91,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                     });
                 }
 
-                // Repos — filtered to local IST date
                 if (repoRes.status === 'fulfilled') {
                     (repoRes.value.items || []).forEach(r => {
                         if (!isOnLocalISTDate(r.created_at, date)) return;
@@ -124,7 +120,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
         fetchActivity();
     }, [isOpen, date, username]);
 
-    // Infinite scroll with 2-second delay
     const handleScroll = useCallback(() => {
         if (!scrollRef.current || loading || loadingMore || visibleCount >= items.length) return;
         const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
@@ -151,7 +146,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
 
     const displayedItems = items.slice(0, visibleCount);
     const hasNextBatch = visibleCount < items.length;
-    // Gap = graph count minus what API actually fetched (private/linked-account contributions)
     const unavailableCount = Math.max(0, graphCount - items.length);
 
     const getTypeIcon = (type) => {
@@ -192,7 +186,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                 }}
                 onClick={e => e.stopPropagation()}
             >
-                {/* Header */}
                 <div style={{
                     padding: '1.25rem 1.5rem', background: 'var(--accent)',
                     borderBottom: '4px solid var(--border)',
@@ -226,7 +219,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                     </button>
                 </div>
 
-                {/* Content */}
                 <div
                     ref={scrollRef}
                     onScroll={handleScroll}
@@ -305,7 +297,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                                 </a>
                             ))}
 
-                            {/* Unavailable contributions — shown after all fetched items are visible */}
                             {!hasNextBatch && !loadingMore && unavailableCount > 0 && (
                                 <div style={{
                                     padding: '1.35rem', background: 'var(--bg-cell)',
@@ -325,7 +316,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                                 </div>
                             )}
 
-                            {/* Infinite scroll trigger */}
                             {(hasNextBatch || loadingMore) && (
                                 <div style={{
                                     display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -342,7 +332,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                     )}
                 </div>
 
-                {/* Footer */}
                 {!loading && (
                     <div style={{
                         padding: '1rem 1.5rem', background: 'var(--bg-cell)',
