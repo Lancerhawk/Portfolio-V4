@@ -481,32 +481,182 @@
         {
             "label": "Creator of",
             "name": "Rootly-Runtime",
+            "slug": "rootly-runtime",
             "tagline": "Surface Production Errors Directly in Your IDE.",
-            "description": "Rootly is a developer platform designed to bridge the gap between production failures and your development environment. Get real-time notifications about production errors right where you code, with full context and stack traces.",
+            "description": "Rootly is a developer platform designed to bridge the gap between production failures and your development environment.",
+            "longDescription": "Rootly-Runtime bridges the painful gap between production failures and your local development environment. When a user hits an error in production, Rootly instantly surfaces the full stack trace, request context, environment metadata, and affected user session directly inside your IDE — no tab switching, no log hunting.\n\nBuilt as a full-stack developer platform, Rootly consists of a lightweight SDK you drop into any Node.js or Python application, a real-time ingestion API that queues and processes error events at scale, and a VS Code extension that renders everything contextually inside your editor.\n\nThe backend is built with Node.js and Express, using PostgreSQL for persistent error storage with relational schemas optimized for rapid lookups by project, severity, and timestamp. The ingestion pipeline supports batch processing to handle traffic spikes without data loss.",
+            "highlights": [
+                "Real-time IDE notifications — zero context switching when production breaks",
+                "Lightweight SDK with <5ms overhead per request instrumentation",
+                "Full stack trace reconstruction with source map support",
+                "PostgreSQL-backed storage with relational schema optimized for high-frequency writes",
+                "VS Code extension with inline error diffing and quick-fix suggestions",
+                "Rate-limited ingestion API to prevent abuse and ensure SLA guarantees",
+                "Supports Node.js and Python runtimes out of the box"
+            ],
+            "techStack": [
+                {
+                    "icon": "fab fa-node-js",
+                    "label": "Node.js"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Express.js"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "PostgreSQL"
+                },
+                {
+                    "icon": "fas fa-code",
+                    "label": "TypeScript"
+                },
+                {
+                    "icon": "fab fa-react",
+                    "label": "React.js"
+                },
+                {
+                    "icon": "fas fa-layer-group",
+                    "label": "Next.js"
+                },
+                {
+                    "icon": "fab fa-aws",
+                    "label": "AWS S3"
+                },
+                {
+                    "icon": "fas fa-plug",
+                    "label": "VS Code API"
+                }
+            ],
+            "images": [
+                "/projects/rootly-runtime/screenshot-1.png",
+                "/projects/rootly-runtime/screenshot-2.png",
+                "/projects/rootly-runtime/screenshot-3.png"
+            ],
             "url": "https://project-rootly.vercel.app/",
             "githubUrl": "https://github.com/Lancerhawk/Rootly-Runtime",
             "logo": "/image/rootly-icon.svg",
-            "logoBg": false
+            "logoBg": false,
+            "githubAnalysis": true,
+            "status": "Active",
+            "year": "2026"
         },
         {
             "label": "Creator of",
             "name": "Vyzora",
+            "slug": "vyzora",
             "tagline": "Analytics that respect user privacy.",
-            "description": "Vyzora is a privacy-first, horizontally scalable analytics platform that lets developers track events, reconstruct sessions, and visualize aggregated metrics in real time without relying on third-party trackers or invasive data collection.",
+            "description": "Vyzora is a privacy-first, horizontally scalable analytics platform for real-time event tracking without invasive data collection.",
+            "longDescription": "Vyzora is a privacy-first analytics platform engineered from the ground up to give developers deep product insights without compromising their users' data. In an era where third-party analytics tools phone home, fingerprint users, and sell behavioral data — Vyzora keeps everything self-hosted and under your control.\n\nDevelopers integrate a tiny client-side JavaScript snippet (under 4KB gzipped) that tracks page views, custom events, and user sessions — all anonymized via server-side hashing, with no cookies or persistent identifiers stored on the client.\n\nThe backend is built for horizontal scalability: events flow through a message queue before being written to the database in batches, ensuring the ingestion layer can absorb traffic spikes without affecting dashboard query performance. The real-time dashboard uses WebSocket subscriptions to show live visitor counts, popular pages, and event funnels.",
+            "highlights": [
+                "Zero third-party dependencies — 100% self-hosted and GDPR-friendly",
+                "Client snippet under 4KB gzipped — negligible page load impact",
+                "Session reconstruction without cookies or persistent client identifiers",
+                "Real-time dashboard via WebSocket subscriptions",
+                "Horizontal scalability with message-queue-backed ingestion pipeline",
+                "Aggregated metric visualizations: funnels, heatmaps, retention curves",
+                "REST API for embedding analytics data in external dashboards"
+            ],
+            "techStack": [
+                {
+                    "icon": "fab fa-node-js",
+                    "label": "Node.js"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Express.js"
+                },
+                {
+                    "icon": "fas fa-leaf",
+                    "label": "MongoDB"
+                },
+                {
+                    "icon": "fab fa-js",
+                    "label": "JavaScript"
+                },
+                {
+                    "icon": "fab fa-react",
+                    "label": "React.js"
+                },
+                {
+                    "icon": "fas fa-exchange-alt",
+                    "label": "WebSockets"
+                },
+                {
+                    "icon": "fas fa-tachometer-alt",
+                    "label": "Rate Limiting"
+                }
+            ],
+            "images": [
+                "/projects/vyzora/screenshot-1.png",
+                "/projects/vyzora/screenshot-2.png",
+                "/projects/vyzora/screenshot-3.png"
+            ],
             "url": "https://vyzora-frontend.vercel.app/",
             "githubUrl": "https://github.com/Lancerhawk/Vyzora",
             "logo": "/image/vyzora.svg",
-            "logoBg": false
+            "logoBg": false,
+            "githubAnalysis": true,
+            "status": "Active",
+            "year": "2025"
         },
         {
             "label": "Creator of",
             "name": "Learning's Hub",
+            "slug": "learnings-hub",
             "tagline": "Master DSA, and Development Skills with Proper Tracking.",
-            "description": "Learning’s Hub is a fullstack web app that helps developers track their progress in Data Structures, Algorithms, and programming languages. It supports custom list creation, public sharing, progress tracking, and community-based learning.",
+            "description": "Learning's Hub helps developers track DSA and programming progress with custom lists, public sharing, and community-based learning.",
+            "longDescription": "Learning's Hub is a full-stack web application that solves one of the most overlooked problems in developer growth: tracking what you've actually learned versus what you've just skimmed. Most developers jump between YouTube, LeetCode, and documentation tabs with no unified record of their progress.\n\nWith Learning's Hub, you build structured learning lists — whether that's 'Blind 75 LeetCode problems', 'JavaScript Fundamentals', or a custom roadmap — and track your completion status, notes, and revisit flags per item. Lists can be kept private or shared publicly with a unique link, enabling community-based accountability.\n\nThe platform supports community discovery: you can browse other users' public lists, fork them to your account, and adapt them. A gamified progress system shows streaks, completion percentages, and weekly goals — keeping motivation high through data-driven feedback.",
+            "highlights": [
+                "Structured learning lists for DSA, languages, and custom roadmaps",
+                "Per-item completion tracking with personal notes and revisit flags",
+                "Public list sharing with unique shareable links",
+                "Community discovery — browse, fork, and adapt other users' lists",
+                "Gamified progress: streaks, completion %, weekly goals",
+                "Supports 50+ built-in DSA problem sets mapped to LeetCode",
+                "Full authentication with JWT — plans are persisted per user"
+            ],
+            "techStack": [
+                {
+                    "icon": "fab fa-react",
+                    "label": "React.js"
+                },
+                {
+                    "icon": "fas fa-layer-group",
+                    "label": "Next.js"
+                },
+                {
+                    "icon": "fab fa-node-js",
+                    "label": "Node.js"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Express.js"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "PostgreSQL"
+                },
+                {
+                    "icon": "fas fa-key",
+                    "label": "JWT Auth"
+                },
+                {
+                    "icon": "fas fa-wind",
+                    "label": "Tailwind CSS"
+                }
+            ],
+            "images": [
+                "/projects/learnings-hub/screenshot-1.png",
+                "/projects/learnings-hub/screenshot-2.png"
+            ],
             "url": "https://learningshub.in",
             "githubUrl": "https://github.com/lancerhawk/learning-hub",
             "logo": "/image/learninghub-logo.svg",
-            "logoBg": false
+            "logoBg": false,
+            "githubAnalysis": true,
+            "status": "Active",
+            "year": "2024"
         }
     ],
     "education": {

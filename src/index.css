@@ -1726,3 +1726,106 @@ body::-webkit-scrollbar-thumb:hover {
   opacity: 0.8;
   animation: vibe-progress 2.7s linear forwards;
 }
+
+/* ─── Project Detail Modal ───────────────────────────────────── */
+
+@keyframes projectModalIn {
+  from { transform: translateY(40px) scale(0.96); opacity: 0; }
+  to   { transform: translateY(0)    scale(1);    opacity: 1; }
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes gallerySlide {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lightboxIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Modal scroll area */
+.proj-modal-scroll::-webkit-scrollbar { width: 8px; }
+.proj-modal-scroll::-webkit-scrollbar-track { background: var(--bg-cell, #ebedf0); }
+.proj-modal-scroll::-webkit-scrollbar-thumb { background: var(--border); border: 2px solid var(--bg-cell, #ebedf0); }
+
+/* Tab buttons */
+.proj-modal-tab:hover:not(.active) {
+  background: var(--yellow) !important;
+  color: var(--yellow-content) !important;
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--border) !important;
+}
+
+/* Gallery thumbnails */
+.proj-gallery-thumb {
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.proj-gallery-thumb:hover {
+  border-color: var(--yellow) !important;
+  transform: translate(2px, -2px);
+}
+.proj-gallery-thumb.active {
+  border-color: var(--yellow) !important;
+  box-shadow: 4px 4px 0 var(--yellow) !important;
+}
+
+/* Highlight bullets */
+.proj-highlight-item {
+  transition: background 0.15s, transform 0.15s;
+}
+.proj-highlight-item:hover {
+  background: var(--yellow) !important;
+  transform: translateX(4px);
+}
+
+/* Tech pills */
+.proj-tech-pill {
+  transition: background 0.15s, color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.proj-tech-pill:hover {
+  background: var(--cyan) !important;
+  color: var(--cyan-content) !important;
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--border) !important;
+}
+
+/* Action buttons in modal */
+.proj-action-btn {
+  transition: transform 0.15s, box-shadow 0.15s !important;
+}
+.proj-action-btn:hover {
+  transform: translate(5px, 5px) !important;
+  box-shadow: 0 0 0 var(--border) !important;
+}
+
+/* GitHub cards (contributors) */
+.proj-gh-card {
+  transition: background 0.15s, transform 0.12s, box-shadow 0.12s;
+}
+.proj-gh-card:hover {
+  background: var(--secondary) !important;
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--border) !important;
+}
+
+/* File tree rows */
+.proj-tree-item {
+  transition: background 0.1s;
+  border-radius: 0;
+}
+.proj-tree-item:hover {
+  background: var(--yellow) !important;
+}
+
+/* Mobile: make modal full-width with smaller padding */
+@media (max-width: 600px) {
+  .proj-modal-scroll {
+    padding: 1rem !important;
+  }
+}

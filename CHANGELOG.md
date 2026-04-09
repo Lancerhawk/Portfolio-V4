@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.4] - 2026-04-09
+
+### Added
+- **Project Detail Modal**: Implemented a comprehensive React modal for project deep-dives with a multi-tab interface (Details, GitHub Analysis).
+- **GitHub API Integration**: Real-time fetching of repository statistics including stars, forks, and language distribution bars.
+- **Enhanced Commit History**: Added a stateful "Commits" feed with pagination (Load More), full multi-line message rendering, and author metadata.
+- **Safe-Zone Lightbox**: New image zoom implementation that guarantees zero overlap between UI controls and the project screenshots, ensuring full visibility.
+
+### Fixed
+- **Lightbox Scaling**: Switched to rigid `object-fit: contain` logic to resolve horizontal and vertical clipping issues in the full-screen view.
+- **Tactile Card Interaction**: Updated project cards to "depress" fully into the background on hover, resetting the hard shadow to zero for a premium physical feel.
+- **Visual Hierarchy**: Moved the project year badge to the top-right corner to maintain consistency with the main site data structure.
+- **Tab Aesthetics**: Redesigned modal tab states with high-contrast active highlights and responsive 'pressed' animations.
+
 ## [0.5.3] - 2026-04-06
 
 ### Added

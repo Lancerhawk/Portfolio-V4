@@ -1,9 +1,9 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.5.3-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.4-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.3) features a deep-integrated GitHub Contribution Modal with IST timezone awareness and accurate activity tracking.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.4) features a premium Project Detail Modal with integrated GitHub repository analysis and an expandable commit history feed.
 
 ## Documentation
 
