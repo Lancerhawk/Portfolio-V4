@@ -269,17 +269,6 @@
             ]
         },
         {
-            "id": "loc-bangalore",
-            "coords": [
-                12.9716,
-                77.5946
-            ],
-            "country": "India, Bangalore",
-            "labelPosition": "bottom",
-            "isCurrent": false,
-            "companies": []
-        },
-        {
             "id": "loc-jabalpur",
             "coords": [
                 23.1815,
@@ -518,66 +507,6 @@
     "projects": [
         {
             "label": "Creator of",
-            "name": "Rootly-Runtime",
-            "slug": "rootly-runtime",
-            "tagline": "Surface production errors directly in your IDE.",
-            "description": "Rootly is a developer platform that brings production errors into your IDE with full context, enabling faster debugging without switching tools.",
-            "longDescription": "Rootly is a developer-focused error monitoring platform designed to eliminate context switching between production systems and development environments. Instead of relying on external dashboards, Rootly surfaces production errors directly inside your IDE with complete debugging context.\n\nApplications integrate a lightweight Node.js SDK that captures runtime errors, including stack traces, environment details, timestamps, and commit SHA. These events are sent to a backend API where they are validated, stored, and made available for querying.\n\nThe platform includes a VS Code extension that polls the backend at regular intervals to fetch new incidents. Developers receive notifications directly inside their editor and can instantly navigate to the exact file and line where the error occurred using parsed stack traces.\n\nThe system is built with a full-stack architecture using Node.js, Express, and PostgreSQL, with GitHub OAuth for authentication and project-based API key management for secure ingestion.",
-            "highlights": [
-                "IDE integration via VS Code extension with in-editor error visibility",
-                "Direct navigation to error location using parsed stack traces",
-                "Lightweight Node.js SDK for runtime error capture",
-                "Structured error ingestion with strict validation (stack trace, commit SHA, environment)",
-                "Polling-based incident fetching with in-IDE notifications",
-                "PostgreSQL-backed incident storage with relational schema",
-                "GitHub OAuth authentication with secure session management",
-                "Project-scoped API keys for secure ingestion"
-            ],
-            "techStack": [
-                {
-                    "icon": "fab fa-node-js",
-                    "label": "Node.js"
-                },
-                {
-                    "icon": "fas fa-server",
-                    "label": "Express.js"
-                },
-                {
-                    "icon": "fas fa-database",
-                    "label": "PostgreSQL"
-                },
-                {
-                    "icon": "fas fa-code",
-                    "label": "TypeScript"
-                },
-                {
-                    "icon": "fas fa-layer-group",
-                    "label": "Next.js"
-                },
-                {
-                    "icon": "fas fa-plug",
-                    "label": "VS Code Extension"
-                },
-                {
-                    "icon": "fab fa-github",
-                    "label": "GitHub OAuth"
-                }
-            ],
-            "images": [
-                "/projects/rootly-runtime/screenshot-1.png",
-                "/projects/rootly-runtime/screenshot-2.png",
-                "/projects/rootly-runtime/screenshot-3.png"
-            ],
-            "url": "https://project-rootly.vercel.app/",
-            "githubUrl": "https://github.com/Lancerhawk/Rootly-Runtime",
-            "logo": "/image/rootly-icon.svg",
-            "logoBg": false,
-            "githubAnalysis": true,
-            "status": "Active",
-            "year": "2026"
-        },
-        {
-            "label": "Creator of",
             "name": "Vyzora",
             "slug": "vyzora",
             "tagline": "Privacy-first, developer-focused analytics platform.",
@@ -635,6 +564,66 @@
             "url": "https://vyzora-frontend.vercel.app/",
             "githubUrl": "https://github.com/Lancerhawk/Vyzora",
             "logo": "/image/vyzora.svg",
+            "logoBg": false,
+            "githubAnalysis": true,
+            "status": "Active",
+            "year": "2026"
+        },
+        {
+            "label": "Creator of",
+            "name": "Rootly-Runtime",
+            "slug": "rootly-runtime",
+            "tagline": "Surface production errors directly in your IDE.",
+            "description": "Rootly is a developer platform that brings production errors into your IDE with full context, enabling faster debugging without switching tools.",
+            "longDescription": "Rootly is a developer-focused error monitoring platform designed to eliminate context switching between production systems and development environments. Instead of relying on external dashboards, Rootly surfaces production errors directly inside your IDE with complete debugging context.\n\nApplications integrate a lightweight Node.js SDK that captures runtime errors, including stack traces, environment details, timestamps, and commit SHA. These events are sent to a backend API where they are validated, stored, and made available for querying.\n\nThe platform includes a VS Code extension that polls the backend at regular intervals to fetch new incidents. Developers receive notifications directly inside their editor and can instantly navigate to the exact file and line where the error occurred using parsed stack traces.\n\nThe system is built with a full-stack architecture using Node.js, Express, and PostgreSQL, with GitHub OAuth for authentication and project-based API key management for secure ingestion.",
+            "highlights": [
+                "IDE integration via VS Code extension with in-editor error visibility",
+                "Direct navigation to error location using parsed stack traces",
+                "Lightweight Node.js SDK for runtime error capture",
+                "Structured error ingestion with strict validation (stack trace, commit SHA, environment)",
+                "Polling-based incident fetching with in-IDE notifications",
+                "PostgreSQL-backed incident storage with relational schema",
+                "GitHub OAuth authentication with secure session management",
+                "Project-scoped API keys for secure ingestion"
+            ],
+            "techStack": [
+                {
+                    "icon": "fab fa-node-js",
+                    "label": "Node.js"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Express.js"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "PostgreSQL"
+                },
+                {
+                    "icon": "fas fa-code",
+                    "label": "TypeScript"
+                },
+                {
+                    "icon": "fas fa-layer-group",
+                    "label": "Next.js"
+                },
+                {
+                    "icon": "fas fa-plug",
+                    "label": "VS Code Extension"
+                },
+                {
+                    "icon": "fab fa-github",
+                    "label": "GitHub OAuth"
+                }
+            ],
+            "images": [
+                "/projects/rootly-runtime/screenshot-1.png",
+                "/projects/rootly-runtime/screenshot-2.png",
+                "/projects/rootly-runtime/screenshot-3.png"
+            ],
+            "url": "https://project-rootly.vercel.app/",
+            "githubUrl": "https://github.com/Lancerhawk/Rootly-Runtime",
+            "logo": "/image/rootly-icon.svg",
             "logoBg": false,
             "githubAnalysis": true,
             "status": "Active",
