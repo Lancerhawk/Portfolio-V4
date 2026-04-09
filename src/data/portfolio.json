@@ -482,17 +482,18 @@
             "label": "Creator of",
             "name": "Rootly-Runtime",
             "slug": "rootly-runtime",
-            "tagline": "Surface Production Errors Directly in Your IDE.",
-            "description": "Rootly is a developer platform designed to bridge the gap between production failures and your development environment.",
-            "longDescription": "Rootly-Runtime bridges the painful gap between production failures and your local development environment. When a user hits an error in production, Rootly instantly surfaces the full stack trace, request context, environment metadata, and affected user session directly inside your IDE — no tab switching, no log hunting.\n\nBuilt as a full-stack developer platform, Rootly consists of a lightweight SDK you drop into any Node.js or Python application, a real-time ingestion API that queues and processes error events at scale, and a VS Code extension that renders everything contextually inside your editor.\n\nThe backend is built with Node.js and Express, using PostgreSQL for persistent error storage with relational schemas optimized for rapid lookups by project, severity, and timestamp. The ingestion pipeline supports batch processing to handle traffic spikes without data loss.",
+            "tagline": "Surface production errors directly in your IDE.",
+            "description": "Rootly is a developer platform that brings production errors into your IDE with full context, enabling faster debugging without switching tools.",
+            "longDescription": "Rootly is a developer-focused error monitoring platform designed to eliminate context switching between production systems and development environments. Instead of relying on external dashboards, Rootly surfaces production errors directly inside your IDE with complete debugging context.\n\nApplications integrate a lightweight Node.js SDK that captures runtime errors, including stack traces, environment details, timestamps, and commit SHA. These events are sent to a backend API where they are validated, stored, and made available for querying.\n\nThe platform includes a VS Code extension that polls the backend at regular intervals to fetch new incidents. Developers receive notifications directly inside their editor and can instantly navigate to the exact file and line where the error occurred using parsed stack traces.\n\nThe system is built with a full-stack architecture using Node.js, Express, and PostgreSQL, with GitHub OAuth for authentication and project-based API key management for secure ingestion.",
             "highlights": [
-                "Real-time IDE notifications — zero context switching when production breaks",
-                "Lightweight SDK with <5ms overhead per request instrumentation",
-                "Full stack trace reconstruction with source map support",
-                "PostgreSQL-backed storage with relational schema optimized for high-frequency writes",
-                "VS Code extension with inline error diffing and quick-fix suggestions",
-                "Rate-limited ingestion API to prevent abuse and ensure SLA guarantees",
-                "Supports Node.js and Python runtimes out of the box"
+                "IDE integration via VS Code extension with in-editor error visibility",
+                "Direct navigation to error location using parsed stack traces",
+                "Lightweight Node.js SDK for runtime error capture",
+                "Structured error ingestion with strict validation (stack trace, commit SHA, environment)",
+                "Polling-based incident fetching with in-IDE notifications",
+                "PostgreSQL-backed incident storage with relational schema",
+                "GitHub OAuth authentication with secure session management",
+                "Project-scoped API keys for secure ingestion"
             ],
             "techStack": [
                 {
@@ -512,20 +513,16 @@
                     "label": "TypeScript"
                 },
                 {
-                    "icon": "fab fa-react",
-                    "label": "React.js"
-                },
-                {
                     "icon": "fas fa-layer-group",
                     "label": "Next.js"
                 },
                 {
-                    "icon": "fab fa-aws",
-                    "label": "AWS S3"
+                    "icon": "fas fa-plug",
+                    "label": "VS Code Extension"
                 },
                 {
-                    "icon": "fas fa-plug",
-                    "label": "VS Code API"
+                    "icon": "fab fa-github",
+                    "label": "GitHub OAuth"
                 }
             ],
             "images": [
@@ -545,17 +542,18 @@
             "label": "Creator of",
             "name": "Vyzora",
             "slug": "vyzora",
-            "tagline": "Analytics that respect user privacy.",
-            "description": "Vyzora is a privacy-first, horizontally scalable analytics platform for real-time event tracking without invasive data collection.",
-            "longDescription": "Vyzora is a privacy-first analytics platform engineered from the ground up to give developers deep product insights without compromising their users' data. In an era where third-party analytics tools phone home, fingerprint users, and sell behavioral data — Vyzora keeps everything self-hosted and under your control.\n\nDevelopers integrate a tiny client-side JavaScript snippet (under 4KB gzipped) that tracks page views, custom events, and user sessions — all anonymized via server-side hashing, with no cookies or persistent identifiers stored on the client.\n\nThe backend is built for horizontal scalability: events flow through a message queue before being written to the database in batches, ensuring the ingestion layer can absorb traffic spikes without affecting dashboard query performance. The real-time dashboard uses WebSocket subscriptions to show live visitor counts, popular pages, and event funnels.",
+            "tagline": "Privacy-first, developer-focused analytics platform.",
+            "description": "Vyzora is a high-performance, privacy-first analytics platform for real-time event tracking, session reconstruction, and aggregated insights — without relying on third-party trackers.",
+            "longDescription": "Vyzora is a privacy-first analytics platform engineered to provide developers with deep product insights while maintaining full control over user data. Unlike traditional analytics tools that rely on third-party tracking and invasive techniques, Vyzora is fully self-hosted and avoids external data sharing.\n\nDevelopers integrate a lightweight TypeScript SDK (< 3KB gzipped) that automatically tracks pageviews, supports SPA navigation, batches events efficiently, and ensures reliable delivery using sendBeacon and fetch fallbacks. The SDK maintains anonymous visitor and session identifiers using localStorage with safe fallbacks, without collecting personally identifiable information.\n\nThe backend is built as a horizontally scalable, asynchronous ingestion system. Incoming events are received by API replicas, queued via Redis using BullMQ, and processed by worker services that perform bulk inserts into PostgreSQL. This decoupled architecture ensures consistent low-latency ingestion even under high traffic spikes.\n\nThe developer dashboard, built with Next.js, provides real-time aggregated metrics such as pageviews, sessions, top pages, and trends. Authentication is handled securely using GitHub OAuth, and all data remains fully controlled by the developer.",
             "highlights": [
-                "Zero third-party dependencies — 100% self-hosted and GDPR-friendly",
-                "Client snippet under 4KB gzipped — negligible page load impact",
-                "Session reconstruction without cookies or persistent client identifiers",
-                "Real-time dashboard via WebSocket subscriptions",
-                "Horizontal scalability with message-queue-backed ingestion pipeline",
-                "Aggregated metric visualizations: funnels, heatmaps, retention curves",
-                "REST API for embedding analytics data in external dashboards"
+                "100% self-hosted — no third-party tracking or data sharing",
+                "Lightweight SDK (< 3KB gzipped) with automatic pageview and SPA tracking",
+                "Asynchronous ingestion using Redis + BullMQ for high scalability",
+                "Bulk event processing with PostgreSQL and optimized indexing",
+                "Horizontally scalable architecture with API and worker replicas",
+                "Real-time aggregated metrics (pageviews, sessions, trends, top pages)",
+                "GitHub OAuth authentication with secure JWT-based sessions",
+                "Project-scoped API keys for secure event ingestion"
             ],
             "techStack": [
                 {
@@ -567,24 +565,28 @@
                     "label": "Express.js"
                 },
                 {
-                    "icon": "fas fa-leaf",
-                    "label": "MongoDB"
+                    "icon": "fas fa-database",
+                    "label": "PostgreSQL"
+                },
+                {
+                    "icon": "fas fa-bolt",
+                    "label": "Redis"
+                },
+                {
+                    "icon": "fas fa-cogs",
+                    "label": "BullMQ"
                 },
                 {
                     "icon": "fab fa-js",
-                    "label": "JavaScript"
+                    "label": "TypeScript"
                 },
                 {
-                    "icon": "fab fa-react",
-                    "label": "React.js"
+                    "icon": "fas fa-layer-group",
+                    "label": "Next.js"
                 },
                 {
-                    "icon": "fas fa-exchange-alt",
-                    "label": "WebSockets"
-                },
-                {
-                    "icon": "fas fa-tachometer-alt",
-                    "label": "Rate Limiting"
+                    "icon": "fas fa-network-wired",
+                    "label": "Nginx"
                 }
             ],
             "images": [
@@ -598,23 +600,24 @@
             "logoBg": false,
             "githubAnalysis": true,
             "status": "Active",
-            "year": "2025"
+            "year": "2026"
         },
         {
             "label": "Creator of",
             "name": "Learning's Hub",
             "slug": "learnings-hub",
-            "tagline": "Master DSA, and Development Skills with Proper Tracking.",
-            "description": "Learning's Hub helps developers track DSA and programming progress with custom lists, public sharing, and community-based learning.",
-            "longDescription": "Learning's Hub is a full-stack web application that solves one of the most overlooked problems in developer growth: tracking what you've actually learned versus what you've just skimmed. Most developers jump between YouTube, LeetCode, and documentation tabs with no unified record of their progress.\n\nWith Learning's Hub, you build structured learning lists — whether that's 'Blind 75 LeetCode problems', 'JavaScript Fundamentals', or a custom roadmap — and track your completion status, notes, and revisit flags per item. Lists can be kept private or shared publicly with a unique link, enabling community-based accountability.\n\nThe platform supports community discovery: you can browse other users' public lists, fork them to your account, and adapt them. A gamified progress system shows streaks, completion percentages, and weekly goals — keeping motivation high through data-driven feedback.",
+            "tagline": "Master DSA and development skills with structured progress tracking.",
+            "description": "Learning's Hub is a full-stack platform for tracking DSA, programming, and exam preparation with structured lists, progress sync, and community-driven learning.",
+            "longDescription": "Learning's Hub is a full-stack learning management platform designed to solve fragmented developer learning workflows. Instead of jumping between multiple platforms with no unified tracking, it provides a structured system to manage learning progress across DSA, programming languages, and competitive exams.\n\nUsers can create custom learning lists with sections, topics, and resources such as videos and practice problems. Each item can be tracked individually, with progress stored and synchronized across devices using a database-backed system. Built-in checklists for DSA and examination preparation are optimized using batch APIs to reduce network overhead and ensure efficient updates.\n\nThe platform also supports community-driven learning through public lists. Users can explore, rate, copy, and trace the lineage of shared lists, enabling collaborative knowledge building. Authentication is handled via JWT with email verification, password recovery, and secure session management.\n\nThe system is optimized for performance using batch operations, rate limiting, and debounced syncing, reducing API calls significantly while maintaining real-time responsiveness in the UI.",
             "highlights": [
-                "Structured learning lists for DSA, languages, and custom roadmaps",
-                "Per-item completion tracking with personal notes and revisit flags",
-                "Public list sharing with unique shareable links",
-                "Community discovery — browse, fork, and adapt other users' lists",
-                "Gamified progress: streaks, completion %, weekly goals",
-                "Supports 50+ built-in DSA problem sets mapped to LeetCode",
-                "Full authentication with JWT — plans are persisted per user"
+                "Structured learning lists with sections, topics, and resources",
+                "Per-item progress tracking with multi-device synchronization",
+                "Built-in DSA and examination tracking system",
+                "Batch API system reducing network requests by ~94%",
+                "Public list sharing, rating, and copying with lineage tracking",
+                "JWT-based authentication with email verification and password reset",
+                "Rate-limited APIs for secure and fair usage",
+                "Optimized UI with responsive terminal-style design"
             ],
             "techStack": [
                 {
@@ -622,8 +625,8 @@
                     "label": "React.js"
                 },
                 {
-                    "icon": "fas fa-layer-group",
-                    "label": "Next.js"
+                    "icon": "fas fa-bolt",
+                    "label": "Vite"
                 },
                 {
                     "icon": "fab fa-node-js",
@@ -640,6 +643,10 @@
                 {
                     "icon": "fas fa-key",
                     "label": "JWT Auth"
+                },
+                {
+                    "icon": "fas fa-envelope",
+                    "label": "SendGrid"
                 },
                 {
                     "icon": "fas fa-wind",
