@@ -88,9 +88,15 @@ function parseOwnerRepo(githubUrl) {
 
 function GhFetch({ url, children }) {
     const [state, setState] = useState({ data: null, loading: true, error: null });
+    const [prevUrl, setPrevUrl] = useState(url);
+
+    // Reset state in render if URL changes
+    if (url !== prevUrl) {
+        setPrevUrl(url);
+        setState({ data: null, loading: true, error: null });
+    }
 
     useEffect(() => {
-        setState({ data: null, loading: true, error: null });
         const headers = {
             'Accept': 'application/vnd.github+json',
             ...(TOKEN ? { Authorization: `token ${TOKEN}` } : {}),
@@ -328,9 +334,53 @@ function CommitsSection({ baseUrl, owner, repo }) {
     const [expanded, setExpanded] = useState(false);
     const [page, setPage] = useState(1);
     const [allCommits, setAllCommits] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [hasMore, setHasMore] = useState(true);
+    const [prevBaseUrl, setPrevBaseUrl] = useState(baseUrl);
     const PER_PAGE = 50;
 
-    const url = `${baseUrl}/commits?per_page=${PER_PAGE}&page=${page}`;
+    // Reset when base repository changes
+    if (baseUrl !== prevBaseUrl) {
+        setPrevBaseUrl(baseUrl);
+        setAllCommits([]);
+        setPage(1);
+        setHasMore(true);
+        setError(null);
+        setLoading(true);
+    }
+
+    useEffect(() => {
+        let ignore = false;
+        const url = `${baseUrl}/commits?per_page=${PER_PAGE}&page=${page}`;
+        
+        const headers = {
+            'Accept': 'application/vnd.github+json',
+            ...(TOKEN ? { Authorization: `token ${TOKEN}` } : {}),
+        };
+
+        fetch(url, { headers })
+            .then(r => {
+                if (!r.ok) throw new Error(`GitHub API error ${r.status}`);
+                return r.json();
+            })
+            .then(newCommits => {
+                if (ignore) return;
+                if (newCommits.length < PER_PAGE) setHasMore(false);
+                setAllCommits(prev => {
+                    const existingShas = new Set(prev.map(c => c.sha));
+                    const uniqueNew = newCommits.filter(c => !existingShas.has(c.sha));
+                    return [...prev, ...uniqueNew];
+                });
+                setLoading(false);
+            })
+            .catch(e => {
+                if (ignore) return;
+                setError(e.message);
+                setLoading(false);
+            });
+        return () => { ignore = true; };
+    }, [baseUrl, page]);
 
     function formatDate(iso) {
         if (!iso) return '';
@@ -338,28 +388,11 @@ function CommitsSection({ baseUrl, owner, repo }) {
         return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
     }
 
+    if (loading && allCommits.length === 0) return <Spinner />;
+    if (error && allCommits.length === 0) return <ErrorBox message="Could not load commits." />;
+    if (allCommits.length === 0 && !loading) return null;
+
     return (
-        <GhFetch url={url}>
-            {({ data: newCommits, loading, error }) => {
-                // Effect to append new commits when they arrive
-                useEffect(() => {
-                    if (newCommits?.length) {
-                        setAllCommits(prev => {
-                            // Avoid duplicates if effect runs twice
-                            const existingShas = new Set(prev.map(c => c.sha));
-                            const uniqueNew = newCommits.filter(c => !existingShas.has(c.sha));
-                            return [...prev, ...uniqueNew];
-                        });
-                    }
-                }, [newCommits]);
-
-                if (loading && allCommits.length === 0) return <Spinner />;
-                if (error && allCommits.length === 0) return <ErrorBox message="Could not load commits." />;
-                if (allCommits.length === 0 && !loading) return null;
-
-                const commitsToShow = allCommits;
-
-                return (
                     <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', background: 'var(--white)', overflow: 'hidden' }}>
                         {/* Header */}
                         <button
@@ -378,7 +411,7 @@ function CommitsSection({ baseUrl, owner, repo }) {
                                     COMMITS
                                 </span>
                                 <span style={{ background: 'var(--yellow)', border: '2px solid var(--border)', padding: '2px 10px', fontFamily: 'Space Mono, monospace', fontSize: '0.72rem', fontWeight: 900 }}>
-                                    {commitsToShow.length}{newCommits?.length === PER_PAGE ? '+' : ''}
+                                    {allCommits.length}{hasMore ? '+' : ''}
                                 </span>
                             </div>
                             <i className={`fas fa-chevron-${expanded ? 'up' : 'down'}`} style={{ fontSize: '0.85rem', opacity: 0.6 }} />
@@ -387,7 +420,7 @@ function CommitsSection({ baseUrl, owner, repo }) {
                         {/* Commit list */}
                         {expanded && (
                             <div>
-                                {commitsToShow.map((c, i) => {
+                                {allCommits.map((c, i) => {
                                     const msg = c.commit?.message || '';
                                     const title = msg.split('\n')[0];
                                     const body = msg.split('\n').slice(1).join('\n').trim();
@@ -401,7 +434,7 @@ function CommitsSection({ baseUrl, owner, repo }) {
                                     return (
                                         <div key={c.sha} style={{
                                             padding: '1rem 1.25rem',
-                                            borderBottom: i < commitsToShow.length - 1 ? '3px solid var(--border)' : 'none',
+                                            borderBottom: i < allCommits.length - 1 ? '3px solid var(--border)' : 'none',
                                             display: 'flex', gap: '0.85rem', alignItems: 'flex-start',
                                         }}>
                                             {/* Avatar */}
@@ -432,13 +465,9 @@ function CommitsSection({ baseUrl, owner, repo }) {
                                                         {date}
                                                     </span>
                                                 </div>
-
-                                                {/* Commit title */}
                                                 <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 700, fontSize: '0.85rem', lineHeight: 1.5, wordBreak: 'break-word' }}>
                                                     {title}
                                                 </div>
-
-                                                {/* Commit body (full, not truncated) */}
                                                 {body && (
                                                     <pre style={{
                                                         fontFamily: 'Space Mono, monospace', fontSize: '0.75rem',
@@ -455,7 +484,7 @@ function CommitsSection({ baseUrl, owner, repo }) {
                                 })}
 
                                 {/* Load more */}
-                                {newCommits?.length === PER_PAGE && (
+                                {allCommits.length > 0 && hasMore && (
                                     <div style={{ padding: '1rem 1.25rem', borderTop: '3px solid var(--border)', display: 'flex', gap: '0.75rem', alignItems: 'center', background: 'var(--bg-cell,#ebedf0)' }}>
                                         <button
                                             disabled={loading}
@@ -483,13 +512,10 @@ function CommitsSection({ baseUrl, owner, repo }) {
                                         </a>
                                     </div>
                                 )}
-                            </div>
-                        )}
                     </div>
-                );
-            }}
-        </GhFetch>
-    );
+                )}
+            </div>
+        );
 }
 
 // ── GitHub Analysis Tab ────────────────────────────────────────────────────────
