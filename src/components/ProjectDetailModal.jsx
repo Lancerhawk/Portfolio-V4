@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo, memo } from 'react';
 
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
@@ -156,7 +156,7 @@ function Spinner() {
     );
 }
 
-function SyntaxHighlighter({ code, language, theme = 'dark' }) {
+function SyntaxHighlighter({ code, theme = 'dark' }) {
     const tokens = useMemo(() => {
         const rules = theme === 'dark' ? [
             { type: 'comment', regex: /(\/\/.*|\/\*[\s\S]*?\*\/)/g, color: '#6a9955' },
@@ -165,7 +165,7 @@ function SyntaxHighlighter({ code, language, theme = 'dark' }) {
             { type: 'boolean', regex: /\b(true|false|null|undefined)\b/g, color: '#569cd6' },
             { type: 'number', regex: /\b(\d+)\b/g, color: '#b5cea8' },
             { type: 'function', regex: /\b([a-zA-Z_]\w*)(?=\s*\()/g, color: '#dcdcaa' },
-            { type: 'tag', regex: /(<[a-zA-Z1-6]+|(?<=<\/)[a-zA-Z1-6]+|(?<=[<])\/?[a-zA-Z1-6]+|(?<=[ \/>])[a-zA-Z-]+(?==)|(?<==)".*?")/g, color: '#569cd6' }
+            { type: 'tag', regex: /(<[a-zA-Z1-6]+|(?<=<\/)[a-zA-Z1-6]+|(?<=[<])\/?[a-zA-Z1-6]+|(?<=[ />])[a-zA-Z-]+(?==)|(?<==)".*?")/g, color: '#569cd6' }
         ] : [
             { type: 'comment', regex: /(\/\/.*|\/\*[\s\S]*?\*\/)/g, color: '#008000' },
             { type: 'string', regex: /(".*?"|'.*?'|`[\s\S]*?`)/g, color: '#a31515' },
@@ -173,7 +173,7 @@ function SyntaxHighlighter({ code, language, theme = 'dark' }) {
             { type: 'boolean', regex: /\b(true|false|null|undefined)\b/g, color: '#0000ff' },
             { type: 'number', regex: /\b(\d+)\b/g, color: '#098658' },
             { type: 'function', regex: /\b([a-zA-Z_]\w*)(?=\s*\()/g, color: '#795e26' },
-            { type: 'tag', regex: /(<[a-zA-Z1-6]+|(?<=<\/)[a-zA-Z1-6]+|(?<=[<])\/?[a-zA-Z1-6]+|(?<=[ \/>])[a-zA-Z-]+(?==)|(?<==)".*?")/g, color: '#800000' }
+            { type: 'tag', regex: /(<[a-zA-Z1-6]+|(?<=<\/)[a-zA-Z1-6]+|(?<=[<])\/?[a-zA-Z1-6]+|(?<=[ />])[a-zA-Z-]+(?==)|(?<==)".*?")/g, color: '#800000' }
         ];
 
         const lines = code.split('\n');
@@ -408,10 +408,10 @@ function FileContentModal({ owner, repo, path, onClose, isMobile }) {
         let decodedContent = "";
         try {
             decodedContent = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
-        } catch (e) {
+        } catch {
             try {
                 decodedContent = atob(data.content.replace(/\s/g, ''));
-            } catch (e2) {
+            } catch {
                 decodedContent = "Could not decode content.";
             }
         }
@@ -428,7 +428,7 @@ function FileContentModal({ owner, repo, path, onClose, isMobile }) {
                         <MarkdownPreview content={decodedContent} />
                     ) : (
                         <div style={{ padding: '1.25rem 0' }}>
-                            <SyntaxHighlighter code={decodedContent} language={path.split('.').pop()} />
+                            <SyntaxHighlighter code={decodedContent} />
                         </div>
                     )}
                 </div>
@@ -481,7 +481,7 @@ function buildTreeStructure(items) {
     return root;
 }
 
-const TreeNode = React.memo(({ node, depth, expandedPaths, togglePath, onFileClick, selectedFile }) => {
+const TreeNode = memo(({ node, depth, expandedPaths, togglePath, onFileClick, selectedFile }) => {
     const isDir = node.type === 'tree';
     const isExpanded = expandedPaths.has(node.path);
     const childrenEntries = Object.values(node.children).sort((a, b) => {
@@ -1328,7 +1328,6 @@ export default function ProjectDetailModal({ project, onClose }) {
     }, []);
 
     const isMobile = windowWidth < 768;
-    const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
     useEffect(() => {
         const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
@@ -1456,7 +1455,7 @@ export default function ProjectDetailModal({ project, onClose }) {
                         overflowX: 'auto',
                         scrollbarWidth: 'none'
                     }}>
-                        {tabs.map((tab, idx) => (
+                        {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 className={`proj-modal-tab${activeTab === tab.id ? ' active' : ''}`}
