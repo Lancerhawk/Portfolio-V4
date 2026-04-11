@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.5] - 2026-04-12
+
+### Added
+- **Premium File Viewer**: Integrated a dedicated, high-fidelity modal for exploring source files directly from the repository tree.
+- **Custom Syntax Highlighting**: Developed a lightweight, theme-aware tokenizer that colorizes keywords, strings, comments, and tags for JS, TS, HTML, CSS, and Markdown.
+- **High-Fidelity Markdown Preview**: Built a custom Markdown renderer with support for headers, bold text, bulleted lists, and nested code blocks.
+- **View Toggling**: Added a real-time "Code vs. Preview" switch for `.md` files to allow seamless switching between source and rendered views.
+- **Floating Action Footer**: Added a persistent, non-overlapping footer for code viewing with an accessible "Copy Source" action.
+- **Global Session Cache**: Implemented a request cache for GitHub API calls, making project re-entry instantaneous.
+- **Memoized Tree Rendering**: Optimized tree components with `React.memo` for smooth 60fps navigation in large repositories.
+- **Parsing Performance**: Wrapped syntax and markdown parsing in `useMemo` to eliminate overhead during UI updates.
+
+### Fixed
+- **Stability Fix**: Resolved a critical render-cycle regression that caused white-screen 'Too many re-renders' crashes.
+- **Content Overlap**: Fixed the source code copy button overlapping file content.
+- **Theme Legibility**: Refined highlighter colors for perfect contrast across both dark and light modes.
+
 ## [0.5.4] - 2026-04-09
 
 ### Added

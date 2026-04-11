@@ -1,5 +1,22 @@
 [
     {
+        "version": "0.5.5",
+        "date": "2026-04-12",
+        "changes": {
+            "Added": [
+                "Premium File Viewer: Integrated a high-fidelity modal for deep-diving into repository source code.",
+                "Custom Syntax Highlighting: Built a regex-driven tokenizer supporting JS, TS, HTML, CSS, and Markdown.",
+                "Markdown Preview: Integrated a custom renderer with real-time 'Code vs Preview' toggling.",
+                "Floating Action Center: Persistent footer for code views with easy 'Copy Source' access.",
+                "Performance Overhaul: Implemented session caching and React.memo for instant, 60fps repository exploration."
+            ],
+            "Fixed": [
+                "Stability Fix: Resolved an infinite render loop and white-screen crash regression.",
+                "Layout Polish: Fixed overlaps between UI controls and source code content."
+            ]
+        }
+    },
+    {
         "version": "0.5.4",
         "date": "2026-04-09",
         "changes": {
