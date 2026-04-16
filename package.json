@@ -1,7 +1,7 @@
 {
   "name": "portfolio-arin-jain",
   "private": true,
-  "version": "0.5.5",
+  "version": "0.5.6",
   "type": "module",
   "scripts": {
     "dev": "vite",

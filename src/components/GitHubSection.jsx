@@ -59,7 +59,10 @@ function cellColor(count) {
 
 function computeStreaks(weeks) {
     const days = weeks.flatMap(w => w.contributionDays);
+    const currentYear = new Date().getFullYear().toString();
     let current = 0, longest = 0, run = 0;
+    let yearTotal = 0;
+
     for (const d of [...days].reverse()) {
         if (d.contributionCount > 0) current++;
         else break;
@@ -67,8 +70,12 @@ function computeStreaks(weeks) {
     for (const d of days) {
         if (d.contributionCount > 0) { run++; if (run > longest) longest = run; }
         else run = 0;
+        
+        if (d.date.startsWith(currentYear)) {
+            yearTotal += d.contributionCount;
+        }
     }
-    return { current, longest };
+    return { current, longest, yearTotal };
 }
 
 function Cell({ day, size, onClick, onHover, onHoverEnd }) {
@@ -362,22 +369,39 @@ export default function GitHubSection() {
                                         🟩 Contribution Activity
                                     </div>
                                     {(() => {
-                                        const { current, longest } = computeStreaks(weeks);
-                                        const show = current > 0 ? current : longest;
-                                        const icon = current > 0 ? '🔥' : '🏆';
-                                        const label = current > 0 ? 'streak' : 'best streak';
-                                        return show > 0 ? (
-                                            <div style={{
-                                                display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-                                                padding: '0.2rem 0.6rem',
-                                                background: 'var(--secondary)', border: 'var(--border-width) solid var(--border)',
-                                                boxShadow: '3px 3px 0 var(--border)',
-                                                color: 'var(--secondary-content)',
-                                                fontFamily: 'Space Mono, monospace', fontSize: '0.75rem', fontWeight: 700,
-                                            }}>
-                                                {icon} {show}-day {label}
+                                        const { current, longest, yearTotal } = computeStreaks(weeks);
+                                        const showStreak = current > 0 ? current : longest;
+                                        const streakIcon = current > 0 ? '🔥' : '🏆';
+                                        const streakLabel = current > 0 ? 'streak' : 'best streak';
+                                        const currentYear = new Date().getFullYear();
+                                        return (
+                                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                                {showStreak > 0 && (
+                                                    <div style={{
+                                                        display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+                                                        padding: '0.2rem 0.6rem',
+                                                        background: 'var(--secondary)', border: 'var(--border-width) solid var(--border)',
+                                                        boxShadow: '3px 3px 0 var(--border)',
+                                                        color: 'var(--secondary-content)',
+                                                        fontFamily: 'Space Mono, monospace', fontSize: '0.75rem', fontWeight: 700,
+                                                    }}>
+                                                        {streakIcon} {showStreak}-day {streakLabel}
+                                                    </div>
+                                                )}
+                                                {yearTotal > 0 && (
+                                                    <div style={{
+                                                        display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+                                                        padding: '0.2rem 0.6rem',
+                                                        background: 'var(--cyan)', border: 'var(--border-width) solid var(--border)',
+                                                        boxShadow: '3px 3px 0 var(--border)',
+                                                        color: 'var(--cyan-content)',
+                                                        fontFamily: 'Space Mono, monospace', fontSize: '0.75rem', fontWeight: 700,
+                                                    }}>
+                                                        <i className="fas fa-rocket" /> {yearTotal.toLocaleString()} commits in {currentYear}
+                                                    </div>
+                                                )}
                                             </div>
-                                        ) : null;
+                                        );
                                     })()}
                                 </div>
                                 <div style={{ fontFamily: 'Space Mono, monospace', fontSize: '0.8rem', opacity: 0.7 }}>
