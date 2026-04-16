@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **GitHub Year-to-Date Metric**: Introduced a live counter in the GitHub section showing total contributions for the current calendar year (2026).
+- **Repo-Centric Modal View**: New toggle in the activity modal to group contributions by repository with smooth opening animations.
+- **Layout Persistence**: Integrated `localStorage` to remember the user's preferred modal view (Sequential vs. Grouped).
 - **Metric Visualization**: Added a high-contrast UI chip to the Contribution Activity header for immediate visibility of annual progress.
 
 ## [0.5.5] - 2026-04-12

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
@@ -30,15 +30,138 @@ const STYLES = `
 .gh-modal-scroll::-webkit-scrollbar { width: 8px; }
 .gh-modal-scroll::-webkit-scrollbar-track { background: var(--bg-cell); }
 .gh-modal-scroll::-webkit-scrollbar-thumb { background: var(--border); border: 2px solid var(--bg-cell); }
+.gh-view-toggle {
+    display: flex;
+    background: var(--bg-cell);
+    border: 3px solid var(--border);
+    box-shadow: 4px 4px 0 var(--border);
+    padding: 2px;
+}
+.gh-toggle-btn {
+    padding: 4px 12px;
+    border: none;
+    background: transparent;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.gh-toggle-btn.active {
+    background: var(--accent);
+    color: var(--text);
+}
+.repo-header:hover {
+    background: var(--bg-cell) !important;
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--border) !important;
+}
 `;
+
+const getTypeIcon = (type) => {
+    switch (type) {
+        case 'merge': return <i className="fas fa-code-merge" style={{ color: 'var(--yellow)' }} />;
+        case 'repo': return <i className="fas fa-book" style={{ color: 'var(--accent)' }} />;
+        default: return <i className="fas fa-code-commit" style={{ color: 'var(--primary)' }} />;
+    }
+};
+
+const getTypeLabel = (type) => {
+    switch (type) {
+        case 'merge': return 'MERGE COMMIT';
+        case 'repo': return 'REPO CREATED';
+        default: return 'COMMIT';
+    }
+};
+
+function CommitCard({ item, showRepo }) {
+    return (
+        <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="gh-item-card"
+            style={{
+                textDecoration: 'none', color: 'inherit',
+                padding: '1.35rem', background: 'var(--white)',
+                border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)',
+                display: 'flex', flexDirection: 'column', gap: '0.85rem',
+                transition: 'all 0.15s',
+            }}
+        >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{
+                        fontSize: '0.65rem', fontWeight: 900, padding: '3px 8px',
+                        background: 'var(--bg-cell)', border: '2px solid var(--border)',
+                        fontFamily: 'Space Mono, monospace', display: 'flex', alignItems: 'center', gap: '6px',
+                    }}>
+                        {getTypeIcon(item.type)} {getTypeLabel(item.type)}
+                    </div>
+                    {showRepo && (
+                        <div style={{ fontSize: '0.7rem', fontWeight: 900, color: 'var(--text)', opacity: 0.5, letterSpacing: '0.5px' }}>
+                            {item.repo.toUpperCase()}
+                        </div>
+                    )}
+                </div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 700, fontFamily: 'Space Mono, monospace', opacity: 0.6 }}>
+                    {item.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
+                </div>
+            </div>
+
+            <div style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.5, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                {item.title}
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: 0.6 }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 700, fontFamily: 'Space Mono, monospace' }}>
+                    SHA: {item.sha || '—'}
+                </div>
+                <div style={{ fontSize: '0.7rem', fontWeight: 900, fontFamily: 'Space Mono, monospace', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    VIEW <i className="fas fa-external-link-alt" style={{ fontSize: '0.6rem' }} />
+                </div>
+            </div>
+        </a>
+    );
+}
 
 export default function GitHubCommitModal({ isOpen, onClose, date, username, graphCount = 0 }) {
     const [items, setItems] = useState([]);
+    const [viewMode, setViewMode] = useState(() => localStorage.getItem('gh_view_mode') || 'sequential');
+    const [expandedRepos, setExpandedRepos] = useState(new Set());
     const [visibleCount, setVisibleCount] = useState(10);
     const [loading, setLoading] = useState(false);
     const [loadingMore, setLoadingMore] = useState(false);
     const [error, setError] = useState(null);
     const scrollRef = useRef(null);
+
+    useEffect(() => {
+        localStorage.setItem('gh_view_mode', viewMode);
+    }, [viewMode]);
+
+    const groupedItems = useMemo(() => {
+        if (viewMode !== 'repo') return [];
+        const groups = {};
+        items.forEach(item => {
+            if (!groups[item.repo]) {
+                groups[item.repo] = { name: item.repo, items: [], latest: item.time };
+            }
+            groups[item.repo].items.push(item);
+        });
+        return Object.values(groups).sort((a, b) => b.items.length - a.items.length || b.latest - a.latest);
+    }, [items, viewMode]);
+
+    const toggleRepo = useCallback((name) => {
+        setExpandedRepos(prev => {
+            const next = new Set(prev);
+            if (next.has(name)) next.delete(name);
+            else next.add(name);
+            return next;
+        });
+    }, []);
 
     useEffect(() => {
         if (!isOpen || !date) return;
@@ -148,22 +271,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
     const hasNextBatch = visibleCount < items.length;
     const unavailableCount = Math.max(0, graphCount - items.length);
 
-    const getTypeIcon = (type) => {
-        switch (type) {
-            case 'merge': return <i className="fas fa-code-merge" style={{ color: 'var(--yellow)' }} />;
-            case 'repo': return <i className="fas fa-book" style={{ color: 'var(--accent)' }} />;
-            default: return <i className="fas fa-code-commit" style={{ color: 'var(--primary)' }} />;
-        }
-    };
-
-    const getTypeLabel = (type) => {
-        switch (type) {
-            case 'merge': return 'MERGE COMMIT';
-            case 'repo': return 'REPO CREATED';
-            default: return 'COMMIT';
-        }
-    };
-
     return (
         <div
             style={{
@@ -204,19 +311,37 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                             {formattedDate}
                         </div>
                     </div>
-                    <button
-                        onClick={onClose}
-                        style={{
-                            width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            background: 'var(--pink)', border: '4px solid var(--border)',
-                            boxShadow: '4px 4px 0 var(--border)', cursor: 'pointer',
-                            fontSize: '1.2rem', color: 'var(--pink-content)', transition: 'all 0.1s',
-                        }}
-                        onMouseEnter={e => { e.currentTarget.style.transform = 'translate(2px, 2px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; }}
-                        onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '4px 4px 0 var(--border)'; }}
-                    >
-                        <i className="fas fa-times" />
-                    </button>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <div className="gh-view-toggle">
+                            <button
+                                className={`gh-toggle-btn ${viewMode === 'sequential' ? 'active' : ''}`}
+                                onClick={() => setViewMode('sequential')}
+                                title="List View"
+                            >
+                                <i className="fas fa-list-ul" />
+                            </button>
+                            <button
+                                className={`gh-toggle-btn ${viewMode === 'repo' ? 'active' : ''}`}
+                                onClick={() => setViewMode('repo')}
+                                title="Repo View"
+                            >
+                                <i className="fas fa-layer-group" />
+                            </button>
+                        </div>
+                        <button
+                            onClick={onClose}
+                            style={{
+                                width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                background: 'var(--pink)', border: '4px solid var(--border)',
+                                boxShadow: '4px 4px 0 var(--border)', cursor: 'pointer',
+                                fontSize: '1.2rem', color: 'var(--pink-content)', transition: 'all 0.1s',
+                            }}
+                            onMouseEnter={e => { e.currentTarget.style.transform = 'translate(2px, 2px)'; e.currentTarget.style.boxShadow = '0 0 0 var(--border)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '4px 4px 0 var(--border)'; }}
+                        >
+                            <i className="fas fa-times" />
+                        </button>
+                    </div>
                 </div>
 
                 <div
@@ -252,55 +377,76 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                         </div>
                     )}
 
-                    {!loading && !error && displayedItems.length > 0 && (
+                    {!loading && !error && items.length > 0 && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                            {displayedItems.map((item, idx) => (
-                                <a
-                                    key={item.id + idx}
-                                    href={item.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="gh-item-card"
-                                    style={{
-                                        textDecoration: 'none', color: 'inherit',
-                                        padding: '1.35rem', background: 'var(--white)',
-                                        border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)',
-                                        display: 'flex', flexDirection: 'column', gap: '0.75rem',
-                                        transition: 'all 0.15s',
-                                    }}
-                                >
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--text)', opacity: 0.5, letterSpacing: '1px' }}>
-                                            {item.repo.toUpperCase()}
+                            {viewMode === 'sequential' ? (
+                                displayedItems.map((item, idx) => (
+                                    <CommitCard key={item.id + idx} item={item} showRepo />
+                                ))
+                            ) : (
+                                groupedItems.map((group) => {
+                                    const isExpanded = expandedRepos.has(group.name);
+                                    return (
+                                        <div key={group.name} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                            <div
+                                                className="repo-header"
+                                                onClick={() => toggleRepo(group.name)}
+                                                style={{
+                                                    padding: '1.25rem 1.5rem', background: 'var(--white)',
+                                                    border: '4px solid var(--border)', boxShadow: '6px 6px 0 var(--border)',
+                                                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                                    cursor: 'pointer', transition: 'all 0.15s'
+                                                }}
+                                            >
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <i className={`fas ${isExpanded ? 'fa-folder-open text-yellow' : 'fa-folder'}`} style={{ color: isExpanded ? 'var(--yellow)' : 'var(--accent)', fontSize: '1.2rem' }} />
+                                                    <div style={{ fontSize: '0.95rem', fontWeight: 950, fontFamily: 'Space Mono, monospace' }}>
+                                                        {group.name.toUpperCase()}
+                                                    </div>
+                                                </div>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    <div style={{ fontSize: '0.75rem', fontWeight: 900, background: 'var(--bg-cell)', padding: '2px 8px', border: '2px solid var(--border)', fontFamily: 'Space Mono, monospace' }}>
+                                                        {group.items.length} ACTIVITIES
+                                                    </div>
+                                                    <i className={`fas fa-chevron-${isExpanded ? 'up' : 'down'}`} style={{ opacity: 0.5 }} />
+                                                </div>
+                                            </div>
+                                            <div style={{
+                                                maxHeight: isExpanded ? '2000px' : '0',
+                                                opacity: isExpanded ? 1 : 0,
+                                                overflow: 'hidden',
+                                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                display: 'flex', flexDirection: 'column', gap: '1rem',
+                                                paddingLeft: '1rem', borderLeft: '4px solid var(--bg-cell)', marginLeft: '1rem'
+                                            }}>
+                                                <div style={{ paddingTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                                    {group.items.map((item, idx) => (
+                                                        <CommitCard key={item.id + idx} item={item} showRepo={false} />
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div style={{
-                                            fontSize: '0.7rem', fontWeight: 900, padding: '3px 10px',
-                                            background: 'var(--bg-cell)', border: '2px solid var(--border)',
-                                            fontFamily: 'Space Mono, monospace', display: 'flex', alignItems: 'center', gap: '6px',
-                                        }}>
-                                            {getTypeIcon(item.type)} {getTypeLabel(item.type)}
-                                        </div>
-                                    </div>
+                                    );
+                                })
+                            )}
 
-                                    <div style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.5, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                                        {item.title}
+                            {viewMode === 'sequential' && (hasNextBatch || loadingMore) && (
+                                <div style={{
+                                    display: 'flex', flexDirection: 'column', alignItems: 'center',
+                                    justifyContent: 'center', padding: '1.5rem', gap: '1rem',
+                                    opacity: loadingMore ? 1 : 0.4,
+                                }}>
+                                    <i className={`fas ${loadingMore ? 'fa-spinner fa-spin' : 'fa-arrow-down'}`} style={{ fontSize: '1.5rem' }} />
+                                    <div style={{ fontFamily: 'Space Mono, monospace', fontSize: '0.85rem', fontWeight: 800 }}>
+                                        {loadingMore ? 'LOADING MORE...' : 'SCROLL FOR MORE'}
                                     </div>
+                                </div>
+                            )}
 
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', opacity: 0.5 }}>
-                                        <div style={{ fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Space Mono, monospace' }}>
-                                            SHA: {item.sha || '—'}
-                                        </div>
-                                        <div style={{ fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Space Mono, monospace' }}>
-                                            {item.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
-                                        </div>
-                                    </div>
-                                </a>
-                            ))}
-
-                            {!hasNextBatch && !loadingMore && unavailableCount > 0 && (
+                            {(viewMode === 'repo' || (!hasNextBatch && !loadingMore)) && unavailableCount > 0 && (
                                 <div style={{
                                     padding: '1.35rem', background: 'var(--bg-cell)',
-                                    border: '4px dashed var(--border)',
+                                    border: '4px dashed var(--border)', marginTop: viewMode === 'repo' ? '1rem' : '0',
                                     display: 'flex', alignItems: 'flex-start', gap: '1rem',
                                 }}>
                                     <i className="fas fa-lock" style={{ fontSize: '1.4rem', flexShrink: 0, marginTop: '2px', opacity: 0.6 }} />
@@ -312,19 +458,6 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                                             These contributions are counted by GitHub but cannot be retrieved via the public API —
                                             they include activity in private repositories and cross-repository work attributed by GitHub internally.
                                         </div>
-                                    </div>
-                                </div>
-                            )}
-
-                            {(hasNextBatch || loadingMore) && (
-                                <div style={{
-                                    display: 'flex', flexDirection: 'column', alignItems: 'center',
-                                    justifyContent: 'center', padding: '1.5rem', gap: '1rem',
-                                    opacity: loadingMore ? 1 : 0.4,
-                                }}>
-                                    <i className={`fas ${loadingMore ? 'fa-spinner fa-spin' : 'fa-arrow-down'}`} style={{ fontSize: '1.5rem' }} />
-                                    <div style={{ fontFamily: 'Space Mono, monospace', fontSize: '0.85rem', fontWeight: 800 }}>
-                                        {loadingMore ? 'LOADING MORE...' : 'SCROLL FOR MORE'}
                                     </div>
                                 </div>
                             )}
@@ -340,7 +473,11 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                         fontFamily: 'Space Mono, monospace', fontSize: '0.8rem', fontWeight: 900,
                         flexWrap: 'wrap', gap: '0.5rem',
                     }}>
-                        <span>{loadingMore ? 'LOADING...' : `${displayedItems.length} OF ${items.length} COMMITS SHOWN`}</span>
+                        <span>
+                            {loadingMore ? 'LOADING...' :
+                                viewMode === 'sequential' ? `${displayedItems.length} OF ${items.length} COMMITS SHOWN` :
+                                    `SHOWING ${items.length} ACTIVITIES IN ${groupedItems.length} REPOSITORIES`}
+                        </span>
                         {unavailableCount > 0 && (
                             <span style={{ opacity: 0.55, fontSize: '0.75rem' }}>
                                 <i className="fas fa-lock" style={{ marginRight: '5px' }} />

@@ -5,6 +5,8 @@
         "changes": {
             "Added": [
                 "Year-to-Date Metric: Added a live counter in the GitHub section showing total contributions for the current calendar year.",
+                "Repo-Centric View: Added a collapsible, animated grouping system for daily activities in the contribution modal.",
+                "Persistence: Layout preferences are now saved to localStorage for a tailored user experience.",
                 "Visual Enhancement: Integrated a dedicated UI pill to highlight annual commit progress alongside the streak data."
             ]
         }
