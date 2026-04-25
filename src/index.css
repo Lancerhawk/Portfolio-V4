@@ -14,7 +14,6 @@
 }
 
 :root {
-  /* Global Transitions for Vibe Check */
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
@@ -1231,25 +1230,20 @@ body::-webkit-scrollbar-thumb:hover {
     height: 400px !important;
   }
 
-  /* Edu/lang: stack on tablet */
   .edu-lang-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  /* Navbar: keep desktop nav on tablet */
   .nav-desktop {
-    display: flex !important;
+    display: none !important;
   }
 
   .nav-mobile {
-    display: none !important;
+    display: flex !important;
   }
 }
 
-/* =============================================
-   MOBILE  (≤640px)
-   ============================================= */
 @media (max-width: 640px) {
   body {
     padding: 0;
@@ -1730,29 +1724,64 @@ body::-webkit-scrollbar-thumb:hover {
 /* ─── Project Detail Modal ───────────────────────────────────── */
 
 @keyframes projectModalIn {
-  from { transform: translateY(40px) scale(0.96); opacity: 0; }
-  to   { transform: translateY(0)    scale(1);    opacity: 1; }
+  from {
+    transform: translateY(40px) scale(0.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes overlayFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes gallerySlide {
-  from { opacity: 0; transform: translateX(20px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes lightboxIn {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Modal scroll area */
-.proj-modal-scroll::-webkit-scrollbar { width: 8px; }
-.proj-modal-scroll::-webkit-scrollbar-track { background: var(--bg-cell, #ebedf0); }
-.proj-modal-scroll::-webkit-scrollbar-thumb { background: var(--border); border: 2px solid var(--bg-cell, #ebedf0); }
+.proj-modal-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.proj-modal-scroll::-webkit-scrollbar-track {
+  background: var(--bg-cell, #ebedf0);
+}
+
+.proj-modal-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 2px solid var(--bg-cell, #ebedf0);
+}
 
 /* Tab buttons */
 .proj-modal-tab:hover:not(.active) {
@@ -1766,10 +1795,12 @@ body::-webkit-scrollbar-thumb:hover {
 .proj-gallery-thumb {
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
+
 .proj-gallery-thumb:hover {
   border-color: var(--yellow) !important;
   transform: translate(2px, -2px);
 }
+
 .proj-gallery-thumb.active {
   border-color: var(--yellow) !important;
   box-shadow: 4px 4px 0 var(--yellow) !important;
@@ -1779,6 +1810,7 @@ body::-webkit-scrollbar-thumb:hover {
 .proj-highlight-item {
   transition: background 0.15s, transform 0.15s;
 }
+
 .proj-highlight-item:hover {
   background: var(--yellow) !important;
   transform: translateX(4px);
@@ -1788,6 +1820,7 @@ body::-webkit-scrollbar-thumb:hover {
 .proj-tech-pill {
   transition: background 0.15s, color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
+
 .proj-tech-pill:hover {
   background: var(--cyan) !important;
   color: var(--cyan-content) !important;
@@ -1799,6 +1832,7 @@ body::-webkit-scrollbar-thumb:hover {
 .proj-action-btn {
   transition: transform 0.15s, box-shadow 0.15s !important;
 }
+
 .proj-action-btn:hover {
   transform: translate(5px, 5px) !important;
   box-shadow: 0 0 0 var(--border) !important;
@@ -1808,6 +1842,7 @@ body::-webkit-scrollbar-thumb:hover {
 .proj-gh-card {
   transition: background 0.15s, transform 0.12s, box-shadow 0.12s;
 }
+
 .proj-gh-card:hover {
   background: var(--secondary) !important;
   transform: translate(2px, 2px);
@@ -1819,6 +1854,7 @@ body::-webkit-scrollbar-thumb:hover {
   transition: background 0.1s;
   border-radius: 0;
 }
+
 .proj-tree-item:hover {
   background: var(--yellow) !important;
 }

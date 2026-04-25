@@ -59,6 +59,33 @@ const STYLES = `
     transform: translate(2px, 2px);
     box-shadow: 0 0 0 var(--border) !important;
 }
+@media (max-width: 768px) {
+    .gh-modal-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+        padding: 1rem !important;
+    }
+    .gh-header-title {
+        font-size: 1.1rem !important;
+    }
+    .gh-header-subtitle {
+        font-size: 0.65rem !important;
+    }
+    .gh-item-card {
+        padding: 1rem !important;
+        box-shadow: 4px 4px 0 var(--border) !important;
+    }
+    .gh-modal-content {
+        padding: 1rem !important;
+    }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+    .gh-modal-container {
+        width: 90% !important;
+        max-width: none !important;
+    }
+}
 `;
 
 const getTypeIcon = (type) => {
@@ -283,6 +310,7 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
         >
             <style>{STYLES}</style>
             <div
+                className="gh-modal-container"
                 style={{
                     width: '100%', maxWidth: '680px', maxHeight: '88vh',
                     background: 'var(--white)', border: '4px solid var(--border)',
@@ -293,21 +321,30 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                 }}
                 onClick={e => e.stopPropagation()}
             >
-                <div style={{
-                    padding: '1.25rem 1.5rem', background: 'var(--accent)',
-                    borderBottom: '4px solid var(--border)',
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    flexShrink: 0,
-                }}>
+                <div 
+                    className="gh-modal-header"
+                    style={{
+                        padding: '1.25rem 1.5rem', background: 'var(--accent)',
+                        borderBottom: '4px solid var(--border)',
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                        flexShrink: 0,
+                    }}
+                >
                     <div>
-                        <div style={{
-                            fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase',
-                            letterSpacing: '1px', color: 'var(--text)', opacity: 0.7,
-                            fontFamily: 'Space Mono, monospace',
-                        }}>
+                        <div 
+                            className="gh-header-subtitle"
+                            style={{
+                                fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase',
+                                letterSpacing: '1px', color: 'var(--text)', opacity: 0.7,
+                                fontFamily: 'Space Mono, monospace',
+                            }}
+                        >
                             {graphCount > 0 ? `${graphCount} CONTRIBUTION${graphCount !== 1 ? 'S' : ''} ON` : 'ACTIVITIES FOR'}
                         </div>
-                        <div style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--text)', fontFamily: 'Space Mono, monospace' }}>
+                        <div 
+                            className="gh-header-title"
+                            style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--text)', fontFamily: 'Space Mono, monospace' }}
+                        >
                             {formattedDate}
                         </div>
                     </div>
@@ -347,7 +384,7 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
                 <div
                     ref={scrollRef}
                     onScroll={handleScroll}
-                    className="gh-modal-scroll"
+                    className="gh-modal-scroll gh-modal-content"
                     style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column' }}
                 >
                     {loading && (

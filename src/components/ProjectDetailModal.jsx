@@ -93,6 +93,22 @@ const MODAL_STYLES = `
 .tree-folder-inner {
     min-height: 0;
 }
+@media (max-width: 768px) {
+    .proj-modal-header {
+        padding: 1rem !important;
+        gap: 0.75rem !important;
+    }
+    .proj-modal-title {
+        font-size: 1.15rem !important;
+    }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+    .proj-modal-container {
+        width: 92% !important;
+        max-width: none !important;
+        max-height: 90vh !important;
+    }
+}
 `;
 
 
@@ -1362,6 +1378,7 @@ export default function ProjectDetailModal({ project, onClose }) {
         >
             <style>{MODAL_STYLES}</style>
             <div
+                className="proj-modal-container"
                 style={{
                     width: '100%', maxWidth: 860,
                     maxHeight: isMobile ? '94vh' : '92vh',
@@ -1379,14 +1396,17 @@ export default function ProjectDetailModal({ project, onClose }) {
                 }}
                 onClick={e => e.stopPropagation()}
             >
-                <div style={{
-                    background: 'var(--secondary)',
-                    borderBottom: '4px solid var(--border)',
-                    padding: isMobile ? '1rem 1.25rem' : '1.25rem 1.5rem',
-                    display: 'flex', alignItems: 'center', gap: isMobile ? '0.75rem' : '1.25rem',
-                    flexShrink: 0,
-                    position: 'relative'
-                }}>
+                <div 
+                    className="proj-modal-header"
+                    style={{
+                        background: 'var(--secondary)',
+                        borderBottom: '4px solid var(--border)',
+                        padding: isMobile ? '1rem 1.25rem' : '1.25rem 1.5rem',
+                        display: 'flex', alignItems: 'center', gap: isMobile ? '0.75rem' : '1.25rem',
+                        flexShrink: 0,
+                        position: 'relative'
+                    }}
+                >
                     <div style={{
                         width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, flexShrink: 0,
                         background: project.logoBg ? 'var(--yellow)' : 'transparent',
@@ -1404,7 +1424,10 @@ export default function ProjectDetailModal({ project, onClose }) {
                         <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 800, fontSize: '0.65rem', letterSpacing: '1.5px', opacity: 0.6, textTransform: 'uppercase', marginBottom: '0.15rem' }}>
                             {project.label}
                         </div>
-                        <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 950, letterSpacing: '-0.5px', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <div 
+                            className="proj-modal-title"
+                            style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 950, letterSpacing: '-0.5px', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                        >
                             {project.name}
                         </div>
                     </div>

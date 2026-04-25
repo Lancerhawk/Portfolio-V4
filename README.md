@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-0.5.6-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.6) features annual GitHub tracking, Repo-Centric activity grouping, and an optimized Project Detail Modal.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.6) features an optimized Project Detail Modal with a premium File Viewer, Syntax Highlighting, and real-time Markdown Preview.
 
 ## Documentation
 
