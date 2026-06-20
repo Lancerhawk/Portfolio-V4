@@ -459,7 +459,7 @@
             "isHighlight": false,
             "tags": [
                 {
-                    "icon": "fas fa-elephant",
+                    "icon": "fas fa-database",
                     "label": "PostgreSQL"
                 },
                 {
