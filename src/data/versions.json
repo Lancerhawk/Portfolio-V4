@@ -1,5 +1,21 @@
 [
     {
+        "version": "0.5.7",
+        "date": "2026-06-20",
+        "changes": {
+            "Changed": [
+                "About Section Redesign: Transformed the 'About Me' container into a rigid neo-brutalist 'whoami.txt' OS window.",
+                "Skills Section Overhaul: Replaced standard skill boxes with vibrant, card-style containers and retro dotted backgrounds.",
+                "Strict Neo-Brutalism: Removed rounded corners and jarring hover movements from large container blocks.",
+                "Tactile Skill Tags: Redesigned skill tags as scattered stickers with bouncy hover effects."
+            ],
+            "Fixed": [
+                "CSS Transition Bug: Resolved conflicts between scroll-fade animations and hover states in the Skills cards.",
+                "PostgreSQL Icon: Fixed missing PostgreSQL icon."
+            ]
+        }
+    },
+    {
         "version": "0.5.6",
         "date": "2026-04-16",
         "changes": {

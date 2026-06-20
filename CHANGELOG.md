@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.7] - 2026-06-20
+
+### Changed
+- **About Section Redesign**: Transformed the 'About Me' container into a rigid neo-brutalist 'whoami.txt' OS window with sharp square controls.
+- **Skills Section Overhaul**: Replaced standard skill boxes with vibrant, card-style containers featuring solid headers and retro dotted backgrounds.
+- **Strict Neo-Brutalism**: Enforced strict design rules by removing rounded corners across both sections and eliminating jarring hover movement from large container blocks.
+- **Tactile Skill Tags**: Redesigned skill tags as scattered stickers with bouncy, "press-down" hover effects.
+
+### Fixed
+- **CSS Transition Bug**: Fixed a layout bug where CSS scroll-fade animations conflicted with hover wrappers in the Skills cards.
+- **PostgreSQL Icon**: Fixed missing PostgreSQL icon in the database skills category.
+
 ## [0.5.6] - 2026-04-16
 
 ### Added
