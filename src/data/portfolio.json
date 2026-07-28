@@ -507,6 +507,79 @@
     "projects": [
         {
             "label": "Creator of",
+            "name": "MailBot",
+            "slug": "mailbot",
+            "tagline": "AI-Powered Email Assistant with RAG-Augmented Drafts & Real-Time Sync.",
+            "description": "MailBot is an enterprise-grade AI email assistant that integrates with Gmail via Google Cloud Pub/Sub webhooks to automate workflows, auto-categorize communications, and draft intelligent RAG-augmented responses in real time.",
+            "longDescription": "MailBot is an enterprise-grade AI email assistant designed to eliminate email overload by integrating directly with Gmail via Google Cloud Pub/Sub webhooks for real-time inbox synchronization. Whenever an incoming email arrives, atomic webhooks instantly trigger background processing pipelines that classify intent, sentiment, and priority while extracting rich CRM metadata.\n\nThe system features a personalized Retrieval-Augmented Generation (RAG) knowledge base backed by PostgreSQL with pgvector and local Transformers.js embeddings (bge-small). To optimize retrieval latency and LLM costs, MailBot employs a hybrid metadata retrieval decision engine—executing PostgreSQL Full-Text Search and trigram matching before selectively invoking global vector searches or AI classification fallbacks. Relevant context from uploaded AWS S3 documents is injected into Groq-powered LLM prompts to draft accurate, context-aware replies automatically.\n\nBuilt with a decoupled, event-driven architecture using Node.js, Express, Prisma, and PostgreSQL on the backend with a responsive Next.js frontend, MailBot also includes automated contact intelligence CRM, real-time WebSocket analytics dashboards, and executive PDF/CSV briefing exports.",
+            "highlights": [
+                "Real-time Gmail synchronization via Google Cloud Pub/Sub webhooks",
+                "RAG-augmented AI drafting using Groq LLM and AWS S3 document context",
+                "Hybrid metadata retrieval engine (PostgreSQL Full-Text Search + pg_trgm + pgvector)",
+                "Automated Contact Intelligence CRM with entity extraction and alias resolution",
+                "Decoupled background processing workers for embeddings and AI descriptions",
+                "Real-time WebSocket analytics dashboard with atomic event tracking",
+                "Executive briefing export engine for vector PDF and CSV reports",
+                "Full-stack TypeScript architecture with Next.js, Express, Prisma, and PostgreSQL"
+            ],
+            "techStack": [
+                {
+                    "icon": "fab fa-node-js",
+                    "label": "Node.js"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Express.js"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "PostgreSQL"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "Prisma"
+                },
+                {
+                    "icon": "fas fa-code",
+                    "label": "TypeScript"
+                },
+                {
+                    "icon": "fas fa-layer-group",
+                    "label": "Next.js"
+                },
+                {
+                    "icon": "fab fa-google",
+                    "label": "GCP Pub/Sub"
+                },
+                {
+                    "icon": "fab fa-aws",
+                    "label": "AWS S3"
+                },
+                {
+                    "icon": "fas fa-brain",
+                    "label": "Groq AI"
+                },
+                {
+                    "icon": "fas fa-project-diagram",
+                    "label": "pgvector"
+                }
+            ],
+            "images": [
+                "/projects/mailbot/image1.png",
+                "/projects/mailbot/image2.png",
+                "/projects/mailbot/image3.png",
+                "/projects/mailbot/image4.png"
+            ],
+            "url": "https://mailbot-seven.vercel.app/",
+            "githubUrl": "https://github.com/Lancerhawk/MailBot",
+            "logo": "/image/mailbot.svg",
+            "logoBg": false,
+            "githubAnalysis": true,
+            "status": "Active",
+            "year": "2026"
+        },
+        {
+            "label": "Creator of",
             "name": "Vyzora",
             "slug": "vyzora",
             "tagline": "Privacy-first, developer-focused analytics platform.",
@@ -564,6 +637,76 @@
             "url": "https://vyzora-frontend.vercel.app/",
             "githubUrl": "https://github.com/Lancerhawk/Vyzora",
             "logo": "/image/vyzora.svg",
+            "logoBg": false,
+            "githubAnalysis": true,
+            "status": "Active",
+            "year": "2026"
+        },
+        {
+            "label": "Creator of",
+            "name": "LimitLab",
+            "slug": "limitlab",
+            "tagline": "Interactive API Rate Limiting Sandbox & Algorithm Simulator.",
+            "description": "LimitLab is a high-performance, real-time sandbox for visualizing, simulating, and load-testing five rate-limiting algorithms with dual In-Memory LRU and PostgreSQL backends.",
+            "longDescription": "LimitLab is an interactive, enterprise-grade rate-limiting sandbox and benchmarking platform built for API engineers and distributed systems architects. The system enables real-time visualization, simulation, and load-testing across five core rate-limiting algorithms: Token Bucket, Fixed Window, Sliding Window Counter, Sliding Log, and Leaky Bucket.\n\nEvery algorithm in LimitLab ships with a dual-architecture implementation: a zero-latency In-Memory LRU cache for high-throughput execution and a PostgreSQL-backed persistence layer featuring Optimistic Concurrency Control for distributed state consistency. The platform exposes open CORS sandbox endpoints designed explicitly for external benchmarking, protected by global rate ceilings (500 req/s burst, 3000 req/15min sustained).\n\nThe client-side React simulation engine provides deterministic visual testing with drag-and-drop timelines, live request graphs, playback speed controls, and side-by-side comparison modes. Additionally, developers can export dynamic load-testing scripts in Node.js, Python, and Bash that embed custom database configurations and timing constraints.",
+            "highlights": [
+                "Five rate-limiting algorithms: Token Bucket, Fixed Window, Sliding Window Counter, Sliding Log, and Leaky Bucket",
+                "Dual-architecture backend with In-Memory LRU cache and PostgreSQL Optimistic Concurrency Control",
+                "Deterministic visual React simulation engine with drag-and-drop timelines and live charts",
+                "Dynamic load-testing script generation in Node.js, Python, and Bash",
+                "Open public CORS benchmarking sandbox endpoints with strict API gateway protection",
+                "Full-stack TypeScript architecture using React 19, Vite, Express.js, Prisma 6, and PostgreSQL"
+            ],
+            "techStack": [
+                {
+                    "icon": "fab fa-react",
+                    "label": "React 19"
+                },
+                {
+                    "icon": "fas fa-bolt",
+                    "label": "Vite"
+                },
+                {
+                    "icon": "fab fa-node-js",
+                    "label": "Node.js"
+                },
+                {
+                    "icon": "fas fa-server",
+                    "label": "Express.js"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "PostgreSQL"
+                },
+                {
+                    "icon": "fas fa-database",
+                    "label": "Prisma 6"
+                },
+                {
+                    "icon": "fas fa-code",
+                    "label": "TypeScript"
+                },
+                {
+                    "icon": "fas fa-wind",
+                    "label": "Tailwind CSS"
+                },
+                {
+                    "icon": "fab fa-aws",
+                    "label": "AWS EC2"
+                },
+                {
+                    "icon": "fas fa-network-wired",
+                    "label": "Nginx"
+                }
+            ],
+            "images": [
+                "/projects/limitlab/image1.png",
+                "/projects/limitlab/image2.png",
+                "/projects/limitlab/image3.png"
+            ],
+            "url": "https://limit-lab.vercel.app/",
+            "githubUrl": "https://github.com/Lancerhawk/LimitLab",
+            "logo": "/image/limitlab.svg",
             "logoBg": false,
             "githubAnalysis": true,
             "status": "Active",
