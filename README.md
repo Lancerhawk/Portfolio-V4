@@ -1,9 +1,9 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.5.8-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.9-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.8) moves all GitHub API calls behind a server-side proxy so the access token never reaches the browser, and adds the latest projects and experience.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.9) lazy-loads the map, terminal, and modals, cutting the initial JavaScript bundle by 42% for faster first loads.
 
 ## Documentation
 

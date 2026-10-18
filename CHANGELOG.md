@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.9] - 2026-10-19
+
+### Changed
+- **Lazy-Loaded Map**: The Leaflet map in the Journey section now loads only when it is about to scroll into view.
+- **On-Demand Modals**: The project details modal, GitHub commit modal, and AI Assistant now load only when opened.
+- **Lazy Terminal Route**: The `/terminal` page (figlet and ASCII fonts) is split into its own bundle and loads only when visited.
+- **Smaller Initial Bundle**: The main JavaScript bundle dropped from 629 kB to 351 kB (182 kB to 106 kB gzipped), a 42% reduction in what visitors download before the page appears.
+
 ## [0.5.8] - 2026-10-19
 
 ### Added
