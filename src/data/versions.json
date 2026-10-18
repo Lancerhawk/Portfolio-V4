@@ -1,5 +1,17 @@
 [
     {
+        "version": "0.5.9",
+        "date": "2026-10-19",
+        "changes": {
+            "Changed": [
+                "Lazy-Loaded Map: The Journey map now loads only when it is about to scroll into view.",
+                "On-Demand Modals: Project details, GitHub commits, and the AI Assistant load only when opened.",
+                "Lazy Terminal: The terminal page now loads only when visited.",
+                "Faster First Load: The main JavaScript bundle is 42% smaller."
+            ]
+        }
+    },
+    {
         "version": "0.5.8",
         "date": "2026-10-19",
         "changes": {

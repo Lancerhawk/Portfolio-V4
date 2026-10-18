@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useControls } from '../context/ControlContext';
-import AIAssistantModal from './AIAssistantModal';
+
+const AIAssistantModal = lazy(() => import('./AIAssistantModal'));
 import './SidebarControls.css';
 
 export default function SidebarControls() {
@@ -16,7 +17,12 @@ export default function SidebarControls() {
 
     return (
         <>
-            <AIAssistantModal isOpen={aiOpen} onClose={() => setAiOpen(false)} />
+            {/* Mounted only while open; chat history is restored from localStorage */}
+            {aiOpen && (
+                <Suspense fallback={null}>
+                    <AIAssistantModal isOpen onClose={() => setAiOpen(false)} />
+                </Suspense>
+            )}
 
             <div className={`desk-sidebar-container desk-only`}>
                 <button className="sidebar-btn" onClick={() => setAiOpen(true)}>

@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
 import { useFadeIn } from '../hooks/useFadeIn';
 import data from '../data/portfolio.json';
-import GitHubCommitModal from './GitHubCommitModal';
+
+const GitHubCommitModal = lazy(() => import('./GitHubCommitModal'));
 import { githubApiUrl } from '../lib/github';
 
 const LANG_COLORS = {
@@ -386,13 +387,17 @@ export default function GitHubSection() {
                             {createPortal(
                                 <>
                                     <ContributionTooltip data={tooltip} />
-                                    <GitHubCommitModal
-                                        isOpen={isModalOpen}
-                                        onClose={() => setIsModalOpen(false)}
-                                        date={selectedDate}
-                                        username={username}
-                                        graphCount={selectedCount}
-                                    />
+                                    {isModalOpen && (
+                                        <Suspense fallback={null}>
+                                            <GitHubCommitModal
+                                                isOpen
+                                                onClose={() => setIsModalOpen(false)}
+                                                date={selectedDate}
+                                                username={username}
+                                                graphCount={selectedCount}
+                                            />
+                                        </Suspense>
+                                    )}
                                 </>,
                                 document.body
                             )}
