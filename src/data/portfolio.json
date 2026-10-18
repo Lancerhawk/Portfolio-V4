@@ -171,6 +171,15 @@
             "locationId": "loc-astrascribe"
         },
         {
+            "id": "exp-nudgeplay-freelance",
+            "title": "Full Stack Developer (Freelance) @ NudgePlay",
+            "period": "May 2026 - Present",
+            "description": "Building NudgePlay and Playroll end to end with a fellow engineer, continuing work for the client directly after leaving SleekSky. Owning the full stack across backend services, frontend, and cloud infrastructure for the game creation and publishing platform.",
+            "location": "San Francisco, CA (Remote)",
+            "country": "USA",
+            "locationId": "loc-sf"
+        },
+        {
             "id": "exp-0",
             "title": "Full-Stack Developer (Contract) @ Medical Melon",
             "period": "Mar 2026 - Aug 2026",
@@ -281,6 +290,12 @@
             "labelPosition": "bottom",
             "isCurrent": false,
             "companies": [
+                {
+                    "city": "San Francisco",
+                    "company": "NudgePlay",
+                    "period": "May 2026 - Present",
+                    "role": "Full Stack Developer (Freelance)"
+                },
                 {
                     "city": "San Francisco",
                     "company": "SleekSky",
