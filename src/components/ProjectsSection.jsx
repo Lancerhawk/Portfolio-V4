@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useFadeIn } from '../hooks/useFadeIn';
 import data from '../data/portfolio.json';
-import ProjectDetailModal from './ProjectDetailModal';
+
+const ProjectDetailModal = lazy(() => import('./ProjectDetailModal'));
 
 export default function ProjectsSection() {
     const fadeRef = useFadeIn();
@@ -56,10 +57,12 @@ export default function ProjectsSection() {
             </section>
 
             {selectedProject && (
-                <ProjectDetailModal
-                    project={selectedProject}
-                    onClose={() => setSelectedProject(null)}
-                />
+                <Suspense fallback={null}>
+                    <ProjectDetailModal
+                        project={selectedProject}
+                        onClose={() => setSelectedProject(null)}
+                    />
+                </Suspense>
             )}
         </>
     );

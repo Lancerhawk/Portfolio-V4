@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useTheme } from './hooks/useTheme';
 import { useClickSound } from './hooks/useClickSound';
 import LoaderOverlay from './components/LoaderOverlay';
@@ -20,8 +20,8 @@ import CustomCursor from './components/CustomCursor';
 import SidebarControls from './components/SidebarControls';
 import VibeNotification from './components/VibeNotification';
 
-import Terminal from './components/Terminal/Terminal';
-
+// Terminal pulls in figlet + ASCII fonts, so only load it on the /terminal route
+const Terminal = lazy(() => import('./components/Terminal/Terminal'));
 
 
 const MainLayout = ({ theme, toggleTheme }) => (
@@ -63,7 +63,11 @@ export default function App() {
       <VibeNotification />
       <Routes>
         <Route path="/" element={<MainLayout theme={theme} toggleTheme={toggle} />} />
-        <Route path="/terminal" element={<Terminal />} />
+        <Route path="/terminal" element={
+          <Suspense fallback={<div style={{ position: 'fixed', inset: 0, background: '#000' }} />}>
+            <Terminal />
+          </Suspense>
+        } />
       </Routes>
     </>
   );
