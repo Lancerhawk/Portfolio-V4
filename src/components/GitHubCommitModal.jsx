@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-
-const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+import { githubApiUrl } from '../lib/github';
 
 const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
 
@@ -200,20 +199,21 @@ export default function GitHubCommitModal({ isOpen, onClose, date, username, gra
             setLoadingMore(false);
             setError(null);
 
-            const headers = {
-                'Accept': 'application/vnd.github.cloak-preview+json',
-                ...(TOKEN ? { 'Authorization': `token ${TOKEN}` } : {}),
-            };
-
             const dateRange = getExpandedDateRange(date);
 
             try {
-                const commitUrl = `https://api.github.com/search/commits?q=${encodeURIComponent(`author:${username} committer-date:${dateRange}`)}&per_page=100&sort=author-date&order=desc`;
-                const repoUrl = `https://api.github.com/search/repositories?q=${encodeURIComponent(`user:${username} created:${dateRange}`)}&per_page=10`;
+                const commitUrl = githubApiUrl('search/commits', {
+                    q: `author:${username} committer-date:${dateRange}`,
+                    per_page: 100, sort: 'author-date', order: 'desc',
+                });
+                const repoUrl = githubApiUrl('search/repositories', {
+                    q: `user:${username} created:${dateRange}`,
+                    per_page: 10,
+                });
 
                 const [commitRes, repoRes] = await Promise.allSettled([
-                    fetch(commitUrl, { headers }).then(r => r.ok ? r.json() : Promise.reject(r.status)),
-                    fetch(repoUrl, { headers }).then(r => r.ok ? r.json() : Promise.reject(r.status)),
+                    fetch(commitUrl).then(r => r.ok ? r.json() : Promise.reject(r.status)),
+                    fetch(repoUrl).then(r => r.ok ? r.json() : Promise.reject(r.status)),
                 ]);
 
                 const allItems = [];

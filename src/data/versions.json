@@ -1,5 +1,22 @@
 [
     {
+        "version": "0.5.8",
+        "date": "2026-10-19",
+        "changes": {
+            "Added": [
+                "GitHub API Proxy: All GitHub data now loads through a server-side /api/github function with edge caching.",
+                "New Projects: Added MailBot and LimitLab to the projects section.",
+                "New Experience: Added the AstraScribe Full Stack Engineer role and the freelance NudgePlay role."
+            ],
+            "Changed": [
+                "Experience Timeline: Marked the Medical Melon contract as ended and moved the current map pin to AstraScribe."
+            ],
+            "Fixed": [
+                "GitHub Token Exposure: The GitHub token is no longer shipped in the public JavaScript bundle."
+            ]
+        }
+    },
+    {
         "version": "0.5.7",
         "date": "2026-06-20",
         "changes": {

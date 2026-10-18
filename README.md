@@ -1,9 +1,9 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.5.7-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.8-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.7) features a rigid neo-brutalist UI overhaul for the About and Skills sections with tactile sticker interactions.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.8) moves all GitHub API calls behind a server-side proxy so the access token never reaches the browser, and adds the latest projects and experience.
 
 ## Documentation
 
@@ -103,7 +103,7 @@ npm install
 ### 3. Configuration
 Create a `.env` file in the root:
 ```env
-VITE_GITHUB_TOKEN=ghp_your_token_here
+GITHUB_TOKEN=ghp_your_token_here  # Server-side only, used by api/github.js
 groq_api_key=gsk_your_key_here
 VITE_AI_SERVER_URL=  # Leave empty for serverless usage
 ```
@@ -131,7 +131,7 @@ The project is pre-configured for Vercel.
 2. Connect the repo to Vercel.
 3. **Important**: Add the following Environment Variables in Vercel Settings:
    - `groq_api_key`
-   - `VITE_GITHUB_TOKEN`
+   - `GITHUB_TOKEN` (no `VITE_` prefix, so it never ships to the browser)
 4. Click **Deploy**. Vercel will automatically detect the `api/` folder and spin up the serverless functions.
 
 ---

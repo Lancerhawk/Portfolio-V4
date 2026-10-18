@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.8] - 2026-10-19
+
+### Added
+- **GitHub API Proxy**: New `/api/github` serverless function that fetches all GitHub data (profile, contribution graph, commit search, repo analysis, file viewer) on the server, with a 5-minute cache on Vercel's edge.
+- **New Projects**: Added MailBot and LimitLab to the projects section.
+- **New Experience**: Added the Full Stack Engineer role at AstraScribe and the freelance Full Stack Developer role on NudgePlay.
+
+### Changed
+- **Experience Timeline**: Marked the Medical Melon contract as ended (Aug 2026) and moved the current map pin to AstraScribe.
+- **Token Config**: The GitHub token is now read server-side as `GITHUB_TOKEN` (the old `VITE_GITHUB_TOKEN` name still works).
+
+### Security
+- **GitHub Token Exposure**: The GitHub token is no longer bundled into the public JavaScript. The proxy only allows read-only requests for the portfolio owner's account and repositories.
+
 ## [0.5.7] - 2026-06-20
 
 ### Changed
