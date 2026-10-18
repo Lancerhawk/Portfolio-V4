@@ -162,9 +162,18 @@
     },
     "experience": [
         {
+            "id": "exp-astrascribe",
+            "title": "Full Stack Engineer @ AstraScribe",
+            "period": "Sep 2026 - Present",
+            "description": "Building end-to-end features for AstraScribe, an AI-powered medical scribe and healthcare management platform (EMR, hospital management, billing). Developing the React + TypeScript frontend and Python backend, managing databases, optimizing performance, and contributing to architecture discussions.",
+            "location": "United States (Remote)",
+            "country": "USA",
+            "locationId": "loc-astrascribe"
+        },
+        {
             "id": "exp-0",
             "title": "Full-Stack Developer (Contract) @ Medical Melon",
-            "period": "Mar 2026 - Present",
+            "period": "Mar 2026 - Aug 2026",
             "description": "Orchestrating the complete system architecture and infrastructure for Medical Melon. Building the entire full-stack ecosystem from scratch, including scalable backend services, interactive frontend, and cloud-native infrastructure deployment.",
             "location": "New York, NY (Remote)",
             "country": "USA",
@@ -227,6 +236,24 @@
     ],
     "mapLocations": [
         {
+            "id": "loc-astrascribe",
+            "coords": [
+                39.8283,
+                -98.5795
+            ],
+            "country": "USA, Remote",
+            "labelPosition": "top",
+            "isCurrent": true,
+            "companies": [
+                {
+                    "city": "Remote",
+                    "company": "AstraScribe",
+                    "period": "Sep 2026 - Present",
+                    "role": "Full Stack Engineer"
+                }
+            ]
+        },
+        {
             "id": "loc-ny",
             "coords": [
                 40.7128,
@@ -234,12 +261,12 @@
             ],
             "country": "USA, New York",
             "labelPosition": "top",
-            "isCurrent": true,
+            "isCurrent": false,
             "companies": [
                 {
                     "city": "New York",
                     "company": "Medical Melon",
-                    "period": "Mar 2026 - Present",
+                    "period": "Mar 2026 - Aug 2026",
                     "role": "Full-Stack Developer (Contract)"
                 }
             ]
