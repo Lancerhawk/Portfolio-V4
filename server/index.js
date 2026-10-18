@@ -84,6 +84,12 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'AI Assistant server is running' });
 });
 
+// GitHub proxy — reuses the Vercel function so the allowlist lives in one place
+app.get('/api/github', async (req, res) => {
+    const { default: githubHandler } = await import('../api/github.js');
+    return githubHandler(req, res);
+});
+
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
     try {

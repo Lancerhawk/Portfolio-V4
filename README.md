@@ -103,7 +103,7 @@ npm install
 ### 3. Configuration
 Create a `.env` file in the root:
 ```env
-VITE_GITHUB_TOKEN=ghp_your_token_here
+GITHUB_TOKEN=ghp_your_token_here  # Server-side only, used by api/github.js
 groq_api_key=gsk_your_key_here
 VITE_AI_SERVER_URL=  # Leave empty for serverless usage
 ```
@@ -131,7 +131,7 @@ The project is pre-configured for Vercel.
 2. Connect the repo to Vercel.
 3. **Important**: Add the following Environment Variables in Vercel Settings:
    - `groq_api_key`
-   - `VITE_GITHUB_TOKEN`
+   - `GITHUB_TOKEN` (no `VITE_` prefix, so it never ships to the browser)
 4. Click **Deploy**. Vercel will automatically detect the `api/` folder and spin up the serverless functions.
 
 ---

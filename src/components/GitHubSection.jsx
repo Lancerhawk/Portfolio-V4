@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useFadeIn } from '../hooks/useFadeIn';
 import data from '../data/portfolio.json';
 import GitHubCommitModal from './GitHubCommitModal';
+import { githubApiUrl } from '../lib/github';
 
 const LANG_COLORS = {
     JavaScript: '#f7df1e', TypeScript: '#3178c6', Python: '#3572A5',
@@ -11,44 +12,6 @@ const LANG_COLORS = {
     PHP: '#4F5D95', Shell: '#89e051', Vue: '#41b883', Svelte: '#ff3e00',
     Kotlin: '#A97BFF', Swift: '#F05138', Dart: '#00B4AB',
 };
-
-const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
-
-const GQL_QUERY = (username) => `{
-  user(login: "${username}") {
-    name
-    bio
-    avatarUrl
-    url
-    followers { totalCount }
-    following { totalCount }
-    repositories(privacy: PUBLIC) { totalCount }
-    pinnedItems(first: 6, types: REPOSITORY) {
-      nodes {
-        ... on Repository {
-          id
-          name
-          description
-          url
-          stargazerCount
-          primaryLanguage { name color }
-          isFork
-        }
-      }
-    }
-    contributionsCollection {
-      contributionCalendar {
-        totalContributions
-        weeks {
-          contributionDays {
-            date
-            contributionCount
-          }
-        }
-      }
-    }
-  }
-}`;
 
 function cellColor(count) {
     if (count === 0) return 'var(--bg-cell)';
@@ -251,16 +214,7 @@ export default function GitHubSection() {
             } catch { /* ignore */ }
         }
 
-        const headers = {
-            'Content-Type': 'application/json',
-            ...(TOKEN ? { Authorization: `bearer ${TOKEN}` } : {}),
-        };
-
-        fetch('https://api.github.com/graphql', {
-            method: 'POST',
-            headers,
-            body: JSON.stringify({ query: GQL_QUERY(username) }),
-        })
+        fetch(githubApiUrl('profile'))
             .then(r => r.json())
             .then(gql => {
                 const u = gql?.data?.user;

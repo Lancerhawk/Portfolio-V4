@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo, memo } from 'react';
-
-const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+import { githubApiUrl } from '../lib/github';
 
 const GITHUB_CACHE = {};
 
@@ -140,11 +139,7 @@ function GhFetch({ url, children }) {
     useEffect(() => {
         if (GITHUB_CACHE[url]) return;
 
-        const headers = {
-            'Accept': 'application/vnd.github+json',
-            ...(TOKEN ? { Authorization: `token ${TOKEN}` } : {}),
-        };
-        fetch(url, { headers })
+        fetch(url)
             .then(r => {
                 if (!r.ok) throw new Error(`GitHub API error ${r.status}`);
                 return r.json();
@@ -325,7 +320,7 @@ function MarkdownPreview({ content }) {
 }
 
 function FileContentModal({ owner, repo, path, onClose, isMobile }) {
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    const url = githubApiUrl(`repos/${owner}/${repo}/contents/${path}`);
     const [viewMode, setViewMode] = useState(path.endsWith('.md') ? 'preview' : 'code');
 
     return (
@@ -775,18 +770,18 @@ function ImageGallery({ images, isMobile }) {
     );
 }
 
-function CommitsSection({ baseUrl, owner, repo, isMobile }) {
+function CommitsSection({ repoPath, owner, repo, isMobile }) {
     const [expanded, setExpanded] = useState(false);
     const [page, setPage] = useState(1);
     const [allCommits, setAllCommits] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [hasMore, setHasMore] = useState(true);
-    const [prevBaseUrl, setPrevBaseUrl] = useState(baseUrl);
+    const [prevRepoPath, setPrevRepoPath] = useState(repoPath);
     const PER_PAGE = 50;
 
-    if (baseUrl !== prevBaseUrl) {
-        setPrevBaseUrl(baseUrl);
+    if (repoPath !== prevRepoPath) {
+        setPrevRepoPath(repoPath);
         setAllCommits([]);
         setPage(1);
         setHasMore(true);
@@ -796,14 +791,9 @@ function CommitsSection({ baseUrl, owner, repo, isMobile }) {
 
     useEffect(() => {
         let ignore = false;
-        const url = `${baseUrl}/commits?per_page=${PER_PAGE}&page=${page}`;
+        const url = githubApiUrl(`${repoPath}/commits`, { per_page: PER_PAGE, page });
 
-        const headers = {
-            'Accept': 'application/vnd.github+json',
-            ...(TOKEN ? { Authorization: `token ${TOKEN}` } : {}),
-        };
-
-        fetch(url, { headers })
+        fetch(url)
             .then(r => {
                 if (!r.ok) throw new Error(`GitHub API error ${r.status}`);
                 return r.json();
@@ -824,7 +814,7 @@ function CommitsSection({ baseUrl, owner, repo, isMobile }) {
                 setLoading(false);
             });
         return () => { ignore = true; };
-    }, [baseUrl, page]);
+    }, [repoPath, page]);
 
     function formatDate(iso) {
         if (!iso) return '';
@@ -958,7 +948,7 @@ function CommitsSection({ baseUrl, owner, repo, isMobile }) {
 
 function GitHubAnalysisTab({ githubUrl, isMobile }) {
     const { owner, repo } = parseOwnerRepo(githubUrl);
-    const baseUrl = `https://api.github.com/repos/${owner}/${repo}`;
+    const repoPath = `repos/${owner}/${repo}`;
     const [treeExpanded, setTreeExpanded] = useState(false);
     const [expandedPaths, setExpandedPaths] = useState(new Set());
     const [selectedFile, setSelectedFile] = useState(null);
@@ -978,7 +968,7 @@ function GitHubAnalysisTab({ githubUrl, isMobile }) {
     }
 
     return (
-        <GhFetch url={baseUrl}>
+        <GhFetch url={githubApiUrl(repoPath)}>
             {({ data: repoData, loading: repoLoading, error: repoError }) => (
                 repoLoading ? <Spinner /> :
                     repoError ? <ErrorBox message={repoError} /> :
@@ -991,7 +981,7 @@ function GitHubAnalysisTab({ githubUrl, isMobile }) {
                                 />
                             )}
                             {/* Pre-fetch tree to use for health check fallback */}
-                            <GhFetch url={`${baseUrl}/git/trees/HEAD?recursive=1`}>
+                            <GhFetch url={githubApiUrl(`${repoPath}/git/trees/HEAD`, { recursive: 1 })}>
                                 {({ data }) => {
                                     if (data && !treeData) setTreeData(data);
                                     return null;
@@ -1020,7 +1010,7 @@ function GitHubAnalysisTab({ githubUrl, isMobile }) {
                                 </div>
                             </div>
 
-                            <GhFetch url={`${baseUrl}/languages`}>
+                            <GhFetch url={githubApiUrl(`${repoPath}/languages`)}>
                                 {({ data: langs, loading, error }) => (
                                     loading ? <Spinner /> : error ? <ErrorBox message={error} /> :
                                         langs && Object.keys(langs).length > 0 ? (
@@ -1053,7 +1043,7 @@ function GitHubAnalysisTab({ githubUrl, isMobile }) {
                                 )}
                             </GhFetch>
 
-                            <GhFetch url={`${baseUrl}/community/profile`}>
+                            <GhFetch url={githubApiUrl(`${repoPath}/community/profile`)}>
                                 {({ data: community, loading, error }) => (
                                     loading ? <Spinner /> : error ? null : community ? (
                                         <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', padding: '1.25rem', background: 'var(--white)' }}>
@@ -1104,7 +1094,7 @@ function GitHubAnalysisTab({ githubUrl, isMobile }) {
                                 )}
                             </GhFetch>
 
-                            <GhFetch url={`${baseUrl}/git/trees/HEAD?recursive=1`}>
+                            <GhFetch url={githubApiUrl(`${repoPath}/git/trees/HEAD`, { recursive: 1 })}>
                                 {({ data: tree, loading, error }) => {
                                     if (loading) return <Spinner />;
                                     if (error) return <ErrorBox message="Could not fetch repository tree." />;
@@ -1158,7 +1148,7 @@ function GitHubAnalysisTab({ githubUrl, isMobile }) {
                                 }}
                             </GhFetch>
 
-                            <GhFetch url={`${baseUrl}/contributors?per_page=10`}>
+                            <GhFetch url={githubApiUrl(`${repoPath}/contributors`, { per_page: 10 })}>
                                 {({ data: contributors, loading, error }) => (
                                     loading ? <Spinner /> : error ? null : contributors?.length > 0 ? (
                                         <div style={{ border: '4px solid var(--border)', boxShadow: '8px 8px 0 var(--border)', padding: '1.25rem', background: 'var(--white)', marginBottom: '0.5rem' }}>
@@ -1191,7 +1181,7 @@ function GitHubAnalysisTab({ githubUrl, isMobile }) {
                                 )}
                             </GhFetch>
 
-                            <CommitsSection baseUrl={baseUrl} owner={owner} repo={repo} isMobile={isMobile} />
+                            <CommitsSection repoPath={repoPath} owner={owner} repo={repo} isMobile={isMobile} />
 
                             <div style={{ background: 'var(--yellow)', border: '4px solid var(--border)', boxShadow: isMobile ? '4px 4px 0 var(--border)' : '8px 8px 0 var(--border)', padding: isMobile ? '1rem' : '1.25rem' }}>
                                 <div style={{ fontFamily: 'Space Mono, monospace', fontWeight: 900, fontSize: '0.7rem', letterSpacing: '2px', opacity: 0.6, marginBottom: '0.75rem' }}>REPOSITORY STATS</div>

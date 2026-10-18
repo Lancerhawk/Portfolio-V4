@@ -1,7 +1,7 @@
 {
     "github": {
         "username": "Lancerhawk",
-        "_note": "Add your GitHub PAT to .env as VITE_GITHUB_TOKEN=ghp_... (read:user scope only)"
+        "_note": "Add your GitHub PAT to .env as GITHUB_TOKEN=ghp_... (read:user scope only). It is used server-side by api/github.js"
     },
     "meta": {
         "name": "Arin Jain",
