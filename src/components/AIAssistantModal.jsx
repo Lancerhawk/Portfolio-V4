@@ -16,8 +16,18 @@ const QUICK_QUESTIONS = [
     { label: '💼 Experience', text: "What work experience does he have?" },
 ];
 
-function formatMessage(text) {
+function escapeHtml(text) {
     return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+// Messages are rendered as HTML, so escape first; only the markdown tags below can produce markup
+function formatMessage(text) {
+    return escapeHtml(String(text ?? ''))
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/`(.*?)`/g, '<code style="background:rgba(0,0,0,0.12);padding:1px 5px;border-radius:0;font-family:var(--font-mono);font-size:0.82em;border:1px solid rgba(0,0,0,0.15)">$1</code>')

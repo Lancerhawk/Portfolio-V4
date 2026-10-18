@@ -9,7 +9,7 @@ import { Vyzora } from 'vyzora-sdk';
 new Vyzora({
   apiKey: import.meta.env.VITE_VYZORA_KEY,
   enabled: true,
-  debug: true
+  debug: import.meta.env.DEV
 });
 
 createRoot(document.getElementById('root')).render(
