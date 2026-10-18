@@ -1,5 +1,17 @@
 [
     {
+        "version": "0.5.10",
+        "date": "2026-10-19",
+        "changes": {
+            "Changed": [
+                "Quieter Console: Analytics debug logging now runs only in local development."
+            ],
+            "Fixed": [
+                "AI Chat HTML Injection: Chat messages are now escaped, so HTML or scripts in a message show as plain text instead of running."
+            ]
+        }
+    },
+    {
         "version": "0.5.9",
         "date": "2026-10-19",
         "changes": {

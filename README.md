@@ -1,9 +1,9 @@
 # Portfolio V4 - Arin Jain
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.5.9-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.10-green.svg)
 
-A modern, high-performance, and interactive developer portfolio. This version (v0.5.9) lazy-loads the map, terminal, and modals, cutting the initial JavaScript bundle by 42% for faster first loads.
+A modern, high-performance, and interactive developer portfolio. This version (v0.5.10) hardens the AI Assistant against HTML injection in chat messages and turns off analytics debug logging on the live site.
 
 ## Documentation
 
