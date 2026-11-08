@@ -175,9 +175,9 @@
             "title": "Full Stack Developer (Freelance) @ NudgePlay",
             "period": "May 2026 - Present",
             "description": "Building NudgePlay and Playroll end to end with a fellow engineer, continuing work for the client directly after leaving SleekSky. Owning the full stack across backend services, frontend, and cloud infrastructure for the game creation and publishing platform.",
-            "location": "San Francisco, CA (Remote)",
-            "country": "USA",
-            "locationId": "loc-sf"
+            "location": "Jakarta, Indonesia (Remote)",
+            "country": "Indonesia",
+            "locationId": "loc-jakarta"
         },
         {
             "id": "exp-0",
@@ -292,12 +292,6 @@
             "companies": [
                 {
                     "city": "San Francisco",
-                    "company": "NudgePlay",
-                    "period": "May 2026 - Present",
-                    "role": "Full Stack Developer (Freelance)"
-                },
-                {
-                    "city": "San Francisco",
                     "company": "SleekSky",
                     "period": "2026",
                     "role": "Web Developer Intern"
@@ -307,6 +301,24 @@
                     "company": "SleekSky",
                     "period": "2025",
                     "role": "Website Development Intern"
+                }
+            ]
+        },
+        {
+            "id": "loc-jakarta",
+            "coords": [
+                -6.2088,
+                106.8456
+            ],
+            "country": "Indonesia, Jakarta",
+            "labelPosition": "bottom",
+            "isCurrent": true,
+            "companies": [
+                {
+                    "city": "Jakarta",
+                    "company": "NudgePlay",
+                    "period": "May 2026 - Present",
+                    "role": "Full Stack Developer (Freelance)"
                 }
             ]
         },
